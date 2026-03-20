@@ -16,6 +16,16 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - **API codegen**: Orval (from OpenAPI spec)
 - **Build**: esbuild (CJS bundle)
 
+## Website
+
+A standalone Next.js 15 website lives at `artifacts/website/`. It is completely self-contained with no dependencies on any other workspace packages. It runs on port 3000 via the "Start application" workflow.
+
+- **Stack**: Next.js 15, React 19, TypeScript, Tailwind CSS v3
+- **Output**: `output: 'export'` — fully static, deployable to Vercel or cPanel
+- **Pages**: Home (`/`), About (`/about/`), Services (`/services/`), Contact (`/contact/`)
+- **Components**: `Header`, `Footer`, `Button`, `Card`, `Section`
+- **No backend, no API routes, no environment variables required**
+
 ## Structure
 
 ```text
