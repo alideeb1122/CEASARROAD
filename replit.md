@@ -16,15 +16,21 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - **API codegen**: Orval (from OpenAPI spec)
 - **Build**: esbuild (CJS bundle)
 
-## Website
+## Website — Caesar Road Travel & Tourism
 
-A standalone Next.js 15 website lives at `artifacts/website/`. It is completely self-contained with no dependencies on any other workspace packages. It runs on port 3000 via the "Start application" workflow.
+A standalone Next.js 15 bilingual (Arabic + English) website at `artifacts/website/`. Self-contained, no workspace dependencies.
 
 - **Stack**: Next.js 15, React 19, TypeScript, Tailwind CSS v3
-- **Output**: `output: 'export'` — fully static, deployable to Vercel or cPanel
-- **Pages**: Home (`/`), About (`/about/`), Services (`/services/`), Contact (`/contact/`)
-- **Components**: `Header`, `Footer`, `Button`, `Card`, `Section`
-- **No backend, no API routes, no environment variables required**
+- **Output**: `output: 'export'` — fully static; generates `artifacts/website/out/`
+- **Artifact**: registered as `artifacts/website` (kind: web, previewPath: `/`, port: 19161)
+- **Workflows**: `artifacts/website: web` (PORT=19161, distDir=`.next-19161`) · `Start application` (port 3000, distDir=`.next`)
+- **distDir**: environment-based — `process.env.PORT ? .next-${PORT} : .next` (avoids cache conflicts between two dev instances)
+- **Route groups**: `(ar)` for Arabic pages at `/`, `/services/`, `/branches/`, `/about/`, `/contact/`; `(en)` for English at `/en/`, `/en/services/`, etc.
+- **Content**: all strings in `src/lib/content/ar.ts` and `src/lib/content/en.ts`
+- **Fonts**: Cairo (Arabic, RTL) · Inter (English, LTR) via Google Fonts in layout
+- **Brand colors**: Navy `#1B2A4A` · Gold `#C9A84C` · Background `#FAFAF8`
+- **Deployment**: static, publicDir = `artifacts/website/out`
+- **No backend, no API routes, no server actions, no middleware**
 
 ## Structure
 
