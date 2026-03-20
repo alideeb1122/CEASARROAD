@@ -9,18 +9,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: "#2563eb",
-          dark: "#1d4ed8",
-          light: "#3b82f6",
+        navy: {
+          DEFAULT: "#1B2A4A",
+          light: "#253563",
+          dark: "#111B30",
         },
-        dark: "#0f172a",
+        gold: {
+          DEFAULT: "#C9A84C",
+          light: "#D4B86A",
+          dark: "#A8872A",
+        },
+        background: "#FAFAF8",
+        "text-primary": "#1B2A4A",
+        "text-muted": "#64748B",
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
-      },
-      maxWidth: {
-        container: "1280px",
+        arabic: ["Cairo", "sans-serif"],
+        english: ["Inter", "sans-serif"],
       },
     },
   },

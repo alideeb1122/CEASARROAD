@@ -2,18 +2,25 @@ interface SectionProps {
   children: React.ReactNode;
   className?: string;
   id?: string;
-  tight?: boolean;
+  size?: "sm" | "md" | "lg";
 }
 
-export default function Section({ children, className = "", id, tight }: SectionProps) {
+export default function Section({
+  children,
+  className = "",
+  id,
+  size = "md",
+}: SectionProps) {
+  const padding =
+    size === "sm"
+      ? "py-10 lg:py-14"
+      : size === "lg"
+        ? "py-20 lg:py-32"
+        : "py-16 lg:py-24";
+
   return (
-    <section
-      id={id}
-      className={`${tight ? "py-12 lg:py-16" : "py-16 lg:py-24"} ${className}`}
-    >
-      <div className="w-full max-w-container mx-auto px-4 sm:px-6 lg:px-8">
-        {children}
-      </div>
+    <section id={id} className={`${padding} ${className}`}>
+      <div className="container-custom">{children}</div>
     </section>
   );
 }
