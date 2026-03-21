@@ -9,6 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        brand: {
+          bg: "#2E314D",
+          section: "#3A3F63",
+          text: "#E8E8E8",
+          muted: "#A6A9B8",
+          cta: "#C2A96B",
+          "cta-hover": "#D4BC84",
+        },
         navy: {
           DEFAULT: "#1B2A4A",
           light: "#253563",
@@ -19,8 +27,9 @@ const config: Config = {
           light: "#D4B86A",
           dark: "#A8872A",
         },
+        surface: "#F7F7F5",
         background: "#FAFAF8",
-        "text-primary": "#1B2A4A",
+        "text-primary": "#1C1C2E",
         "text-muted": "#64748B",
       },
       fontFamily: {
