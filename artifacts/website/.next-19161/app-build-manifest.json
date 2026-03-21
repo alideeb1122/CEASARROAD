@@ -10,57 +10,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/(ar)/page.js"
-    ],
-    "/(en)/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/(en)/layout.css",
-      "static/chunks/app/(en)/layout.js"
-    ],
-    "/(en)/en/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(en)/en/page.js"
-    ],
-    "/(ar)/services/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(ar)/services/page.js"
-    ],
-    "/(en)/en/services/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(en)/en/services/page.js"
-    ],
-    "/(ar)/branches/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(ar)/branches/page.js"
-    ],
-    "/(en)/en/branches/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(en)/en/branches/page.js"
-    ],
-    "/(ar)/about/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(ar)/about/page.js"
-    ],
-    "/(en)/en/about/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(en)/en/about/page.js"
-    ],
-    "/(ar)/contact/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(ar)/contact/page.js"
-    ],
-    "/(en)/en/contact/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(en)/en/contact/page.js"
     ]
   }
 }
