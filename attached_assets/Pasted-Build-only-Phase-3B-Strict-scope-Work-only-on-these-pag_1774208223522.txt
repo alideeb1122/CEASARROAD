@@ -1,0 +1,89 @@
+Build only Phase 3B.
+
+Strict scope:
+- Work only on these pages:
+  - /services
+  - /about
+  - /en/services
+  - /en/about
+- Do NOT redesign the homepage
+- Do NOT redesign the branches or contact pages
+- Do NOT change the stack
+- Do NOT add new dependencies
+- Do NOT add API routes
+- Do NOT add middleware
+- Do NOT add server actions
+- Keep everything static-export-friendly
+- Keep the existing design system and visual style consistent
+
+Goal:
+Turn the Services and About pages into real business pages for Caesar Road Travel and Tourism / طريق القيصر للسياحة والسفر.
+
+Content source:
+- Use local bilingual content files only
+- Add all new data to ar.ts and en.ts
+- Keep the content structure clean, reusable, and easy to edit later
+
+Pages to build:
+
+1) Services page
+Create a real services page for these 4 services:
+- Flight Tickets
+- Visa Issuance
+- Hotel Booking
+- Health Insurance
+
+Each service section/card should include:
+- title
+- short description
+- simple visual/icon area
+- WhatsApp CTA button
+- optional short supporting line
+
+The page should include:
+- intro hero section
+- services grid or stacked layout
+- short trust/benefits section
+- final WhatsApp CTA
+
+Important:
+- Keep the page clean and premium
+- Make the services easy to scan
+- Keep strong CTA buttons
+- Do not make it look generic
+
+2) About page
+Create a real “About Us” page for the company.
+
+The About page should include:
+- intro hero section
+- who we are
+- short company story
+- mission
+- values or trust points
+- optional numbers/trust highlights
+- final WhatsApp CTA
+
+Important:
+- Keep the copy professional and concise
+- Make it feel like a real travel company
+- Avoid generic AI-style filler text
+- Keep it warm, credible, and business-friendly
+
+Brand / style direction:
+- professional travel company
+- mostly light layout
+- use brand dark colors selectively
+- premium but simple
+- clean spacing
+- fully responsive
+- Arabic RTL and English LTR
+
+Important content note:
+If exact company story/mission text is not available yet, write clean temporary business-ready copy that is easy to replace later.
+Keep the structure realistic and editable.
+
+Before editing, tell me exactly:
+1. which files you will modify
+2. which new content entries you will add to ar.ts and en.ts
+3. which reusable components you will add or reuse
