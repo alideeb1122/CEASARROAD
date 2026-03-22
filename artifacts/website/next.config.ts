@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
-  allowedDevOrigins: ["*.riker.replit.dev", "*.replit.dev"],
+  allowedDevOrigins: ["*.riker.replit.dev", "*.replit.dev", "*.worf.replit.dev"],
 };
 
 export default nextConfig;
