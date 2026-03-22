@@ -35,7 +35,7 @@ outputType = "webview"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "PORT=3000 pnpm --filter @workspace/website run dev"
+args = "[ -d node_modules ] || pnpm install && PORT=3000 pnpm --filter @workspace/website run dev"
 waitForPort = 3000
 
 [agent]
