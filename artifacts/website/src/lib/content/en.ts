@@ -178,22 +178,146 @@ export const en = {
         "We offer a comprehensive range of travel services to meet all your needs",
       placeholderText: "Service details coming soon.",
     },
+
     branches: {
-      title: "Our Branches",
+      label: "Our Branches",
+      title: "Our Branches Around the World",
       subtitle:
-        "We serve you across multiple locations to bring our services closer to you",
-      placeholderText: "Branch details coming soon.",
+        "Three branches in three countries — we make sure you're always within reach",
+      branchCta: "Contact via WhatsApp",
+      mapCta: "View on Map",
+      hoursLabel: "Working Hours",
+      offDayLabel: "Day off",
+      branches: [
+        {
+          city: "Dubai",
+          country: "United Arab Emirates",
+          address: "Al Barsha 1 – Al Bidaya Building – Office 302",
+          mapUrl: "https://maps.app.goo.gl/NzAPJUiPULQs8YUz8",
+          whatsapp: "971XXXXXXXXX",
+          hours: "10:00 AM – 6:00 PM",
+          offDay: "Sunday",
+          description:
+            "Our Dubai branch in Al Barsha serves you with the full range of professional travel and tourism services at the heart of the city.",
+        },
+        {
+          city: "Erbil",
+          country: "Iraq — Kurdistan Region",
+          address: "Bakhtiary – Street 20 – opposite Qassab Erbil",
+          mapUrl: "https://maps.app.goo.gl/v9wdBeigiUvSf4gbA",
+          whatsapp: "964XXXXXXXXX",
+          hours: "10:00 AM – 8:00 PM",
+          offDay: "Friday",
+          description:
+            "Our Erbil branch in Bakhtiary brings comprehensive travel services to the Kurdistan Region and all of Iraq with a well-established local presence.",
+        },
+        {
+          city: "Homs",
+          country: "Syria",
+          address:
+            "Western Corniche – beside Al-Dablan Garden – opposite Khairi Allah Broasted",
+          mapUrl: "https://maps.app.goo.gl/oyDdPQpz9wQf2BMG7",
+          whatsapp: "963XXXXXXXXX",
+          hours: "8:00 AM – 4:00 PM",
+          offDay: "Friday",
+          description:
+            "Our founding branch in Homs on the Western Corniche — serving our community with the professionalism and care that years of experience bring.",
+        },
+      ],
     },
+
     about: {
       title: "About Us",
       subtitle: "Discover our story and journey in the world of travel and tourism",
       placeholderText: "About page content coming soon.",
     },
+
     contact: {
+      label: "Get in Touch",
       title: "Contact Us",
-      subtitle:
-        "We are here to answer your inquiries and make your travel dreams come true",
-      placeholderText: "Contact information coming soon.",
+      subtitle: "We are here to help you every step of the way",
+      intro:
+        "The fastest and easiest way to reach us is via WhatsApp — our team is ready to respond during working hours",
+      primaryCta: "Chat on WhatsApp",
+      primaryCtaNote: "We typically respond within minutes during working hours",
+      primaryWhatsapp: "971XXXXXXXXX",
+      branchesLabel: "Our Branches",
+      branchSelectNote: "Choose the branch nearest to you and reach out directly",
+      branchCta: "WhatsApp",
+      mapCta: "View on Map",
+      hoursLabel: "Working Hours",
+      offDayLabel: "Day off",
+      socialsTitle: "Follow Us on Social Media",
+      socialsSubtitle:
+        "Stay updated with our latest news, offers, and destinations across all our official accounts",
+      socials: [
+        {
+          platform: "Instagram",
+          handle: "@caesar_road_travel",
+          url: "https://www.instagram.com/caesar_road_travel?igsh=MWxwbjBneWRlMzk5dA==",
+          type: "instagram",
+          branch: "Homs",
+        },
+        {
+          platform: "Instagram",
+          handle: "@caesar_road_uae",
+          url: "https://www.instagram.com/caesar_road_uae?igsh=cmFndmQ1MDEyMjli",
+          type: "instagram",
+          branch: "Dubai",
+        },
+        {
+          platform: "Instagram",
+          handle: "@caesar_road_erbil",
+          url: "https://www.instagram.com/caesar_road_erbil?igsh=d2t1YzhxdjlxaHdu",
+          type: "instagram",
+          branch: "Erbil",
+        },
+        {
+          platform: "Facebook",
+          handle: "Caesarroad22",
+          url: "https://www.facebook.com/Caesarroad22?mibextid=ZbWKwL",
+          type: "facebook",
+          branch: "Homs",
+        },
+        {
+          platform: "Facebook",
+          handle: "Caesar Road Erbil",
+          url: "https://facebook.com/share/Z3YXGuedmL9Effyd/?mibextid=qi2Omg",
+          type: "facebook",
+          branch: "Erbil",
+        },
+        {
+          platform: "Facebook",
+          handle: "Caesar Road UAE",
+          url: "https://www.facebook.com/profile.php?id=61550938273732&mibextid=ZbWKwL",
+          type: "facebook",
+          branch: "Dubai",
+        },
+        {
+          platform: "YouTube",
+          handle: "@Caesar.road.travel",
+          url: "https://youtube.com/@Caesar.road.travel?si=prhqNMC4RHN1rN_f",
+          type: "youtube",
+        },
+        {
+          platform: "TikTok",
+          handle: "@caesar.road2",
+          url: "https://www.tiktok.com/@caesar.road2",
+          type: "tiktok",
+        },
+        {
+          platform: "Instagram Channel",
+          handle: "Caesar Road Channel",
+          url: "https://www.instagram.com/channel/AbaGAl5SiH8ZYZpC/",
+          type: "instagram",
+        },
+        {
+          platform: "LinkedIn",
+          handle: "Caesar Road Travel and Tourism",
+          url: "https://www.linkedin.com/company/caesar-road-travel-and-tourism/",
+          type: "linkedin",
+        },
+      ],
     },
   },
 

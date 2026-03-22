@@ -177,23 +177,144 @@ export const ar = {
       placeholderText:
         "سيتم إضافة تفاصيل الخدمات قريباً.",
     },
+
     branches: {
-      title: "فروعنا",
-      subtitle: "نخدمكم في عدة مواقع لتقريب المسافات وتسهيل الوصول إلينا",
-      placeholderText: "سيتم إضافة تفاصيل الفروع قريباً.",
+      label: "فروعنا",
+      title: "فروعنا حول العالم",
+      subtitle: "ثلاثة فروع في ثلاث دول — نحرص على أن تكون دائماً على مقربة منّا",
+      branchCta: "تواصل عبر واتساب",
+      mapCta: "عرض على الخريطة",
+      hoursLabel: "أوقات العمل",
+      offDayLabel: "يوم إجازة",
+      branches: [
+        {
+          city: "دبي",
+          country: "الإمارات العربية المتحدة",
+          address: "البرشاء 1 – بناية البداية – مكتب 302",
+          mapUrl: "https://maps.app.goo.gl/NzAPJUiPULQs8YUz8",
+          whatsapp: "971XXXXXXXXX",
+          hours: "10:00 ص – 6:00 م",
+          offDay: "الأحد",
+          description:
+            "فرعنا في دبي يخدمكم في قلب منطقة البرشاء بكل ما تحتاجونه من خدمات السفر والسياحة بأعلى مستوى من الاحتراف.",
+        },
+        {
+          city: "أربيل",
+          country: "العراق — إقليم كردستان",
+          address: "بختياري – شارع 20 – مقابل قصاب أربيل",
+          mapUrl: "https://maps.app.goo.gl/v9wdBeigiUvSf4gbA",
+          whatsapp: "964XXXXXXXXX",
+          hours: "10:00 ص – 8:00 م",
+          offDay: "الجمعة",
+          description:
+            "فرعنا في أربيل يقدم خدمات سفر متكاملة لأبناء إقليم كردستان والعراق بخبرة راسخة وتواجد مميز في حي بختياري.",
+        },
+        {
+          city: "حمص",
+          country: "سوريا",
+          address: "الكورنيش الغربي – بجانب حديقة الدبلان – مقابل بروستد خيري الله",
+          mapUrl: "https://maps.app.goo.gl/oyDdPQpz9wQf2BMG7",
+          whatsapp: "963XXXXXXXXX",
+          hours: "8:00 ص – 4:00 م",
+          offDay: "الجمعة",
+          description:
+            "فرعنا الأصيل في حمص منذ البداية — نخدمكم على الكورنيش الغربي بمستوى خدمة يعكس سنوات من الخبرة والثقة.",
+        },
+      ],
     },
+
     about: {
       title: "من نحن",
       subtitle: "تعرّف على قصتنا ورحلتنا في عالم السياحة والسفر",
       placeholderText:
         "سيتم إضافة محتوى صفحة 'من نحن' قريباً.",
     },
+
     contact: {
+      label: "تواصل معنا",
       title: "تواصل معنا",
-      subtitle:
-        "نحن هنا للإجابة على استفساراتكم وتحقيق أحلامكم في السفر",
-      placeholderText:
-        "سيتم إضافة معلومات التواصل قريباً.",
+      subtitle: "نحن هنا لمساعدتك في كل خطوة من خطوات رحلتك",
+      intro:
+        "أسرع وأسهل طريقة للتواصل معنا هي عبر واتساب — فريقنا جاهز للرد عليك في أي وقت خلال أوقات العمل",
+      primaryCta: "تواصل عبر واتساب",
+      primaryCtaNote: "نرد عادةً في غضون دقائق خلال أوقات العمل",
+      primaryWhatsapp: "971XXXXXXXXX",
+      branchesLabel: "فروعنا",
+      branchSelectNote: "اختر الفرع الأقرب إليك وتواصل معنا مباشرةً",
+      branchCta: "واتساب",
+      mapCta: "الموقع على الخريطة",
+      hoursLabel: "أوقات العمل",
+      offDayLabel: "إجازة",
+      socialsTitle: "تابعنا على منصات التواصل",
+      socialsSubtitle: "تابع آخر أخبارنا وعروضنا ووجهاتنا عبر حساباتنا الرسمية",
+      socials: [
+        {
+          platform: "إنستغرام",
+          handle: "@caesar_road_travel",
+          url: "https://www.instagram.com/caesar_road_travel?igsh=MWxwbjBneWRlMzk5dA==",
+          type: "instagram",
+          branch: "حمص",
+        },
+        {
+          platform: "إنستغرام",
+          handle: "@caesar_road_uae",
+          url: "https://www.instagram.com/caesar_road_uae?igsh=cmFndmQ1MDEyMjli",
+          type: "instagram",
+          branch: "دبي",
+        },
+        {
+          platform: "إنستغرام",
+          handle: "@caesar_road_erbil",
+          url: "https://www.instagram.com/caesar_road_erbil?igsh=d2t1YzhxdjlxaHdu",
+          type: "instagram",
+          branch: "أربيل",
+        },
+        {
+          platform: "فيسبوك",
+          handle: "Caesarroad22",
+          url: "https://www.facebook.com/Caesarroad22?mibextid=ZbWKwL",
+          type: "facebook",
+          branch: "حمص",
+        },
+        {
+          platform: "فيسبوك",
+          handle: "Caesar Road Erbil",
+          url: "https://facebook.com/share/Z3YXGuedmL9Effyd/?mibextid=qi2Omg",
+          type: "facebook",
+          branch: "أربيل",
+        },
+        {
+          platform: "فيسبوك",
+          handle: "Caesar Road UAE",
+          url: "https://www.facebook.com/profile.php?id=61550938273732&mibextid=ZbWKwL",
+          type: "facebook",
+          branch: "دبي",
+        },
+        {
+          platform: "يوتيوب",
+          handle: "@Caesar.road.travel",
+          url: "https://youtube.com/@Caesar.road.travel?si=prhqNMC4RHN1rN_f",
+          type: "youtube",
+        },
+        {
+          platform: "تيك توك",
+          handle: "@caesar.road2",
+          url: "https://www.tiktok.com/@caesar.road2",
+          type: "tiktok",
+        },
+        {
+          platform: "قناة إنستغرام",
+          handle: "Caesar Road Channel",
+          url: "https://www.instagram.com/channel/AbaGAl5SiH8ZYZpC/",
+          type: "instagram",
+        },
+        {
+          platform: "لينكدإن",
+          handle: "Caesar Road Travel and Tourism",
+          url: "https://www.linkedin.com/company/caesar-road-travel-and-tourism/",
+          type: "linkedin",
+        },
+      ],
     },
   },
 
