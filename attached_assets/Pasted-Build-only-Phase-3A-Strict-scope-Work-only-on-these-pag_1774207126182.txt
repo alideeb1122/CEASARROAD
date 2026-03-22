@@ -1,0 +1,130 @@
+Build only Phase 3A.
+
+Strict scope:
+- Work only on these pages:
+  - /branches
+  - /contact
+  - /en/branches
+  - /en/contact
+- Do NOT redesign the homepage
+- Do NOT change the stack
+- Do NOT add new dependencies
+- Do NOT add API routes
+- Do NOT add middleware
+- Do NOT add server actions
+- Keep everything static-export-friendly
+- Keep the existing design system and visual style consistent
+
+Goal:
+Turn the Branches and Contact pages into real business pages for Caesar Road Travel and Tourism / طريق القيصر للسياحة والسفر.
+
+Content source:
+- Use local bilingual content files only
+- Add all new data to ar.ts and en.ts
+- Keep the content structure clean and reusable
+
+Pages to build:
+
+1) Branches page
+Create a real branches page with 3 branch cards/sections:
+- Dubai
+- Erbil
+- Homs
+
+Each branch must include:
+- city name
+- country
+- full address
+- working hours
+- Google Maps link
+- WhatsApp button
+- small branch description
+- clean responsive card or section layout
+
+Use this real branch data:
+
+Dubai, UAE
+Address:
+Al Barsha 1 – Al Bidaya Building – Office 302
+Map:
+https://maps.app.goo.gl/NzAPJUiPULQs8YUz8
+Working hours:
+10:00 AM to 6:00 PM
+Sunday off
+
+Erbil, Iraq
+Address:
+Bakhtiary – Street 20 – opposite Qassab Erbil
+Map:
+https://maps.app.goo.gl/v9wdBeigiUvSf4gbA
+Working hours:
+10:00 AM to 8:00 PM
+Friday off
+
+Homs, Syria
+Address:
+Western Corniche – beside Al-Dablan Garden – opposite Khairi Allah Broasted
+Map:
+https://maps.app.goo.gl/oyDdPQpz9wQf2BMG7
+Working hours:
+8:00 AM to 4:00 PM
+Friday off
+
+Important:
+- If real WhatsApp links are not available yet, create a clear branch WhatsApp data structure in ar.ts and en.ts with temporary placeholder URLs
+- Wire all buttons to that data structure
+- Make it easy to replace later without changing components
+
+2) Contact page
+Build a contact page focused on WhatsApp-first communication, not a long form.
+
+The Contact page should include:
+- short bilingual intro
+- primary WhatsApp contact CTA
+- 3 branch contact cards
+- working hours summary
+- map links
+- social media links section
+- a clean business contact layout
+- optional short note telling users to choose the nearest branch
+
+Do NOT build a heavy contact form.
+At most, a very simple non-functional placeholder block can exist, but WhatsApp must be the main contact method.
+
+Social links to include:
+Instagram
+- Homs: https://www.instagram.com/caesar_road_travel?igsh=MWxwbjBneWRlMzk5dA==
+- Dubai: https://www.instagram.com/caesar_road_uae?igsh=cmFndmQ1MDEyMjli
+- Erbil: https://www.instagram.com/caesar_road_erbil?igsh=d2t1YzhxdjlxaHdu
+
+Facebook
+- Homs: https://www.facebook.com/Caesarroad22?mibextid=ZbWKwL
+- Erbil: https://facebook.com/share/Z3YXGuedmL9Effyd/?mibextid=qi2Omg
+- Dubai: https://www.facebook.com/profile.php?id=61550938273732&mibextid=ZbWKwL
+
+YouTube
+- https://youtube.com/@Caesar.road.travel?si=prhqNMC4RHN1rN_f
+
+TikTok
+- https://www.tiktok.com/@caesar.road2
+
+Instagram Channel
+- https://www.instagram.com/channel/AbaGAl5SiH8ZYZpC/
+
+LinkedIn
+- https://www.linkedin.com/company/caesar-road-travel-and-tourism/
+
+Design direction:
+- professional travel company
+- mostly light layout
+- use brand dark colors selectively
+- strong CTA buttons
+- clean spacing
+- fully responsive
+- Arabic RTL and English LTR
+- keep it premium and not generic
+
+Before editing, tell me exactly:
+1. which files you will modify
+2. which new content entries you will add to ar.ts and en.ts
+3. which reusable components you will add or reuse
