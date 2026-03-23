@@ -8,6 +8,7 @@ import BranchesSection from "@/components/home/BranchesSection";
 import SocialSection from "@/components/home/SocialSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import FinalCtaSection from "@/components/home/FinalCtaSection";
+import AirlinesSection from "@/components/home/AirlinesSection";
 
 export const metadata: Metadata = {
   title: "طريق القيصر للسياحة والسفر",
@@ -34,6 +35,12 @@ export default function ArabicHomePage() {
         locale="ar"
         servicesHref="/services"
         whatsappNumber={WHATSAPP}
+      />
+
+      <AirlinesSection
+        label={p.airlinesLabel}
+        trust={p.airlinesTrust}
+        locale="ar"
       />
 
       <ServicesSection

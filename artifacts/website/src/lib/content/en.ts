@@ -187,6 +187,9 @@ export const en = {
         },
       ],
 
+      airlinesLabel: "Airline Partners",
+      airlinesTrust: "We book through the region's and world's leading airlines",
+
       finalCtaLabel: "Ready to Go?",
       finalCtaTitle: "Start Your Journey With Us Today",
       finalCtaSubtitle:

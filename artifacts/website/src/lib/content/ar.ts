@@ -185,6 +185,9 @@ export const ar = {
         },
       ],
 
+      airlinesLabel: "شركاء النقل الجوي",
+      airlinesTrust: "نحجز لك عبر أكبر شركات الطيران في المنطقة والعالم",
+
       finalCtaLabel: "هل أنت مستعد؟",
       finalCtaTitle: "ابدأ رحلتك معنا اليوم",
       finalCtaSubtitle:
