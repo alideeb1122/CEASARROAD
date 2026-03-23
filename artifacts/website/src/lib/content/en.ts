@@ -173,10 +173,53 @@ export const en = {
     },
 
     services: {
+      label: "Services",
       title: "Our Services",
       subtitle:
-        "We offer a comprehensive range of travel services to meet all your needs",
-      placeholderText: "Service details coming soon.",
+        "Everything you need for a successful trip — handled with care from start to finish",
+      services: [
+        {
+          icon: "plane",
+          title: "Flight Tickets",
+          desc: "We book the best flights to any destination worldwide at competitive prices, through trusted and reliable airlines.",
+          detail: "Individual, family, and group bookings",
+          ctaBtn: "Ask on WhatsApp",
+        },
+        {
+          icon: "passport",
+          title: "Visa Issuance",
+          desc: "We handle your visa applications with precision and speed, covering tourism, business, medical, and more.",
+          detail: "Tourist, business, medical & more",
+          ctaBtn: "Ask on WhatsApp",
+        },
+        {
+          icon: "hotel",
+          title: "Hotel Booking",
+          desc: "We find hotels that match your taste and budget in any city, ensuring quality accommodation and great location.",
+          detail: "Hotels across all major destinations",
+          ctaBtn: "Ask on WhatsApp",
+        },
+        {
+          icon: "shield",
+          title: "Health Insurance",
+          desc: "Comprehensive travel and health insurance that keeps you fully covered and protected wherever you go.",
+          detail: "Flexible plans for all needs",
+          ctaBtn: "Ask on WhatsApp",
+        },
+      ],
+      trustLabel: "Why Us",
+      trustTitle: "A Standard of Service You Can Count On",
+      trustPoints: [
+        { icon: "check", text: "Competitive pricing with no hidden fees" },
+        { icon: "headset", text: "Dedicated team ready to answer your questions" },
+        { icon: "globe", text: "Coverage across 50+ destinations worldwide" },
+        { icon: "star", text: "Over 10,000 satisfied clients trust us" },
+      ],
+      ctaTitle: "Ready to book?",
+      ctaSubtitle:
+        "Reach out now and we'll help you find the best options for your trip",
+      ctaBtn: "Chat on WhatsApp",
+      ctaWhatsapp: "971XXXXXXXXX",
     },
 
     branches: {
@@ -227,9 +270,56 @@ export const en = {
     },
 
     about: {
-      title: "About Us",
-      subtitle: "Discover our story and journey in the world of travel and tourism",
-      placeholderText: "About page content coming soon.",
+      label: "About Us",
+      title: "Caesar Road Travel & Tourism",
+      subtitle:
+        "Your trusted companion in travel — getting you where you need to be, professionally and reliably",
+      whoLabel: "Who We Are",
+      whoTitle: "About Caesar Road",
+      whoText:
+        "Caesar Road Travel & Tourism is a full-service travel agency operating across three branches in Dubai, Erbil, and Homs. We are committed to delivering an exceptional experience to every client — paying close attention to every detail from the moment of booking to the safe return home.",
+      storyLabel: "Our Story",
+      storyTitle: "Built on a Passion for Travel",
+      storyText:
+        "We started in Homs with a simple belief: that travel should be accessible, smooth, and enjoyable for everyone. Over the years, we expanded to Iraq and the UAE, earning the trust of thousands of clients who chose Caesar Road as their travel partner.",
+      missionLabel: "Our Mission",
+      missionTitle: "Why We Do What We Do",
+      missionText:
+        "Our mission is to make travel within reach for everyone — through fair pricing, honest service, and a team that always puts the client first.",
+      valuesLabel: "Our Values",
+      valuesTitle: "What Sets Us Apart",
+      values: [
+        {
+          icon: "check",
+          title: "Integrity",
+          desc: "We operate with full transparency at every stage of your service",
+        },
+        {
+          icon: "star",
+          title: "Quality",
+          desc: "We select the best options and ensure service standards with every request",
+        },
+        {
+          icon: "headset",
+          title: "Client Focus",
+          desc: "Our team is always ready to help, even after your trip is over",
+        },
+        {
+          icon: "globe",
+          title: "Global Network",
+          desc: "Our partner relationships worldwide open the best options for you",
+        },
+      ],
+      stats: [
+        { value: 10, suffix: "+", label: "Years of Experience" },
+        { value: 3, suffix: "", label: "Active Branches" },
+        { value: 10000, suffix: "+", label: "Happy Clients" },
+        { value: 50, suffix: "+", label: "Destinations Worldwide" },
+      ],
+      ctaTitle: "Start Your Journey With Us",
+      ctaSubtitle: "Reach out and let us plan your perfect trip down to every detail",
+      ctaBtn: "Chat on WhatsApp",
+      ctaWhatsapp: "971XXXXXXXXX",
     },
 
     contact: {
