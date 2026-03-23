@@ -12,7 +12,7 @@ version = "1.0.0"
 [[services]]
 name = "web"
 paths = [ "/" ]
-localPort = 19161
+localPort = 3000
 
 [services.development]
 run = "[ -d node_modules ] || pnpm install && pnpm --filter @workspace/website run dev"
@@ -23,5 +23,5 @@ publicDir = "artifacts/website/out"
 serve = "static"
 
 [services.env]
-PORT = "19161"
+PORT = "3000"
 BASE_PATH = "/"
