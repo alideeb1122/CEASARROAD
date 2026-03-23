@@ -745,6 +745,10 @@ html {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
 }
+.my-5{
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
 .-ml-4{
   margin-left: -1rem;
 }
@@ -1724,6 +1728,9 @@ html {
 }
 .p-\[1px\]{
   padding: 1px;
+}
+.p-7{
+  padding: 1.75rem;
 }
 .px-1{
   padding-left: 0.25rem;

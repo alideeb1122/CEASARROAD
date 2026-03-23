@@ -6,6 +6,7 @@ import WhyUsSection from "@/components/home/WhyUsSection";
 import StatsSection from "@/components/home/StatsSection";
 import BranchesSection from "@/components/home/BranchesSection";
 import SocialSection from "@/components/home/SocialSection";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
 import FinalCtaSection from "@/components/home/FinalCtaSection";
 
 export const metadata: Metadata = {
@@ -71,6 +72,13 @@ export default function EnglishHomePage() {
         title={p.socialTitle}
         subtitle={p.socialSubtitle}
         socials={p.socials}
+      />
+
+      <TestimonialsSection
+        label={p.testimonialsLabel}
+        title={p.testimonialsTitle}
+        subtitle={p.testimonialsSubtitle}
+        testimonials={p.testimonials}
       />
 
       <FinalCtaSection

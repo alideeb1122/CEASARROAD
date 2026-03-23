@@ -165,6 +165,28 @@ export const en = {
         },
       ],
 
+      testimonialsLabel: "Client Reviews",
+      testimonialsTitle: "What Our Clients Say",
+      testimonialsSubtitle:
+        "Real experiences from clients who trusted Caesar Road with their travels",
+      testimonials: [
+        {
+          name: "Mohamed Al-Saeed",
+          text: "I used them for my Dubai visa and the whole process was smoother than I expected. The team was professional and quick, and handled everything without any hassle.",
+          context: "Homs — Tourist Visa",
+        },
+        {
+          name: "Nour Hussein",
+          text: "I've booked through them more than once, and they've never let me down. Competitive pricing and a team that stays in touch even after the booking is confirmed.",
+          context: "Erbil — Flight Tickets",
+        },
+        {
+          name: "Reem Al-Hamdani",
+          text: "The Dubai branch is excellent — friendly staff who genuinely know their business. I haven't found a travel agency at this level in a long time.",
+          context: "Dubai — Multiple Services",
+        },
+      ],
+
       finalCtaLabel: "Ready to Go?",
       finalCtaTitle: "Start Your Journey With Us Today",
       finalCtaSubtitle:
