@@ -1,5 +1,8 @@
+"use client";
+
 import SectionHeading from "./SectionHeading";
 import { getSocialIcon } from "./Icons";
+import { useReveal } from "./useReveal";
 
 const SOCIAL_COLORS: Record<string, string> = {
   whatsapp: "#25D366",
@@ -30,8 +33,10 @@ export default function SocialSection({
   subtitle,
   socials,
 }: SocialSectionProps) {
+  const { ref, visible } = useReveal(0.1);
+
   return (
-    <section className="bg-surface section-padding">
+    <section ref={ref} className="bg-surface section-padding">
       <div className="container-custom">
         <SectionHeading label={label} title={title} subtitle={subtitle} />
 
@@ -45,13 +50,18 @@ export default function SocialSection({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex flex-col items-center gap-3 p-5 bg-white rounded-2xl border border-gray-100 hover:border-transparent hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                style={{ "--hover-color": color } as React.CSSProperties}
+                style={{
+                  opacity: visible ? 1 : 0,
+                  transform: visible ? "translateY(0)" : "translateY(16px)",
+                  transition: "opacity 0.55s ease, transform 0.55s ease, box-shadow 0.3s ease, border-color 0.3s ease",
+                  transitionDelay: `${i * 60}ms`,
+                }}
               >
                 {/* Icon container */}
                 <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300"
+                  className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
                   style={{
-                    backgroundColor: `${color}15`,
+                    backgroundColor: `${color}18`,
                   }}
                 >
                   <span style={{ color }}>

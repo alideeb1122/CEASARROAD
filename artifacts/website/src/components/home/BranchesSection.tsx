@@ -1,5 +1,8 @@
+"use client";
+
 import SectionHeading from "./SectionHeading";
 import { MapPinIcon, ClockIcon, ExternalLinkIcon, WhatsAppIcon } from "./Icons";
+import { useReveal } from "./useReveal";
 
 interface Branch {
   city: string;
@@ -27,8 +30,10 @@ export default function BranchesSection({
   branchCta,
   hoursLabel,
 }: BranchesSectionProps) {
+  const { ref, visible } = useReveal(0.1);
+
   return (
-    <section className="bg-white section-padding">
+    <section ref={ref} className="bg-white section-padding">
       <div className="container-custom">
         <SectionHeading label={label} title={title} subtitle={subtitle} />
 
@@ -37,9 +42,16 @@ export default function BranchesSection({
             <div
               key={i}
               className="group flex flex-col rounded-2xl border border-gray-100 bg-white overflow-hidden hover:border-brand-cta/30 hover:shadow-lg transition-all duration-300"
+              style={{
+                opacity: visible ? 1 : 0,
+                transform: visible ? "translateY(0)" : "translateY(20px)",
+                transition: "opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease, border-color 0.3s ease",
+                transitionDelay: `${i * 130}ms`,
+              }}
             >
-              {/* Card header with dark accent */}
-              <div className="bg-brand-bg px-6 py-5">
+              {/* Card header */}
+              <div className="relative bg-brand-bg px-6 py-5 overflow-hidden">
+                <div className="absolute bottom-0 inset-x-0 h-0.5 bg-brand-cta scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-start" />
                 <h3 className="text-2xl font-extrabold text-white">
                   {branch.city}
                 </h3>
