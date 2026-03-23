@@ -24,16 +24,27 @@ const AIRLINES = [
 function AirlineBadge({ abbr, name }: { abbr: string; name: string }) {
   return (
     <div
-      className="airline-badge flex-shrink-0 flex items-center gap-3 mx-3 px-4 py-3.5 rounded-xl bg-white border border-gray-100/80 shadow-[0_1px_3px_rgba(0,0,0,0.05),0_1px_8px_rgba(0,0,0,0.03)] hover:border-brand-cta/25 hover:shadow-[0_3px_14px_rgba(0,0,0,0.08)] hover:scale-[1.03] hover:-translate-y-px transition-all duration-300 select-none cursor-default"
-      style={{ minWidth: "158px" }}
+      className="airline-badge flex-shrink-0 flex items-center gap-3 mx-3 px-4 py-3.5 rounded-xl bg-white border border-gray-100 transition-all duration-300 select-none cursor-default"
+      style={{
+        minWidth: "162px",
+        boxShadow: "0 1px 4px rgba(0,0,0,0.055)",
+      }}
     >
-      <span className="flex-shrink-0 w-[3px] h-8 rounded-full bg-brand-cta opacity-50" />
-
+      <span
+        className="flex-shrink-0 rounded-full bg-brand-cta"
+        style={{ width: "2.5px", height: "34px", opacity: 0.55 }}
+      />
       <div className="flex flex-col gap-[3px] min-w-0">
-        <span className="text-[15px] font-bold tracking-[0.14em] text-gray-800 font-mono leading-none">
+        <span
+          className="font-mono font-bold text-gray-800 leading-none"
+          style={{ fontSize: "14px", letterSpacing: "0.16em" }}
+        >
           {abbr}
         </span>
-        <span className="text-[10px] font-medium text-gray-400 leading-tight tracking-wide whitespace-nowrap">
+        <span
+          className="font-medium text-gray-400 leading-tight whitespace-nowrap"
+          style={{ fontSize: "10px", letterSpacing: "0.04em" }}
+        >
           {name}
         </span>
       </div>
@@ -50,10 +61,8 @@ export default function AirlinesSection({
   const isRtl = locale === "ar";
 
   return (
-    <section
-      ref={ref}
-      className="bg-gray-50 border-y border-gray-100 overflow-hidden"
-    >
+    <section ref={ref} className="bg-gray-50 border-y border-gray-100">
+      {/* Header */}
       <div className="container-custom pt-10 pb-7">
         <div
           className="text-center"
@@ -73,24 +82,42 @@ export default function AirlinesSection({
         </div>
       </div>
 
+      {/* Marquee wrapper — overflow hidden lives here, not on section */}
       <div
-        className="airlines-wrap relative pb-10"
+        className="airlines-wrap relative overflow-hidden pb-10"
         style={{
           opacity: visible ? 1 : 0,
           transition: "opacity 0.8s ease 0.2s",
         }}
       >
-        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-28 z-10 bg-gradient-to-r from-gray-50 to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-28 z-10 bg-gradient-to-l from-gray-50 to-transparent" />
+        {/* Edge fade — left */}
+        <div
+          className="pointer-events-none absolute left-0 top-0 bottom-0 z-10"
+          style={{
+            width: "96px",
+            background: "linear-gradient(to right, #f9fafb, transparent)",
+          }}
+        />
+        {/* Edge fade — right */}
+        <div
+          className="pointer-events-none absolute right-0 top-0 bottom-0 z-10"
+          style={{
+            width: "96px",
+            background: "linear-gradient(to left, #f9fafb, transparent)",
+          }}
+        />
 
+        {/* Track — 3 copies for a rock-solid seamless loop */}
         <div
           className="airlines-track flex items-center py-1"
           style={{
-            animation: `airlines-marquee 46s linear infinite${isRtl ? " reverse" : ""}`,
+            animation: `airlines-marquee 52s linear infinite${isRtl ? " reverse" : ""}`,
+            willChange: "transform",
+            backfaceVisibility: "hidden",
           }}
           aria-hidden="true"
         >
-          {[...AIRLINES, ...AIRLINES].map((a, i) => (
+          {[...AIRLINES, ...AIRLINES, ...AIRLINES].map((a, i) => (
             <AirlineBadge key={i} abbr={a.abbr} name={a.name} />
           ))}
         </div>
@@ -99,10 +126,15 @@ export default function AirlinesSection({
       <style>{`
         @keyframes airlines-marquee {
           from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
+          to   { transform: translateX(-33.333%); }
         }
         .airlines-wrap:hover .airlines-track {
           animation-play-state: paused;
+        }
+        .airline-badge:hover {
+          border-color: rgba(194, 169, 107, 0.22);
+          transform: translateY(-1px);
+          box-shadow: 0 3px 12px rgba(0,0,0,0.08);
         }
         @media (prefers-reduced-motion: reduce) {
           .airlines-track {
