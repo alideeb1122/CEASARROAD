@@ -24,15 +24,16 @@ const AIRLINES = [
 function AirlineBadge({ abbr, name }: { abbr: string; name: string }) {
   return (
     <div
-      className="airline-badge flex-shrink-0 flex items-center gap-3 mx-3 px-4 py-3.5 rounded-xl bg-white border border-gray-100 transition-all duration-300 select-none cursor-default"
+      className="airline-badge flex-shrink-0 flex items-center gap-3 mx-3 px-4 py-3.5 rounded-xl bg-white border border-gray-100"
       style={{
-        minWidth: "162px",
+        minWidth: "158px",
         boxShadow: "0 1px 4px rgba(0,0,0,0.055)",
+        transition: "border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease",
       }}
     >
       <span
         className="flex-shrink-0 rounded-full bg-brand-cta"
-        style={{ width: "2.5px", height: "34px", opacity: 0.55 }}
+        style={{ width: "2.5px", height: "34px", opacity: 0.5 }}
       />
       <div className="flex flex-col gap-[3px] min-w-0">
         <span
@@ -59,6 +60,7 @@ export default function AirlinesSection({
 }: AirlinesSectionProps) {
   const { ref, visible } = useReveal(0.1);
   const isRtl = locale === "ar";
+  const direction = isRtl ? " reverse" : "";
 
   return (
     <section ref={ref} className="bg-gray-50 border-y border-gray-100">
@@ -82,7 +84,7 @@ export default function AirlinesSection({
         </div>
       </div>
 
-      {/* Marquee wrapper — overflow hidden lives here, not on section */}
+      {/* Marquee */}
       <div
         className="airlines-wrap relative overflow-hidden pb-10"
         style={{
@@ -90,34 +92,33 @@ export default function AirlinesSection({
           transition: "opacity 0.8s ease 0.2s",
         }}
       >
-        {/* Edge fade — left */}
+        {/* Left fade */}
         <div
           className="pointer-events-none absolute left-0 top-0 bottom-0 z-10"
-          style={{
-            width: "96px",
-            background: "linear-gradient(to right, #f9fafb, transparent)",
-          }}
+          style={{ width: "88px", background: "linear-gradient(to right, #f9fafb 40%, transparent)" }}
         />
-        {/* Edge fade — right */}
+        {/* Right fade */}
         <div
           className="pointer-events-none absolute right-0 top-0 bottom-0 z-10"
-          style={{
-            width: "96px",
-            background: "linear-gradient(to left, #f9fafb, transparent)",
-          }}
+          style={{ width: "88px", background: "linear-gradient(to left, #f9fafb 40%, transparent)" }}
         />
 
-        {/* Track — 3 copies for a rock-solid seamless loop */}
+        {/*
+          Track: exactly 2 copies.
+          Animation: translateX(0) → translateX(-50%).
+          At t=100% the second copy is in the exact pixel position the first copy was at t=0.
+          The loop reset is visually identical → no jump, no cut.
+        */}
         <div
           className="airlines-track flex items-center py-1"
           style={{
-            animation: `airlines-marquee 52s linear infinite${isRtl ? " reverse" : ""}`,
+            animation: `airlines-marquee 20s linear infinite${direction}`,
             willChange: "transform",
-            backfaceVisibility: "hidden",
+            transform: "translateZ(0)",
           }}
           aria-hidden="true"
         >
-          {[...AIRLINES, ...AIRLINES, ...AIRLINES].map((a, i) => (
+          {[...AIRLINES, ...AIRLINES].map((a, i) => (
             <AirlineBadge key={i} abbr={a.abbr} name={a.name} />
           ))}
         </div>
@@ -125,16 +126,21 @@ export default function AirlinesSection({
 
       <style>{`
         @keyframes airlines-marquee {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-33.333%); }
+          from { transform: translateZ(0) translateX(0); }
+          to   { transform: translateZ(0) translateX(-50%); }
         }
         .airlines-wrap:hover .airlines-track {
           animation-play-state: paused;
         }
         .airline-badge:hover {
-          border-color: rgba(194, 169, 107, 0.22);
+          border-color: rgba(194, 169, 107, 0.25) !important;
+          box-shadow: 0 3px 12px rgba(0,0,0,0.08) !important;
           transform: translateY(-1px);
-          box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+        @media (max-width: 768px) {
+          .airlines-track {
+            animation-duration: 12s !important;
+          }
         }
         @media (prefers-reduced-motion: reduce) {
           .airlines-track {
