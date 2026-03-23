@@ -24,4 +24,3 @@ serve = "static"
 
 [services.env]
 PORT = "3000"
-BASE_PATH = "/"

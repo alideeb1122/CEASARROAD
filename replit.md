@@ -23,7 +23,7 @@ A standalone Next.js 15 bilingual (Arabic + English) website at `artifacts/websi
 - **Stack**: Next.js 15, React 19, TypeScript, Tailwind CSS v3
 - **Output**: `output: 'export'` — fully static; generates `artifacts/website/out/`
 - **Artifact**: registered as `artifacts/website` (kind: web, previewPath: `/`, port: 19161)
-- **Workflows**: `artifacts/website: web` (PORT=19161, distDir=`.next-19161`) · `Start application` (port 3000, distDir=`.next`)
+- **Workflows**: `Start application` (PORT=3000, binds `0.0.0.0`, distDir=`.next-3000`)
 - **distDir**: environment-based — `process.env.PORT ? .next-${PORT} : .next` (avoids cache conflicts between two dev instances)
 - **Route groups**: `(ar)` for Arabic pages at `/`, `/services/`, `/branches/`, `/about/`, `/contact/`; `(en)` for English at `/en/`, `/en/services/`, etc.
 - **Content**: all strings in `src/lib/content/ar.ts` and `src/lib/content/en.ts`
