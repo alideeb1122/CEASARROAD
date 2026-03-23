@@ -439,9 +439,19 @@ export const en = {
   footer: {
     tagline: "Your trusted companion in the world of travel and tourism",
     quickLinks: "Quick Links",
-    contactTitle: "Contact Us",
-    contactPlaceholder: "Coming soon",
+    branchesTitle: "Our Branches",
+    followUs: "Follow Us",
+    whatsappCta: "WhatsApp",
+    mapCta: "Map",
+    closedDay: "Closed",
     rights: "© 2025 Caesar Road Travel & Tourism. All rights reserved.",
+    socials: [
+      { type: "instagram", url: "https://www.instagram.com/caesar_road_travel?igsh=MWxwbjBneWRlMzk5dA==", label: "Instagram" },
+      { type: "facebook",  url: "https://www.facebook.com/Caesarroad22?mibextid=ZbWKwL", label: "Facebook" },
+      { type: "youtube",   url: "https://youtube.com/@Caesar.road.travel?si=prhqNMC4RHN1rN_f", label: "YouTube" },
+      { type: "tiktok",    url: "https://www.tiktok.com/@caesar.road2", label: "TikTok" },
+      { type: "linkedin",  url: "https://www.linkedin.com/company/caesar-road-travel-and-tourism/", label: "LinkedIn" },
+    ],
   },
 };
 

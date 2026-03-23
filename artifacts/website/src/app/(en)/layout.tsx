@@ -33,6 +33,7 @@ export default function EnglishLayout({
           siteName={en.siteName}
           nav={en.nav}
           footer={en.footer}
+          branches={en.pages.branches.branches}
         />
       </body>
     </html>

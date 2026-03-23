@@ -17,15 +17,10 @@
       "static/css/app/(en)/layout.css",
       "static/chunks/app/(en)/layout.js"
     ],
-    "/(en)/en/page": [
+    "/(en)/en/about/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(en)/en/page.js"
-    ],
-    "/(ar)/contact/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(ar)/contact/page.js"
+      "static/chunks/app/(en)/en/about/page.js"
     ]
   }
 }

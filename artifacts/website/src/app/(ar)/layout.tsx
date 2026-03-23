@@ -33,6 +33,7 @@ export default function ArabicLayout({
           siteName={ar.siteName}
           nav={ar.nav}
           footer={ar.footer}
+          branches={ar.pages.branches.branches}
         />
       </body>
     </html>

@@ -431,9 +431,19 @@ export const ar = {
   footer: {
     tagline: "رفيقك الموثوق في عالم السفر والسياحة",
     quickLinks: "روابط سريعة",
-    contactTitle: "تواصل معنا",
-    contactPlaceholder: "قريباً",
+    branchesTitle: "فروعنا",
+    followUs: "تابعنا",
+    whatsappCta: "واتساب",
+    mapCta: "الموقع",
+    closedDay: "إجازة",
     rights: "© 2025 طريق القيصر للسياحة والسفر. جميع الحقوق محفوظة.",
+    socials: [
+      { type: "instagram", url: "https://www.instagram.com/caesar_road_travel?igsh=MWxwbjBneWRlMzk5dA==", label: "Instagram" },
+      { type: "facebook",  url: "https://www.facebook.com/Caesarroad22?mibextid=ZbWKwL", label: "Facebook" },
+      { type: "youtube",   url: "https://youtube.com/@Caesar.road.travel?si=prhqNMC4RHN1rN_f", label: "YouTube" },
+      { type: "tiktok",    url: "https://www.tiktok.com/@caesar.road2", label: "TikTok" },
+      { type: "linkedin",  url: "https://www.linkedin.com/company/caesar-road-travel-and-tourism/", label: "LinkedIn" },
+    ],
   },
 };
 
