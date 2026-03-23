@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { WhatsAppIcon, PlaneIcon } from "./Icons";
 
@@ -18,6 +21,13 @@ interface HeroSectionProps {
   whatsappNumber?: string;
 }
 
+const reveal = (visible: boolean, delay = 0): React.CSSProperties => ({
+  opacity: visible ? 1 : 0,
+  transform: visible ? "translateY(0)" : "translateY(22px)",
+  transition: "opacity 0.7s ease, transform 0.7s ease",
+  transitionDelay: `${delay}ms`,
+});
+
 export default function HeroSection({
   content,
   locale,
@@ -25,6 +35,12 @@ export default function HeroSection({
   whatsappNumber = "971501234567",
 }: HeroSectionProps) {
   const isRtl = locale === "ar";
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   return (
     <section className="relative bg-brand-bg overflow-hidden">
@@ -41,7 +57,10 @@ export default function HeroSection({
           }`}
         >
           {/* Text content */}
-          <div className={`flex-1 ${isRtl ? "text-right" : "text-left"} text-center lg:text-start`}>
+          <div
+            className={`flex-1 ${isRtl ? "text-right" : "text-left"} text-center lg:text-start`}
+            style={reveal(mounted, 0)}
+          >
             {/* Label pill */}
             <div className={`flex justify-center lg:${isRtl ? "justify-end" : "justify-start"} mb-6`}>
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-cta/30 bg-brand-cta/10 text-brand-cta text-sm font-medium">
@@ -69,24 +88,27 @@ export default function HeroSection({
                 href={`https://wa.me/${whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-brand-cta text-brand-bg font-bold rounded-xl hover:bg-brand-cta-hover transition-all duration-200 text-sm sm:text-base shadow-lg shadow-brand-cta/20 hover:shadow-brand-cta/30 hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-brand-cta text-brand-bg font-bold rounded-xl hover:bg-brand-cta-hover transition-all duration-200 text-sm sm:text-base shadow-lg shadow-brand-cta/20 hover:shadow-brand-cta/40 hover:-translate-y-1 active:translate-y-0"
               >
                 <WhatsAppIcon className="w-5 h-5" />
                 {content.heroWhatsappCta}
               </a>
               <Link
                 href={servicesHref}
-                className="inline-flex items-center justify-center px-7 py-3.5 border-2 border-white/20 text-white font-semibold rounded-xl hover:border-white/40 hover:bg-white/8 transition-all duration-200 text-sm sm:text-base"
+                className="inline-flex items-center justify-center px-7 py-3.5 border-2 border-white/20 text-white font-semibold rounded-xl hover:border-white/50 hover:bg-white/10 transition-all duration-200 text-sm sm:text-base hover:-translate-y-1 active:translate-y-0"
               >
                 {content.heroServicesCta}
               </Link>
             </div>
           </div>
 
-          {/* Media placeholder — prepared for future video or image */}
-          <div className="flex-1 w-full max-w-xl lg:max-w-none">
+          {/* Media block */}
+          <div
+            className="flex-1 w-full max-w-xl lg:max-w-none"
+            style={reveal(mounted, 180)}
+          >
             <div
-              className="relative w-full aspect-[4/3] lg:aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 bg-brand-section/60 shadow-2xl"
+              className="relative w-full aspect-[4/3] lg:aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 bg-brand-section/60 shadow-2xl hover:shadow-brand-cta/10 hover:border-white/20 transition-all duration-500"
               data-media-area="hero"
               aria-label={content.heroMediaLabel}
             >
@@ -103,9 +125,14 @@ export default function HeroSection({
                 }}
               />
 
-              {/* Placeholder content — replace with <video> or next/image in Phase 3 */}
+              {/* Placeholder content */}
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6">
-                <div className="w-20 h-20 rounded-full bg-brand-cta/15 border border-brand-cta/20 flex items-center justify-center">
+                <div
+                  className="w-20 h-20 rounded-full bg-brand-cta/15 border border-brand-cta/20 flex items-center justify-center"
+                  style={{
+                    animation: "heroIconBreath 4s ease-in-out infinite",
+                  }}
+                >
                   <PlaneIcon className="w-10 h-10 text-brand-cta" />
                 </div>
                 <p className="text-brand-muted text-sm font-medium text-center">
@@ -130,6 +157,13 @@ export default function HeroSection({
 
       {/* Bottom wave divider */}
       <div className="absolute bottom-0 left-0 right-0 h-8 bg-white" style={{ clipPath: "ellipse(55% 100% at 50% 100%)" }} />
+
+      <style>{`
+        @keyframes heroIconBreath {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.06); opacity: 0.85; }
+        }
+      `}</style>
     </section>
   );
 }
