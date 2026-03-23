@@ -1,74 +1,75 @@
 import type { Metadata } from "next";
 import { ar } from "@/lib/content/ar";
-import ServiceCard from "@/components/services/ServiceCard";
+import ServiceDetailBlock from "@/components/services/ServiceDetailBlock";
+import ServicesHowSection from "@/components/services/ServicesHowSection";
+import ServicesFaqSection from "@/components/services/ServicesFaqSection";
 import FinalCtaSection from "@/components/shared/FinalCtaSection";
-import { getServiceIcon } from "@/components/home/Icons";
 
 export const metadata: Metadata = { title: "خدماتنا" };
 
 export default function ArabicServicesPage() {
   const p = ar.pages.services;
+
   return (
     <>
-      <section className="bg-navy text-white py-20 lg:py-28">
-        <div className="container-custom text-center">
-          <p className="text-gold text-sm font-semibold uppercase tracking-widest mb-3">
+      <section className="bg-navy text-white py-20 lg:py-28 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(201,168,76,0.12),transparent_60%)] pointer-events-none" />
+        <div className="container-custom text-center relative z-10">
+          <p className="text-gold text-sm font-semibold uppercase tracking-widest mb-4">
             {p.label}
           </p>
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
             {p.title}
           </h1>
-          <p className="mt-4 text-white/65 text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-5 text-white/65 text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed">
             {p.subtitle}
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3 justify-center">
+            {p.services.map((s, i) => (
+              <span
+                key={i}
+                className="inline-flex items-center gap-1.5 bg-white/8 border border-white/12 rounded-full px-4 py-1.5 text-sm text-white/80 font-medium"
+              >
+                {s.title}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white section-padding-sm border-b border-gray-100">
+        <div className="container-custom">
+          <p className="text-base lg:text-lg text-text-muted leading-relaxed max-w-3xl mx-auto text-center">
+            {p.intro}
           </p>
         </div>
       </section>
 
-      <section className="bg-background section-padding">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
-            {p.services.map((service, i) => (
-              <ServiceCard
-                key={i}
-                icon={service.icon}
-                title={service.title}
-                desc={service.desc}
-                detail={service.detail}
-                ctaBtn={service.ctaBtn}
-                whatsapp={p.ctaWhatsapp}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+      {p.services.map((service, i) => (
+        <ServiceDetailBlock
+          key={i}
+          index={i}
+          icon={service.icon}
+          title={service.title}
+          desc={service.desc}
+          detail={service.detail}
+          bullets={service.bullets}
+          ctaBtn={service.ctaBtn}
+          whatsapp={p.ctaWhatsapp}
+        />
+      ))}
 
-      <section className="bg-surface section-padding-sm">
-        <div className="container-custom">
-          <div className="text-center mb-10">
-            <p className="text-gold text-sm font-semibold uppercase tracking-widest mb-2">
-              {p.trustLabel}
-            </p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-text-primary">
-              {p.trustTitle}
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {p.trustPoints.map((point, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-3 bg-white rounded-xl border border-gray-100 p-5"
-              >
-                <div className="w-8 h-8 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  {getServiceIcon(point.icon, "w-4 h-4 text-gold")}
-                </div>
-                <p className="text-sm text-text-primary font-medium leading-snug">
-                  {point.text}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ServicesHowSection
+        label={p.howLabel}
+        title={p.howTitle}
+        steps={p.howSteps}
+      />
+
+      <ServicesFaqSection
+        label={p.faqLabel}
+        title={p.faqTitle}
+        faqs={p.faqs}
+      />
 
       <FinalCtaSection
         title={p.ctaTitle}

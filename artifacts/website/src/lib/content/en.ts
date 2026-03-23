@@ -202,6 +202,8 @@ export const en = {
       title: "Our Services",
       subtitle:
         "Everything you need for a successful trip — handled with care from start to finish",
+      intro:
+        "At Caesar Road, we believe your journey deserves more than just a booking. Every service we offer is built on real expertise, trusted global partnerships, and a dedicated team that tracks every detail — from your first question to your safe return.",
       services: [
         {
           icon: "plane",
@@ -209,6 +211,11 @@ export const en = {
           desc: "We book the best flights to any destination worldwide at competitive prices, through trusted and reliable airlines.",
           detail: "Individual, family, and group bookings",
           ctaBtn: "Ask on WhatsApp",
+          bullets: [
+            "We search across 50+ airlines to find you the best available fare",
+            "Direct booking — no middlemen, no complications",
+            "We support you with changes and cancellations when needed",
+          ],
         },
         {
           icon: "passport",
@@ -216,6 +223,11 @@ export const en = {
           desc: "We handle your visa applications with precision and speed, covering tourism, business, medical, and more.",
           detail: "Tourist, business, medical & more",
           ctaBtn: "Ask on WhatsApp",
+          bullets: [
+            "Full file review and guidance before submission",
+            "Close tracking through every stage of the application",
+            "Tourist, business, medical, and study visas covered",
+          ],
         },
         {
           icon: "hotel",
@@ -223,6 +235,11 @@ export const en = {
           desc: "We find hotels that match your taste and budget in any city, ensuring quality accommodation and great location.",
           detail: "Hotels across all major destinations",
           ctaBtn: "Ask on WhatsApp",
+          bullets: [
+            "Carefully selected based on location, rating, and price",
+            "We negotiate rates with our partner hotels on your behalf",
+            "Options across all budgets — from comfortable to luxury",
+          ],
         },
         {
           icon: "shield",
@@ -230,6 +247,11 @@ export const en = {
           desc: "Comprehensive travel and health insurance that keeps you fully covered and protected wherever you go.",
           detail: "Flexible plans for all needs",
           ctaBtn: "Ask on WhatsApp",
+          bullets: [
+            "Full medical coverage including emergencies and hospitalization",
+            "Plans tailored by trip duration and destination",
+            "We help you compare and choose the right coverage clearly",
+          ],
         },
       ],
       trustLabel: "Why Us",
@@ -239,6 +261,50 @@ export const en = {
         { icon: "headset", text: "Dedicated team ready to answer your questions" },
         { icon: "globe", text: "Coverage across 50+ destinations worldwide" },
         { icon: "star", text: "Over 10,000 satisfied clients trust us" },
+      ],
+      howLabel: "How We Work",
+      howTitle: "With You at Every Step",
+      howSteps: [
+        {
+          step: "01",
+          title: "Reach Out",
+          desc: "Send us a WhatsApp message and tell us your needs — destination, travel dates, and any other details.",
+        },
+        {
+          step: "02",
+          title: "We Prepare Your Options",
+          desc: "Our team compares prices and available choices, then presents a considered recommendation that fits your requirements.",
+        },
+        {
+          step: "03",
+          title: "Confirm and Pay Easily",
+          desc: "Once you approve, we complete all booking procedures and send you the confirmation and documents directly.",
+        },
+        {
+          step: "04",
+          title: "We're There Until You Return",
+          desc: "Our team is available before and during your trip for any questions or assistance you may need — you're never alone.",
+        },
+      ],
+      faqLabel: "Common Questions",
+      faqTitle: "Have a Question?",
+      faqs: [
+        {
+          q: "How long does a visa take?",
+          a: "It depends on the visa type and destination. Gulf country visas typically take 3–5 working days, while some European destinations may require two weeks or more. We'll let you know the exact timeframe once we review your file.",
+        },
+        {
+          q: "Do you book for groups and families?",
+          a: "Yes, we book for individuals, families, and groups of any size. We arrange all the details — flights, hotels, and insurance — to ensure a smooth experience for everyone.",
+        },
+        {
+          q: "Can I inquire before committing to a booking?",
+          a: "Absolutely. We're happy to answer all your questions and compare available options with no obligation. Reach out on WhatsApp and we'll get back to you as soon as possible.",
+        },
+        {
+          q: "What is the difference between health insurance and travel insurance?",
+          a: "Travel insurance covers trip cancellations, baggage, and emergency medical care. Health insurance is broader and covers full medical treatment. We'll help you choose the right plan based on your destination and length of stay.",
+        },
       ],
       ctaTitle: "Ready to book?",
       ctaSubtitle:
