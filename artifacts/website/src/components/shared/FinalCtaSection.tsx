@@ -1,4 +1,7 @@
+"use client";
+
 import { WhatsAppIcon } from "@/components/home/Icons";
+import { useReveal } from "@/components/home/useReveal";
 
 interface FinalCtaSectionProps {
   title: string;
@@ -13,10 +16,19 @@ export default function FinalCtaSection({
   ctaBtn,
   whatsapp,
 }: FinalCtaSectionProps) {
+  const { ref, visible } = useReveal(0.1);
+
   return (
-    <section className="bg-navy section-padding">
+    <section ref={ref} className="bg-navy section-padding">
       <div className="container-custom">
-        <div className="max-w-2xl mx-auto text-center">
+        <div
+          className="max-w-2xl mx-auto text-center"
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(20px)",
+            transition: "opacity 0.65s ease, transform 0.65s ease",
+          }}
+        >
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
             {title}
           </h2>

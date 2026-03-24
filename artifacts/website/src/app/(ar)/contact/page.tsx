@@ -3,6 +3,7 @@ import { ar } from "@/lib/content/ar";
 import { WhatsAppIcon } from "@/components/home/Icons";
 import ContactBranchCard from "@/components/contact/ContactBranchCard";
 import SocialLinksSection from "@/components/contact/SocialLinksSection";
+import RevealWrapper from "@/components/shared/RevealWrapper";
 
 export const metadata: Metadata = { title: "تواصل معنا" };
 
@@ -12,7 +13,7 @@ export default function ArabicContactPage() {
   return (
     <>
       <section className="bg-navy text-white py-20 lg:py-28">
-        <div className="container-custom text-center">
+        <RevealWrapper className="container-custom text-center">
           <p className="text-gold text-sm font-semibold uppercase tracking-widest mb-3">
             {p.label}
           </p>
@@ -22,12 +23,12 @@ export default function ArabicContactPage() {
           <p className="mt-4 text-white/65 text-lg max-w-2xl mx-auto leading-relaxed">
             {p.subtitle}
           </p>
-        </div>
+        </RevealWrapper>
       </section>
 
       <section className="bg-white py-16 lg:py-20 border-b border-gray-100">
         <div className="container-custom">
-          <div className="max-w-2xl mx-auto text-center">
+          <RevealWrapper className="max-w-2xl mx-auto text-center">
             <p className="text-text-muted text-base lg:text-lg leading-relaxed mb-8">
               {p.intro}
             </p>
@@ -41,24 +42,25 @@ export default function ArabicContactPage() {
               {p.primaryCta}
             </a>
             <p className="mt-4 text-sm text-text-muted">{p.primaryCtaNote}</p>
-          </div>
+          </RevealWrapper>
         </div>
       </section>
 
       <section className="bg-background section-padding">
         <div className="container-custom">
-          <div className="text-center mb-10">
+          <RevealWrapper className="text-center mb-10">
             <p className="text-gold text-sm font-semibold uppercase tracking-widest mb-2">
               {p.branchesLabel}
             </p>
             <h2 className="text-2xl sm:text-3xl font-bold text-text-primary">
               {p.branchSelectNote}
             </h2>
-          </div>
+          </RevealWrapper>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {branches.map((branch, i) => (
               <ContactBranchCard
                 key={i}
+                index={i}
                 branch={branch}
                 branchCta={p.branchCta}
                 mapCta={p.mapCta}

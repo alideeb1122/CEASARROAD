@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ar } from "@/lib/content/ar";
 import BranchCard from "@/components/branches/BranchCard";
+import RevealWrapper from "@/components/shared/RevealWrapper";
 
 export const metadata: Metadata = { title: "فروعنا" };
 
@@ -9,7 +10,7 @@ export default function ArabicBranchesPage() {
   return (
     <>
       <section className="bg-navy text-white py-20 lg:py-28">
-        <div className="container-custom text-center">
+        <RevealWrapper className="container-custom text-center">
           <p className="text-gold text-sm font-semibold uppercase tracking-widest mb-3">
             {p.label}
           </p>
@@ -19,7 +20,7 @@ export default function ArabicBranchesPage() {
           <p className="mt-4 text-white/65 text-lg max-w-2xl mx-auto leading-relaxed">
             {p.subtitle}
           </p>
-        </div>
+        </RevealWrapper>
       </section>
 
       <section className="bg-background section-padding">
@@ -28,6 +29,7 @@ export default function ArabicBranchesPage() {
             {p.branches.map((branch, i) => (
               <BranchCard
                 key={i}
+                index={i}
                 branch={branch}
                 branchCta={p.branchCta}
                 mapCta={p.mapCta}

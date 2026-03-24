@@ -4,6 +4,7 @@ import ServiceDetailBlock from "@/components/services/ServiceDetailBlock";
 import ServicesHowSection from "@/components/services/ServicesHowSection";
 import ServicesFaqSection from "@/components/services/ServicesFaqSection";
 import FinalCtaSection from "@/components/shared/FinalCtaSection";
+import RevealWrapper from "@/components/shared/RevealWrapper";
 
 export const metadata: Metadata = { title: "Our Services" };
 
@@ -14,7 +15,7 @@ export default function EnglishServicesPage() {
     <>
       <section className="bg-navy text-white py-20 lg:py-28 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(201,168,76,0.12),transparent_60%)] pointer-events-none" />
-        <div className="container-custom text-center relative z-10">
+        <RevealWrapper className="container-custom text-center relative z-10">
           <p className="text-gold text-sm font-semibold uppercase tracking-widest mb-4">
             {p.label}
           </p>
@@ -34,15 +35,15 @@ export default function EnglishServicesPage() {
               </span>
             ))}
           </div>
-        </div>
+        </RevealWrapper>
       </section>
 
       <section className="bg-white section-padding-sm border-b border-gray-100">
-        <div className="container-custom">
+        <RevealWrapper className="container-custom">
           <p className="text-base lg:text-lg text-text-muted leading-relaxed max-w-3xl mx-auto text-center">
             {p.intro}
           </p>
-        </div>
+        </RevealWrapper>
       </section>
 
       {p.services.map((service, i) => (

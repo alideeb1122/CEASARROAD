@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ar } from "@/lib/content/ar";
 import FinalCtaSection from "@/components/shared/FinalCtaSection";
+import RevealWrapper from "@/components/shared/RevealWrapper";
 import { getServiceIcon, MapPinIcon, ClockIcon, GlobeIcon } from "@/components/home/Icons";
 
 export const metadata: Metadata = { title: "من نحن" };
@@ -17,7 +18,7 @@ export default function ArabicAboutPage() {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full border border-white/30" />
           <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full border border-white/20" />
         </div>
-        <div className="container-custom text-center relative">
+        <RevealWrapper className="container-custom text-center relative">
           <span className="inline-block px-4 py-1.5 rounded-full bg-gold/15 text-gold text-xs font-semibold uppercase tracking-widest mb-6">
             {p.label}
           </span>
@@ -34,13 +35,13 @@ export default function ArabicAboutPage() {
             <span className="w-1 h-1 rounded-full bg-gold/50" />
             <span>حمص</span>
           </div>
-        </div>
+        </RevealWrapper>
       </section>
 
       {/* 2. Who We Are */}
       <section className="bg-white section-padding">
         <div className="container-custom">
-          <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-24 items-start">
+          <RevealWrapper className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-24 items-start">
             <div>
               <span className="inline-block text-gold text-xs font-semibold uppercase tracking-widest mb-4">
                 {p.whoLabel}
@@ -75,14 +76,14 @@ export default function ArabicAboutPage() {
                 ))}
               </div>
             </div>
-          </div>
+          </RevealWrapper>
         </div>
       </section>
 
       {/* 3. Mission + Vision */}
       <section className="bg-surface section-padding">
         <div className="container-custom">
-          <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <RevealWrapper className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="bg-white rounded-2xl border border-gray-100 p-8 lg:p-10">
               <div className="w-11 h-11 rounded-xl bg-navy/5 flex items-center justify-center mb-5">
                 <GlobeIcon className="w-5 h-5 text-navy" />
@@ -107,21 +108,21 @@ export default function ArabicAboutPage() {
               </h2>
               <p className="text-white/70 leading-relaxed text-base">{p.visionText}</p>
             </div>
-          </div>
+          </RevealWrapper>
         </div>
       </section>
 
       {/* 4. Values */}
       <section className="bg-white section-padding">
         <div className="container-custom">
-          <div className="text-center mb-12">
+          <RevealWrapper className="text-center mb-12">
             <span className="inline-block text-gold text-xs font-semibold uppercase tracking-widest mb-3">
               {p.valuesLabel}
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-text-primary">
               {p.valuesTitle}
             </h2>
-          </div>
+          </RevealWrapper>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
             {p.values.map((value, i) => (
               <div
@@ -144,7 +145,7 @@ export default function ArabicAboutPage() {
       {/* 5. Regional Presence */}
       <section className="bg-surface section-padding">
         <div className="container-custom">
-          <div className="text-center mb-12">
+          <RevealWrapper className="text-center mb-12">
             <span className="inline-block text-gold text-xs font-semibold uppercase tracking-widest mb-3">
               {p.presenceLabel}
             </span>
@@ -154,7 +155,7 @@ export default function ArabicAboutPage() {
             <p className="text-text-muted max-w-xl mx-auto text-base leading-relaxed">
               {p.presenceSubtitle}
             </p>
-          </div>
+          </RevealWrapper>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
             {branches.map((branch, i) => (
               <div
@@ -189,7 +190,7 @@ export default function ArabicAboutPage() {
       {/* 6. Trust Numbers */}
       <section className="bg-navy py-16 lg:py-20">
         <div className="container-custom">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 text-center">
+          <RevealWrapper className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 text-center">
             {p.stats.map((stat, i) => (
               <div key={i} className="px-2">
                 <p className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gold leading-none">
@@ -199,7 +200,7 @@ export default function ArabicAboutPage() {
                 <p className="text-white/45 text-xs mt-1 leading-relaxed">{stat.desc}</p>
               </div>
             ))}
-          </div>
+          </RevealWrapper>
         </div>
       </section>
 

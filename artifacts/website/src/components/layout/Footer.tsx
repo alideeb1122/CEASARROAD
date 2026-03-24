@@ -1,4 +1,8 @@
+"use client";
+
+import React from "react";
 import Link from "next/link";
+import { useReveal } from "@/components/home/useReveal";
 
 type IconProps = { className?: string };
 
@@ -129,6 +133,7 @@ interface FooterProps {
 
 export default function Footer({ locale, siteName, nav, footer, branches }: FooterProps) {
   const prefix = locale === "ar" ? "" : "/en";
+  const { ref, visible } = useReveal(0.05);
 
   const navLinks = [
     { label: nav.home,     href: locale === "ar" ? "/" : "/en" },
@@ -139,12 +144,19 @@ export default function Footer({ locale, siteName, nav, footer, branches }: Foot
   ];
 
   return (
-    <footer className="bg-navy-dark text-white/60 border-t border-white/10">
+    <footer ref={ref as React.Ref<HTMLElement>} className="bg-navy-dark text-white/60 border-t border-white/10">
       <div className="container-custom py-12 lg:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14">
 
           {/* Col 1 — Brand + Socials */}
-          <div>
+          <div
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateY(0)" : "translateY(20px)",
+              transition: "opacity 0.65s ease, transform 0.65s ease",
+              transitionDelay: "0ms",
+            }}
+          >
             <p className="text-brand-cta font-bold text-base leading-tight">{siteName}</p>
             <p className="mt-3 text-sm leading-relaxed text-white/45 max-w-[240px]">
               {footer.tagline}
@@ -172,7 +184,14 @@ export default function Footer({ locale, siteName, nav, footer, branches }: Foot
           </div>
 
           {/* Col 2 — Quick Links */}
-          <div>
+          <div
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateY(0)" : "translateY(20px)",
+              transition: "opacity 0.65s ease, transform 0.65s ease",
+              transitionDelay: "80ms",
+            }}
+          >
             <h3 className="text-white/90 font-semibold text-[10px] uppercase tracking-widest mb-5">
               {footer.quickLinks}
             </h3>
@@ -191,7 +210,15 @@ export default function Footer({ locale, siteName, nav, footer, branches }: Foot
           </div>
 
           {/* Col 3 — Branches */}
-          <div className="sm:col-span-2 lg:col-span-1">
+          <div
+            className="sm:col-span-2 lg:col-span-1"
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateY(0)" : "translateY(20px)",
+              transition: "opacity 0.65s ease, transform 0.65s ease",
+              transitionDelay: "160ms",
+            }}
+          >
             <h3 className="text-white/90 font-semibold text-[10px] uppercase tracking-widest mb-5">
               {footer.branchesTitle}
             </h3>

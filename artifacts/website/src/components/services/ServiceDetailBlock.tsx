@@ -1,4 +1,7 @@
+"use client";
+
 import { getServiceIcon, WhatsAppIcon, CheckCircleIcon } from "@/components/home/Icons";
+import { useReveal } from "@/components/home/useReveal";
 
 interface ServiceDetailBlockProps {
   icon: string;
@@ -22,14 +25,20 @@ export default function ServiceDetailBlock({
   index,
 }: ServiceDetailBlockProps) {
   const isEven = index % 2 === 0;
+  const { ref, visible } = useReveal(0.08);
 
   return (
-    <section className={isEven ? "bg-white" : "bg-[#F7F6F2]"}>
+    <section ref={ref} className={isEven ? "bg-white" : "bg-[#F7F6F2]"}>
       <div className="container-custom section-padding">
         <div
           className={`flex flex-col gap-10 lg:gap-16 lg:items-center ${
             isEven ? "lg:flex-row" : "lg:flex-row-reverse"
           }`}
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(20px)",
+            transition: "opacity 0.65s ease, transform 0.65s ease",
+          }}
         >
           <div className="flex-shrink-0 flex items-center justify-center lg:w-[340px]">
             <div className="relative w-full max-w-[280px] lg:max-w-none aspect-square rounded-3xl bg-navy/5 border border-navy/8 flex items-center justify-center">

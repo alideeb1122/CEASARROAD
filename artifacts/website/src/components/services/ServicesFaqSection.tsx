@@ -1,3 +1,7 @@
+"use client";
+
+import { useReveal } from "@/components/home/useReveal";
+
 interface Faq {
   q: string;
   a: string;
@@ -14,10 +18,19 @@ export default function ServicesFaqSection({
   title,
   faqs,
 }: ServicesFaqSectionProps) {
+  const { ref, visible } = useReveal(0.1);
+
   return (
-    <section className="bg-background section-padding">
+    <section ref={ref} className="bg-background section-padding">
       <div className="container-custom">
-        <div className="text-center mb-10 lg:mb-14">
+        <div
+          className="text-center mb-10 lg:mb-14"
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(20px)",
+            transition: "opacity 0.65s ease, transform 0.65s ease",
+          }}
+        >
           <p className="text-gold text-sm font-semibold uppercase tracking-widest mb-3">
             {label}
           </p>
@@ -31,6 +44,12 @@ export default function ServicesFaqSection({
             <details
               key={i}
               className="group py-5 first:pt-0 last:pb-0"
+              style={{
+                opacity: visible ? 1 : 0,
+                transform: visible ? "translateY(0)" : "translateY(16px)",
+                transition: "opacity 0.6s ease, transform 0.6s ease",
+                transitionDelay: `${80 + i * 60}ms`,
+              }}
             >
               <summary className="flex items-center justify-between gap-4 cursor-pointer list-none">
                 <span className="font-semibold text-text-primary text-base leading-snug group-open:text-navy transition-colors">

@@ -1,4 +1,7 @@
+"use client";
+
 import { MapPinIcon, ClockIcon, ExternalLinkIcon, WhatsAppIcon } from "@/components/home/Icons";
+import { useReveal } from "@/components/home/useReveal";
 
 interface Branch {
   city: string;
@@ -17,6 +20,7 @@ interface BranchCardProps {
   mapCta: string;
   hoursLabel: string;
   offDayLabel: string;
+  index?: number;
 }
 
 export default function BranchCard({
@@ -25,9 +29,21 @@ export default function BranchCard({
   mapCta,
   hoursLabel,
   offDayLabel,
+  index = 0,
 }: BranchCardProps) {
+  const { ref, visible } = useReveal(0.1);
+
   return (
-    <div className="group flex flex-col rounded-2xl border border-gray-100 bg-white overflow-hidden hover:shadow-xl hover:border-gold/30 transition-all duration-300">
+    <div
+      ref={ref as React.Ref<HTMLDivElement>}
+      className="group flex flex-col rounded-2xl border border-gray-100 bg-white overflow-hidden hover:shadow-xl hover:border-gold/30 transition-all duration-300"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(20px)",
+        transition: "opacity 0.65s ease, transform 0.65s ease, box-shadow 0.3s ease, border-color 0.3s ease",
+        transitionDelay: `${index * 80}ms`,
+      }}
+    >
       <div className="bg-navy px-6 py-6">
         <h3 className="text-2xl font-extrabold text-white">{branch.city}</h3>
         <p className="text-sm text-white/60 mt-1">{branch.country}</p>

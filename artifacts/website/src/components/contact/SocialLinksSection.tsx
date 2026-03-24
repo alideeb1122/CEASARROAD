@@ -1,4 +1,7 @@
+"use client";
+
 import { getSocialIcon } from "@/components/home/Icons";
+import { useReveal } from "@/components/home/useReveal";
 
 interface Social {
   platform: string;
@@ -19,10 +22,19 @@ export default function SocialLinksSection({
   subtitle,
   socials,
 }: SocialLinksSectionProps) {
+  const { ref, visible } = useReveal(0.1);
+
   return (
-    <section className="bg-navy section-padding">
+    <section ref={ref} className="bg-navy section-padding">
       <div className="container-custom">
-        <div className="text-center mb-12">
+        <div
+          className="text-center mb-12"
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(20px)",
+            transition: "opacity 0.65s ease, transform 0.65s ease",
+          }}
+        >
           <h2 className="text-2xl sm:text-3xl font-bold text-white">{title}</h2>
           <p className="mt-3 text-white/55 text-sm max-w-xl mx-auto leading-relaxed">
             {subtitle}
@@ -37,6 +49,12 @@ export default function SocialLinksSection({
               target="_blank"
               rel="noopener noreferrer"
               className="group flex flex-col items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-gold/40 rounded-2xl p-4 transition-all duration-200 text-center"
+              style={{
+                opacity: visible ? 1 : 0,
+                transform: visible ? "translateY(0)" : "translateY(16px)",
+                transition: "opacity 0.6s ease, transform 0.6s ease, background-color 0.2s, border-color 0.2s",
+                transitionDelay: `${80 + i * 60}ms`,
+              }}
             >
               <div className="w-10 h-10 rounded-full bg-gold/15 group-hover:bg-gold/25 flex items-center justify-center text-gold transition-colors duration-200 flex-shrink-0">
                 {getSocialIcon(social.type, "w-5 h-5")}
