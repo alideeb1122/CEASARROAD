@@ -1,0 +1,90 @@
+Build only the next micro-step.
+
+Strict scope:
+- Add a Gallery section to the homepage only
+- Do not redesign existing sections
+- Do not touch inner pages
+- Do not add new dependencies
+- Do not refactor unrelated files
+- Keep the existing design system, spacing, and color palette
+
+Goal:
+Create a premium travel gallery section that feels elegant, dynamic, and brand-appropriate — not like a generic AI template and not like a cheap slider.
+
+What I want:
+- A visually rich homepage gallery section
+- A responsive masonry-style or staggered image grid
+- A premium travel/lifestyle feel
+- Subtle motion and hover polish
+- Easy image replacement later without changing the component structure
+
+Gallery requirements:
+- Add the gallery section to the homepage
+- Place it after Branches and before Testimonials
+- Use local content/data only
+- Keep all gallery items easy to replace later from a local data structure
+- The section should support 6 to 8 gallery items
+- Each item should support:
+  - image path
+  - title or short label
+  - short tag/category
+  - alt text
+
+Content direction:
+The gallery should reflect:
+- travel atmosphere
+- customer service
+- booking and visa experience
+- destinations and branch presence
+- premium travel brand mood
+
+Suggested tags/categories:
+- Flights
+- Visa
+- Hotels
+- Travel Moments
+- Dubai
+- Erbil
+- Homs
+- Customer Experience
+
+Design direction:
+- mostly light section
+- premium travel brand feel
+- elegant spacing
+- not overcrowded
+- not flashy
+- not generic
+- not a basic slider
+- not a cheap carousel
+
+Animation and interaction:
+- use lightweight reveal-on-scroll for the section/items
+- use subtle stagger entrance for gallery cards
+- use gentle hover zoom or lift on images
+- use a soft overlay or caption reveal on hover
+- keep the motion elegant and restrained
+- no autoplay
+- no arrows
+- no dots
+- no heavy lightbox system in this step
+
+Implementation preferences:
+- use native React + TypeScript only
+- use CSS/Tailwind only
+- no animation libraries
+- keep it responsive and lightweight
+- keep the component reusable and image-driven
+
+Important:
+- real final images may not be available yet
+- build the section so placeholder images can be replaced later very easily
+- structure the gallery data cleanly in local content files
+- do not hardcode image content directly inside the component
+
+Before editing, tell me exactly:
+1. which files you will modify
+2. which new content entries you will add to ar.ts and en.ts
+3. whether you will use a masonry layout or a staggered grid
+4. what hover/reveal effects you will apply
+5. how you will keep image replacement easy later
