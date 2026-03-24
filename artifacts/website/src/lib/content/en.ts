@@ -364,19 +364,23 @@ export const en = {
       label: "About Us",
       title: "Caesar Road Travel & Tourism",
       subtitle:
-        "Your trusted companion in travel — getting you where you need to be, professionally and reliably",
+        "Over a decade of serving travellers across three countries — built on trust, experience, and genuine care",
       whoLabel: "Who We Are",
       whoTitle: "About Caesar Road",
       whoText:
-        "Caesar Road Travel & Tourism is a full-service travel agency operating across three branches in Dubai, Erbil, and Homs. We are committed to delivering an exceptional experience to every client — paying close attention to every detail from the moment of booking to the safe return home.",
+        "Caesar Road Travel & Tourism is a full-service travel agency operating across three branches in Dubai, Erbil, and Homs. We serve our clients with a dedicated team that tracks every detail — from the first enquiry to the safe return home. We are not just a booking agency; we are a travel partner you can rely on every time.",
       storyLabel: "Our Story",
       storyTitle: "Built on a Passion for Travel",
       storyText:
-        "We started in Homs with a simple belief: that travel should be accessible, smooth, and enjoyable for everyone. Over the years, we expanded to Iraq and the UAE, earning the trust of thousands of clients who chose Caesar Road as their travel partner.",
+        "We started in Homs with a simple belief: that travel should be accessible, smooth, and enjoyable for everyone. We expanded to Erbil to serve the Kurdistan Region and Iraq, then to Dubai to be present at the heart of the UAE. Over more than a decade, we have built genuine trust with thousands of clients — renewed with every successful trip and every visa delivered on time.",
       missionLabel: "Our Mission",
       missionTitle: "Why We Do What We Do",
       missionText:
         "Our mission is to make travel within reach for everyone — through fair pricing, honest service, and a team that always puts the client first.",
+      visionLabel: "Our Vision",
+      visionTitle: "Where We Are Headed",
+      visionText:
+        "We aim to be the first name every Arab traveller thinks of when they need reliable, end-to-end travel service — a company that combines a strong local presence with a global network, and delivers an experience worthy of every client.",
       valuesLabel: "Our Values",
       valuesTitle: "What Sets Us Apart",
       values: [
@@ -401,11 +405,14 @@ export const en = {
           desc: "Our partner relationships worldwide open the best options for you",
         },
       ],
+      presenceLabel: "Regional Presence",
+      presenceTitle: "We Are Close to You",
+      presenceSubtitle: "Three branches in three countries — making sure there is always someone nearby to help",
       stats: [
-        { value: 10, suffix: "+", label: "Years of Experience" },
-        { value: 3, suffix: "", label: "Active Branches" },
-        { value: 10000, suffix: "+", label: "Happy Clients" },
-        { value: 50, suffix: "+", label: "Destinations Worldwide" },
+        { value: 10, suffix: "+", label: "Years of Experience", desc: "Accumulated expertise serving travellers" },
+        { value: 3, suffix: "", label: "Active Branches", desc: "In Dubai, Erbil, and Homs" },
+        { value: 10000, suffix: "+", label: "Happy Clients", desc: "Who trusted us with their travels" },
+        { value: 50, suffix: "+", label: "Destinations Worldwide", desc: "Covered through our global partners" },
       ],
       ctaTitle: "Start Your Journey With Us",
       ctaSubtitle: "Reach out and let us plan your perfect trip down to every detail",
