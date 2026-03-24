@@ -161,18 +161,6 @@ export const ar = {
           title: "أربيل — روح كردستان",
           tag: "أربيل",
         },
-        {
-          src: "/images/gallery/gallery-7.svg",
-          alt: "منارة في حمص وإضاءة الغروب",
-          title: "حمص — عراقة وضيافة",
-          tag: "حمص",
-        },
-        {
-          src: "/images/gallery/gallery-8.svg",
-          alt: "موظف يقدم المساعدة لعميل في المكتب",
-          title: "فريق متخصص في خدمتك",
-          tag: "تجربة العملاء",
-        },
       ],
 
       socialLabel: "ابقَ على تواصل",

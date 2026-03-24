@@ -162,18 +162,6 @@ export const en = {
           title: "Erbil — The Soul of Kurdistan",
           tag: "Erbil",
         },
-        {
-          src: "/images/gallery/gallery-7.svg",
-          alt: "Minaret in Homs at sunset",
-          title: "Homs — Heritage & Hospitality",
-          tag: "Homs",
-        },
-        {
-          src: "/images/gallery/gallery-8.svg",
-          alt: "Agent assisting a client at the office",
-          title: "A Dedicated Team at Your Service",
-          tag: "Customer Experience",
-        },
       ],
 
       socialLabel: "Stay Connected",
