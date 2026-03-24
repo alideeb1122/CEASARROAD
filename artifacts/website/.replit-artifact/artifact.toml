@@ -15,7 +15,7 @@ paths = [ "/" ]
 localPort = 3000
 
 [services.development]
-run = "[ -d node_modules ] || pnpm install && pnpm --filter @workspace/website run dev"
+run = "pnpm --filter @workspace/website run dev"
 
 [services.production]
 build = [ "pnpm", "--filter", "@workspace/website", "run", "build" ]

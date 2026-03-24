@@ -1,4 +1,5 @@
 {
-  "/(en)/en/about/page": "app/(en)/en/about/page.js",
-  "/(ar)/about/page": "app/(ar)/about/page.js"
+  "/(ar)/page": "app/(ar)/page.js",
+  "/(ar)/about/page": "app/(ar)/about/page.js",
+  "/(en)/en/about/page": "app/(en)/en/about/page.js"
 }

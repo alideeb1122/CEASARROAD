@@ -6,6 +6,11 @@
       "static/css/app/(ar)/layout.css",
       "static/chunks/app/(ar)/layout.js"
     ],
+    "/(ar)/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(ar)/page.js"
+    ],
     "/(ar)/about/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
