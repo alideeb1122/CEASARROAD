@@ -122,6 +122,60 @@ export const en = {
         },
       ],
 
+      galleryLabel: "Moments from Our Journeys",
+      galleryTitle: "A World Waiting for You",
+      gallerySubtitle: "Flights, visas, hotels, destinations — everything you need, all in one place",
+      galleryItems: [
+        {
+          src: "/images/gallery/gallery-1.svg",
+          alt: "Bright airport terminal with travelers heading to their gates",
+          title: "Flights to 50+ Destinations Worldwide",
+          tag: "Flights",
+        },
+        {
+          src: "/images/gallery/gallery-2.svg",
+          alt: "Visa stamp on a passport",
+          title: "Fast & Reliable Visa Services",
+          tag: "Visa",
+        },
+        {
+          src: "/images/gallery/gallery-3.svg",
+          alt: "Luxury hotel lobby with warm lighting",
+          title: "Hotel Bookings at the Best Rates",
+          tag: "Hotels",
+        },
+        {
+          src: "/images/gallery/gallery-4.svg",
+          alt: "Family taking a photo at a tourist destination",
+          title: "Unforgettable Moments with Your Loved Ones",
+          tag: "Travel Moments",
+        },
+        {
+          src: "/images/gallery/gallery-5.svg",
+          alt: "Dubai skyline with Burj Khalifa",
+          title: "Dubai — Gateway to Dreams",
+          tag: "Dubai",
+        },
+        {
+          src: "/images/gallery/gallery-6.svg",
+          alt: "Erbil Citadel and the historic old city",
+          title: "Erbil — The Soul of Kurdistan",
+          tag: "Erbil",
+        },
+        {
+          src: "/images/gallery/gallery-7.svg",
+          alt: "Minaret in Homs at sunset",
+          title: "Homs — Heritage & Hospitality",
+          tag: "Homs",
+        },
+        {
+          src: "/images/gallery/gallery-8.svg",
+          alt: "Agent assisting a client at the office",
+          title: "A Dedicated Team at Your Service",
+          tag: "Customer Experience",
+        },
+      ],
+
       socialLabel: "Stay Connected",
       socialTitle: "Follow Us on Social Media",
       socialSubtitle:

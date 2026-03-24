@@ -121,6 +121,60 @@ export const ar = {
         },
       ],
 
+      galleryLabel: "لقطات من رحلاتنا",
+      galleryTitle: "عالم كامل ينتظرك",
+      gallerySubtitle: "نقاط لقاء، تأشيرات، وجهات، وذكريات — كل ما تحتاجه في مكان واحد",
+      galleryItems: [
+        {
+          src: "/images/gallery/gallery-1.svg",
+          alt: "صالة مطار مضيئة مع مسافرين يتجهون نحو بواباتهم",
+          title: "رحلات جوية إلى أكثر من ٥٠ وجهة",
+          tag: "رحلات جوية",
+        },
+        {
+          src: "/images/gallery/gallery-2.svg",
+          alt: "ختم تأشيرة على جواز سفر",
+          title: "خدمة تأشيرات سريعة وموثوقة",
+          tag: "تأشيرات",
+        },
+        {
+          src: "/images/gallery/gallery-3.svg",
+          alt: "لوبي فندق فاخر مع إضاءة دافئة",
+          title: "حجوزات فندقية بأفضل الأسعار",
+          tag: "فنادق",
+        },
+        {
+          src: "/images/gallery/gallery-4.svg",
+          alt: "عائلة تلتقط صورة في وجهة سياحية",
+          title: "لحظات لا تُنسى مع أحبائك",
+          tag: "لحظات السفر",
+        },
+        {
+          src: "/images/gallery/gallery-5.svg",
+          alt: "أفق مدينة دبي مع برج خليفة",
+          title: "دبي — بوابة الأحلام",
+          tag: "دبي",
+        },
+        {
+          src: "/images/gallery/gallery-6.svg",
+          alt: "قلعة أربيل التاريخية والمدينة القديمة",
+          title: "أربيل — روح كردستان",
+          tag: "أربيل",
+        },
+        {
+          src: "/images/gallery/gallery-7.svg",
+          alt: "منارة في حمص وإضاءة الغروب",
+          title: "حمص — عراقة وضيافة",
+          tag: "حمص",
+        },
+        {
+          src: "/images/gallery/gallery-8.svg",
+          alt: "موظف يقدم المساعدة لعميل في المكتب",
+          title: "فريق متخصص في خدمتك",
+          tag: "تجربة العملاء",
+        },
+      ],
+
       socialLabel: "ابقَ على تواصل",
       socialTitle: "تابعنا على منصات التواصل",
       socialSubtitle: "آخر الأخبار والعروض والوجهات دائماً في متناول يدك",

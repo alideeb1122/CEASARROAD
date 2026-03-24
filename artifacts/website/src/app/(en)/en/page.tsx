@@ -5,6 +5,7 @@ import ServicesSection from "@/components/home/ServicesSection";
 import WhyUsSection from "@/components/home/WhyUsSection";
 import StatsSection from "@/components/home/StatsSection";
 import BranchesSection from "@/components/home/BranchesSection";
+import GallerySection from "@/components/home/GallerySection";
 import SocialSection from "@/components/home/SocialSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import FinalCtaSection from "@/components/home/FinalCtaSection";
@@ -72,6 +73,13 @@ export default function EnglishHomePage() {
         branches={p.branches}
         branchCta={p.branchCta}
         hoursLabel={p.hoursLabel}
+      />
+
+      <GallerySection
+        label={p.galleryLabel}
+        title={p.galleryTitle}
+        subtitle={p.gallerySubtitle}
+        items={p.galleryItems}
       />
 
       <SocialSection
