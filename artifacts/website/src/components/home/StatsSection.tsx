@@ -18,6 +18,10 @@ function easeOutCubic(t: number): number {
   return 1 - Math.pow(1 - t, 3);
 }
 
+function formatStatNumber(value: number): string {
+  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 interface StatItemProps {
   stat: Stat;
   active: boolean;
@@ -82,7 +86,7 @@ function StatItem({ stat, active, duration, delay }: StatItemProps) {
               letterSpacing: "-0.03em",
             }}
           >
-            {count.toLocaleString()}
+            {formatStatNumber(count)}
           </span>
           <span
             className="text-3xl sm:text-4xl font-bold text-brand-cta ms-0.5"
@@ -136,7 +140,7 @@ export default function StatsSection({ label, title, stats }: StatsSectionProps)
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-brand-section section-padding-sm">
+    <section ref={sectionRef} data-header-theme="dark" className="bg-brand-section section-padding-sm">
       <div className="container-custom">
         <div className="text-center mb-10">
           <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase mb-3 bg-white/10 text-brand-cta">

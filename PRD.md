@@ -69,13 +69,76 @@
 5. Push to GitHub, then sync in Replit if needed.
 
 ## 11) Current Priority Plan
-1. Stabilize content consistency between Arabic and English pages.
-2. Polish conversion paths (WhatsApp CTAs, branch contact clarity).
-3. SEO + metadata pass across main pages.
-4. Visual refinement pass (spacing, hierarchy, responsiveness).
-5. Final QA sweep before production release.
+1. Polish the home page middle sections to match the new hero quality (`Services`, then `Why Us`).
+2. Add branch visuals: one representative image per city/country on branch-related UI.
+3. Add real hero/banner imagery to internal pages (`/services`, `/branches`, `/about`, `/contact` and English equivalents) instead of abstract placeholder rectangles.
+4. Continue content consistency and conversion polishing across Arabic and English pages.
+5. SEO + metadata pass across main pages.
+6. Final QA sweep before production release.
 
-## 12) Change Control
+## 12) Progress Snapshot
+
+### Completed in this thread
+- Environment on the new laptop is ready enough for local development:
+  - Git installed
+  - Node.js installed
+  - `pnpm` installed and working
+  - project runs locally from `D:\ceasarroad\CEASARROAD`
+- Home hero significantly redesigned and polished:
+  - Arabic font flow improved by using Cairo in the Arabic app layout
+  - English layout now uses Inter via Next font loading
+  - hero spacing, hierarchy, and CTA layout refined
+  - rotating final word added in the hero title for both Arabic and English
+  - hero background changed toward a calmer premium sky-like motion direction
+  - mouse interaction added to the hero background layers
+- Header upgraded:
+  - more premium visual treatment
+  - header now switches between dark/light appearance depending on the section under it
+- Home content polish:
+  - hero copy updated in Arabic and English to feel more premium
+- Home branch data consistency fixed:
+  - home page branch cards now use the same branch source as the dedicated branches page
+  - this removes mismatch between home, footer, and branches page
+- Airlines section refined visually to better fit the upgraded hero/header style
+- Hydration issue fixed in the home stats section by replacing locale-dependent number formatting with deterministic formatting
+
+### Known current state
+- The top/home experience is now ahead of the middle sections in visual quality.
+- There are still broader repo typecheck issues outside the immediate scope of these UI changes.
+- Deployment flow to cPanel is intentionally deferred until the visual/content batch is ready.
+
+## 13) Remaining Work
+
+### Home page
+- Refine `Services` section to visually match the upgraded hero.
+- Refine `Why Us` section to match the new quality level and spacing rhythm.
+- Review the remaining home sections for spacing consistency and stronger visual hierarchy.
+- Validate mobile behavior after the recent hero/header changes and tune where needed.
+
+### Branches and branch visuals
+- Add one representative image per branch/city/country in branch-related UI.
+- Ensure those images are used consistently wherever branches are presented.
+- Keep branch data unified from one source of truth.
+
+### Internal pages
+- Add a proper opening visual/hero image to each non-home page:
+  - `Services`
+  - `Branches`
+  - `About`
+  - `Contact`
+  - and the English equivalents
+- Replace simple placeholder/abstract opening blocks with meaningful branded imagery.
+
+### Content and QA
+- Continue upgrading Arabic and English copy page by page.
+- Verify WhatsApp/contact paths remain clear and consistent.
+- Run final visual QA before deployment, especially:
+  - hero/header transitions
+  - branch consistency
+  - mobile spacing
+  - bilingual parity
+
+## 14) Change Control
 - Any request outside scope is either:
   - deferred to backlog, or
   - added here first by updating this PRD, then implemented.

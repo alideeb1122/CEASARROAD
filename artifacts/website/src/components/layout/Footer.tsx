@@ -144,7 +144,7 @@ export default function Footer({ locale, siteName, nav, footer, branches }: Foot
   ];
 
   return (
-    <footer ref={ref as React.Ref<HTMLElement>} className="bg-navy-dark text-white/60 border-t border-white/10">
+    <footer ref={ref as React.Ref<HTMLElement>} data-header-theme="dark" className="bg-navy-dark text-white/60 border-t border-white/10">
       <div className="container-custom py-12 lg:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14">
 

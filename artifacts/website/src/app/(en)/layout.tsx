@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "../globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { en } from "@/lib/content/en";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
 
 export const metadata: Metadata = {
   title: {
@@ -20,7 +26,7 @@ export default function EnglishLayout({
 }) {
   return (
     <html lang="en" dir="ltr">
-      <body className="font-english bg-background text-text-primary flex flex-col min-h-screen antialiased">
+      <body className={`${inter.className} bg-background text-text-primary flex flex-col min-h-screen antialiased`}>
         <Header
           locale="en"
           siteName={en.siteNameShort}

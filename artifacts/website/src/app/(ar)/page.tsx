@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 };
 
 const p = ar.pages.home;
+const branchesPage = ar.pages.branches;
 const WHATSAPP = "971501234567";
 
 export default function ArabicHomePage() {
@@ -70,7 +71,7 @@ export default function ArabicHomePage() {
         label={p.branchesLabel}
         title={p.branchesTitle}
         subtitle={p.branchesSubtitle}
-        branches={p.branches}
+        branches={branchesPage.branches}
         branchCta={p.branchCta}
         hoursLabel={p.hoursLabel}
       />

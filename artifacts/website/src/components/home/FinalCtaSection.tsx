@@ -21,7 +21,7 @@ export default function FinalCtaSection({
   const { ref, visible } = useReveal(0.25);
 
   return (
-    <section ref={ref} className="relative bg-brand-bg overflow-hidden">
+    <section ref={ref} data-header-theme="dark" className="relative bg-brand-bg overflow-hidden">
       {/* Decorative blobs */}
       <div className="absolute top-0 start-1/4 w-64 h-64 bg-brand-cta/8 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 end-1/4 w-80 h-80 bg-brand-section/80 rounded-full blur-3xl pointer-events-none" />

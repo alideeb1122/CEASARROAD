@@ -32,7 +32,7 @@ export default function ServicesSection({
   const { ref, visible } = useReveal(0.1);
 
   return (
-    <section ref={ref} className="bg-white section-padding">
+    <section ref={ref} data-header-theme="light" className="bg-white section-padding">
       <div className="container-custom">
         <SectionHeading label={label} title={title} subtitle={subtitle} />
 
