@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useReveal } from "@/components/home/useReveal";
 
 type IconProps = { className?: string };
@@ -157,8 +158,16 @@ export default function Footer({ locale, siteName, nav, footer, branches }: Foot
               transitionDelay: "0ms",
             }}
           >
-            <p className="text-brand-cta font-bold text-base leading-tight">{siteName}</p>
-            <p className="mt-3 text-sm leading-relaxed text-white/45 max-w-[240px]">
+            <span className="inline-flex rounded-2xl border border-white/15 bg-white/10 px-3 py-2 shadow-[0_12px_30px_rgba(0,0,0,0.2)]">
+              <Image
+                src="/branding/logo-caesar-road.svg"
+                alt={siteName}
+                width={280}
+                height={82}
+                className="h-12 w-auto brightness-0 invert md:h-14"
+              />
+            </span>
+            <p className="mt-3 max-w-[240px] text-sm leading-relaxed text-white/55">
               {footer.tagline}
             </p>
 

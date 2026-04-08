@@ -29,16 +29,30 @@
     "target": "ES2017"
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".next-19161/types/**/*.ts",
-    ".next-3000/types/**/*.ts",
-    ".next-3001/types/**/*.ts",
-    ".next/types/**/*.ts",
     "next-env.d.ts",
-    ".next-3002/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "src/app/**/*.ts",
+    "src/app/**/*.tsx",
+    "src/components/branches/**/*.ts",
+    "src/components/branches/**/*.tsx",
+    "src/components/contact/**/*.ts",
+    "src/components/contact/**/*.tsx",
+    "src/components/home/**/*.ts",
+    "src/components/home/**/*.tsx",
+    "src/components/layout/**/*.ts",
+    "src/components/layout/**/*.tsx",
+    "src/components/services/**/*.ts",
+    "src/components/services/**/*.tsx",
+    "src/components/shared/**/*.ts",
+    "src/components/shared/**/*.tsx",
+    "src/components/ui/LanguageSwitcher.tsx",
+    "src/lib/content/**/*.ts",
+    "src/lib/content/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "src/App.tsx",
+    "src/main.tsx",
+    "src/pages/**/*"
   ]
 }

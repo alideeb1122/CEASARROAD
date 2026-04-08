@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import MobileMenu from "./MobileMenu";
@@ -29,6 +30,7 @@ export default function Header({
   nav,
 }: HeaderProps) {
   const pathname = usePathname();
+  const currentPath = pathname ?? (locale === "ar" ? "/" : "/en");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const headerRef = useRef<HTMLElement | null>(null);
@@ -47,7 +49,7 @@ export default function Header({
     p.endsWith("/") && p.length > 1 ? p.slice(0, -1) : p;
 
   const isActive = (href: string) => {
-    const norm = normalize(pathname);
+    const norm = normalize(currentPath);
     const normHref = normalize(href);
     if (normHref === "/" || normHref === "/en") return norm === normHref;
     return norm === normHref || norm.startsWith(normHref + "/");
@@ -86,13 +88,12 @@ export default function Header({
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
     };
-  }, [pathname]);
+  }, [currentPath]);
 
   const headerClasses =
     theme === "light"
       ? "border-slate-200/80 bg-white/86 shadow-[0_10px_30px_rgba(15,23,42,0.08)]"
       : "border-white/10 bg-navy/88 shadow-[0_10px_30px_rgba(10,16,30,0.18)]";
-  const brandTaglineClasses = theme === "light" ? "text-slate-500" : "text-white/45";
   const navShellClasses =
     theme === "light"
       ? "border-slate-200/80 bg-slate-100/70 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]"
@@ -109,6 +110,14 @@ export default function Header({
     theme === "light"
       ? "border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900"
       : "border-white/10 text-white/70 hover:bg-white/10 hover:text-white";
+  const brandImageClasses =
+    theme === "light"
+      ? "h-11 sm:h-12 lg:h-14"
+      : "h-11 sm:h-12 lg:h-14 brightness-[2.1] contrast-[1.15]";
+  const brandTextClasses =
+    theme === "light"
+      ? "text-slate-700"
+      : "text-white/90";
 
   return (
     <>
@@ -120,12 +129,17 @@ export default function Header({
           <div className="flex h-[72px] items-center justify-between lg:h-[86px]">
             <Link
               href={locale === "ar" ? "/" : "/en"}
-              className="group flex flex-col flex-shrink-0 leading-snug"
+              className="group flex flex-col flex-shrink-0 items-start leading-snug"
             >
-              <span className="text-gold text-base font-bold leading-tight transition-transform duration-300 group-hover:-translate-y-0.5 sm:text-lg">
-                {siteName}
-              </span>
-              <span className={`hidden text-xs sm:block ${brandTaglineClasses}`}>
+              <Image
+                src="/branding/logo-caesar-road.svg"
+                alt={siteName}
+                width={300}
+                height={90}
+                priority
+                className={`w-auto transition-transform duration-300 group-hover:-translate-y-0.5 ${brandImageClasses}`}
+              />
+              <span className={`-mt-1 ms-0.5 hidden text-base font-bold sm:block ${brandTextClasses}`}>
                 {siteTagline}
               </span>
             </Link>
@@ -177,7 +191,7 @@ export default function Header({
         onClose={() => setIsMenuOpen(false)}
         navItems={navItems}
         locale={locale}
-        currentPath={pathname}
+        currentPath={currentPath}
       />
     </>
   );
