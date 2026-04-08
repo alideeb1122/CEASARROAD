@@ -24,7 +24,7 @@ function getCounterpartPath(pathname: string, locale: "ar" | "en"): string {
 
 export default function LanguageSwitcher({ locale, label }: LanguageSwitcherProps) {
   const pathname = usePathname();
-  const counterpart = getCounterpartPath(pathname, locale);
+  const counterpart = getCounterpartPath(pathname ?? (locale === "ar" ? "/" : "/en"), locale);
 
   return (
     <Link

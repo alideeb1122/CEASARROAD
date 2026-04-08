@@ -36,7 +36,7 @@ export default function SocialSection({
   const { ref, visible } = useReveal(0.1);
 
   return (
-    <section ref={ref} className="bg-surface section-padding">
+    <section ref={ref} data-header-theme="light" className="bg-surface section-padding">
       <div className="container-custom">
         <SectionHeading label={label} title={title} subtitle={subtitle} />
 

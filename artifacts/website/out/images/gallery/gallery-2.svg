@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#2A3F6B"/>
+  <rect x="0" y="0" width="800" height="3" fill="#C9A84C" opacity="0.8"/>
+  <rect x="0" y="597" width="800" height="3" fill="#C9A84C" opacity="0.4"/>
+  <text x="400" y="270" font-family="Georgia, serif" font-size="72" fill="#C9A84C" text-anchor="middle" opacity="0.6">🛂</text>
+  <text x="400" y="340" font-family="Georgia, serif" font-size="22" fill="white" text-anchor="middle" opacity="0.85" letter-spacing="3">VISA</text>
+  <text x="400" y="375" font-family="Georgia, serif" font-size="13" fill="#C9A84C" text-anchor="middle" opacity="0.6">Caesar Road Travel &amp; Tourism</text>
+</svg>

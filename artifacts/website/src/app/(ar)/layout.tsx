@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
+import { Cairo } from "next/font/google";
 import "../globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { ar } from "@/lib/content/ar";
+
+const cairo = Cairo({
+  subsets: ["arabic", "latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
 
 export const metadata: Metadata = {
   title: {
@@ -20,7 +26,7 @@ export default function ArabicLayout({
 }) {
   return (
     <html lang="ar" dir="rtl">
-      <body className="font-arabic bg-background text-text-primary flex flex-col min-h-screen antialiased">
+      <body className={`${cairo.className} bg-background text-text-primary flex flex-col min-h-screen antialiased`}>
         <Header
           locale="ar"
           siteName={ar.siteNameShort}

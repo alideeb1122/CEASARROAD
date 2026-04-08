@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 };
 
 const p = en.pages.home;
+const branchesPage = en.pages.branches;
 const WHATSAPP = "971501234567";
 
 export default function EnglishHomePage() {
@@ -70,7 +71,7 @@ export default function EnglishHomePage() {
         label={p.branchesLabel}
         title={p.branchesTitle}
         subtitle={p.branchesSubtitle}
-        branches={p.branches}
+        branches={branchesPage.branches}
         branchCta={p.branchCta}
         hoursLabel={p.hoursLabel}
       />

@@ -29,6 +29,7 @@ export default function GallerySection({
   return (
     <section
       ref={ref}
+      data-header-theme="light"
       className="bg-white section-padding"
       style={{ borderTop: "1px solid #f0ede8" }}
     >
