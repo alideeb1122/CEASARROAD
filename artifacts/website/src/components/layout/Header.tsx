@@ -61,7 +61,7 @@ export default function Header({
   const inactiveNavClasses = "text-slate-600 hover:bg-white hover:text-slate-900";
   const mobileButtonClasses =
     "border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900";
-  const brandImageClasses = "h-9 sm:h-10 lg:h-11";
+  const brandImageClasses = "h-10 sm:h-11 lg:h-12";
 
   return (
     <>
