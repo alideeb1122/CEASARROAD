@@ -26,7 +26,7 @@ interface HeaderProps {
 export default function Header({
   locale,
   siteName,
-  siteTagline,
+  siteTagline: _siteTagline,
   nav,
 }: HeaderProps) {
   const pathname = usePathname();
@@ -112,12 +112,8 @@ export default function Header({
       : "border-white/10 text-white/70 hover:bg-white/10 hover:text-white";
   const brandImageClasses =
     theme === "light"
-      ? "h-11 sm:h-12 lg:h-14"
-      : "h-11 sm:h-12 lg:h-14 brightness-[2.1] contrast-[1.15]";
-  const brandTextClasses =
-    theme === "light"
-      ? "text-slate-700"
-      : "text-white/90";
+      ? "h-9 sm:h-10 lg:h-11"
+      : "h-9 sm:h-10 lg:h-11";
 
   return (
     <>
@@ -126,10 +122,10 @@ export default function Header({
         className={`sticky top-0 z-50 border-b backdrop-blur-xl transition-colors duration-300 ${headerClasses}`}
       >
         <div className="container-custom">
-          <div className="flex h-[72px] items-center justify-between lg:h-[86px]">
+          <div className="flex h-[68px] items-center justify-between lg:h-[82px]">
             <Link
               href={locale === "ar" ? "/" : "/en"}
-              className="group flex flex-col flex-shrink-0 items-start leading-snug"
+              className="group flex flex-shrink-0 items-center"
             >
               <Image
                 src="/branding/logo-caesar-road.svg"
@@ -139,12 +135,9 @@ export default function Header({
                 priority
                 className={`w-auto transition-transform duration-300 group-hover:-translate-y-0.5 ${brandImageClasses}`}
               />
-              <span className={`-mt-1 ms-0.5 hidden text-base font-bold sm:block ${brandTextClasses}`}>
-                {siteTagline}
-              </span>
             </Link>
 
-            <nav className={`hidden items-center gap-1 rounded-full border px-2 py-1.5 md:flex lg:gap-1.5 lg:px-2.5 ${navShellClasses}`}>
+            <nav className={`hidden items-center gap-1 rounded-full border px-2 py-1.5 lg:flex lg:gap-1.5 lg:px-2.5 ${navShellClasses}`}>
               {navItems.map((item) => (
                 <Link
                   key={item.href}
@@ -164,7 +157,7 @@ export default function Header({
               <LanguageSwitcher locale={locale} label={nav.switchLang} />
               <button
                 onClick={() => setIsMenuOpen(true)}
-                className={`rounded-xl border p-2 transition-colors md:hidden ${mobileButtonClasses}`}
+                className={`rounded-xl border p-2 transition-colors lg:hidden ${mobileButtonClasses}`}
                 aria-label={locale === "ar" ? "فتح القائمة" : "Open menu"}
               >
                 <svg
@@ -196,3 +189,4 @@ export default function Header({
     </>
   );
 }
+
