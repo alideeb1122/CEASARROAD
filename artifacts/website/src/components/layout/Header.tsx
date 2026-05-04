@@ -61,7 +61,7 @@ export default function Header({
   const inactiveNavClasses = "text-slate-600 hover:bg-white hover:text-slate-900";
   const mobileButtonClasses =
     "border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900";
-  const brandImageClasses = "h-10 sm:h-11 lg:h-12";
+  const brandImageClasses = "h-12 sm:h-14 lg:h-16";
 
   return (
     <>
@@ -69,7 +69,7 @@ export default function Header({
         className={`sticky top-0 z-50 border-b backdrop-blur-xl transition-colors duration-300 ${headerClasses}`}
       >
         <div className="container-custom">
-          <div className="flex h-[68px] items-center justify-between lg:h-[82px]">
+          <div className="flex h-[74px] items-center justify-between lg:h-[92px]">
             <Link
               href={locale === "ar" ? "/" : "/en"}
               className="group flex flex-shrink-0 items-center"
