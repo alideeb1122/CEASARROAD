@@ -1,0 +1,5 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 90" role="img" aria-label="Delta Air Lines">
+  <rect width="320" height="90" rx="12" fill="#ffffff"/>
+  <polygon points="34,62 56,24 78,62" fill="#d61f2c"/>
+  <text x="196" y="57" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#1b2d5d" letter-spacing="1">DELTA</text>
+</svg>

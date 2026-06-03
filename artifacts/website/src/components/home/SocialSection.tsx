@@ -49,32 +49,47 @@ export default function SocialSection({
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col items-center gap-3 p-5 bg-white rounded-2xl border border-gray-100 hover:border-transparent hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                className="group relative isolate flex flex-col items-center gap-3 overflow-hidden rounded-[28px] border border-white/65 bg-white/45 p-5 shadow-[0_18px_45px_-28px_rgba(15,23,42,0.22)] backdrop-blur-[18px] transition-all duration-500 hover:border-white/90 hover:shadow-[0_24px_60px_-26px_rgba(15,23,42,0.3)]"
                 style={{
                   opacity: visible ? 1 : 0,
                   transform: visible ? "translateY(0)" : "translateY(16px)",
-                  transition: "opacity 0.55s ease, transform 0.55s ease, box-shadow 0.3s ease, border-color 0.3s ease",
+                  transition:
+                    "opacity 0.55s ease, transform 0.55s ease, box-shadow 0.45s ease, border-color 0.45s ease, background-color 0.45s ease",
                   transitionDelay: `${i * 60}ms`,
                 }}
               >
-                {/* Icon container */}
+                <div className="pointer-events-none absolute inset-0 rounded-[28px] bg-[linear-gradient(145deg,rgba(255,255,255,0.58),rgba(255,255,255,0.18)_44%,rgba(255,255,255,0.1)_100%)] opacity-90 transition-opacity duration-500 group-hover:opacity-100" />
                 <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
+                  className="pointer-events-none absolute inset-x-4 top-0 h-16 rounded-b-[999px] bg-white/55 blur-xl transition-all duration-500 group-hover:h-20 group-hover:bg-white/70"
+                  style={{ opacity: 0.8 }}
+                />
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                   style={{
-                    backgroundColor: `${color}18`,
+                    background: `radial-gradient(circle at 50% 0%, ${color}1f 0%, transparent 58%), radial-gradient(circle at 50% 100%, ${color}14 0%, transparent 52%)`,
+                  }}
+                />
+
+                <div
+                  className="relative z-10 flex h-14 w-14 items-center justify-center rounded-[18px] border border-white/70 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_18px_26px_-18px_rgba(15,23,42,0.4)] backdrop-blur-xl transition-all duration-500 group-hover:scale-[1.08] group-hover:rotate-[-4deg]"
+                  style={{
+                    background: `linear-gradient(180deg, rgba(255,255,255,0.72), ${color}16)`,
+                    boxShadow: `inset 0 1px 0 rgba(255,255,255,0.75), 0 18px 26px -18px ${color}55`,
                   }}
                 >
-                  <span style={{ color }}>
+                  <span
+                    className="transition-transform duration-500 group-hover:scale-110"
+                    style={{ color, filter: `drop-shadow(0 8px 16px ${color}2f)` }}
+                  >
                     {getSocialIcon(social.type, "w-6 h-6")}
                   </span>
                 </div>
 
-                {/* Text */}
-                <div className="text-center">
-                  <p className="text-xs font-bold text-text-primary leading-tight">
+                <div className="relative z-10 text-center">
+                  <p className="text-xs font-bold leading-tight text-slate-900 transition-colors duration-300 group-hover:text-slate-950">
                     {social.platform}
                   </p>
-                  <p className="text-xs text-text-muted mt-0.5 leading-tight">
+                  <p className="mt-0.5 text-xs leading-tight text-slate-500 transition-colors duration-300 group-hover:text-slate-600">
                     {social.handle}
                   </p>
                 </div>

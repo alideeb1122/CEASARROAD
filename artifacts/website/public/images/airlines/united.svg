@@ -1,0 +1,6 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 90" role="img" aria-label="United Airlines">
+  <rect width="340" height="90" rx="12" fill="#ffffff"/>
+  <path d="M42 68c16-6 27-21 27-38h8c0 21-13 39-33 46z" fill="#1f4ea8"/>
+  <path d="M34 60c12-5 20-17 20-30h7c0 16-9 31-24 38z" fill="#3a6fcb"/>
+  <text x="210" y="57" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#1f4ea8" letter-spacing="1">UNITED</text>
+</svg>

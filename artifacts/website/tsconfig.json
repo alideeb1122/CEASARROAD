@@ -29,8 +29,9 @@
     "target": "ES2017"
   },
   "include": [
-    "next-env.d.ts",
+    ".next-3000/types/**/*.ts",
     ".next/types/**/*.ts",
+    "next-env.d.ts",
     "src/app/**/*.ts",
     "src/app/**/*.tsx",
     "src/components/branches/**/*.ts",
@@ -47,7 +48,8 @@
     "src/components/shared/**/*.tsx",
     "src/components/ui/LanguageSwitcher.tsx",
     "src/lib/content/**/*.ts",
-    "src/lib/content/**/*.tsx"
+    "src/lib/content/**/*.tsx",
+    ".next-3001/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

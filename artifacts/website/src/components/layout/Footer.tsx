@@ -81,11 +81,11 @@ function ClockIcon({ className }: IconProps) {
 function SocialIcon({ type, className }: { type: string; className?: string }) {
   switch (type) {
     case "instagram": return <InstagramIcon className={className} />;
-    case "facebook":  return <FacebookIcon className={className} />;
-    case "youtube":   return <YoutubeIcon className={className} />;
-    case "tiktok":    return <TikTokIcon className={className} />;
-    case "linkedin":  return <LinkedInIcon className={className} />;
-    default:          return null;
+    case "facebook": return <FacebookIcon className={className} />;
+    case "youtube": return <YoutubeIcon className={className} />;
+    case "tiktok": return <TikTokIcon className={className} />;
+    case "linkedin": return <LinkedInIcon className={className} />;
+    default: return null;
   }
 }
 
@@ -137,20 +137,28 @@ export default function Footer({ locale, siteName, nav, footer, branches }: Foot
   const { ref, visible } = useReveal(0.05);
 
   const navLinks = [
-    { label: nav.home,     href: locale === "ar" ? "/" : "/en" },
+    { label: nav.home, href: locale === "ar" ? "/" : "/en" },
     { label: nav.services, href: `${prefix}/services` },
     { label: nav.branches, href: `${prefix}/branches` },
-    { label: nav.about,    href: `${prefix}/about` },
-    { label: nav.contact,  href: `${prefix}/contact` },
+    { label: nav.about, href: `${prefix}/about` },
+    { label: nav.contact, href: `${prefix}/contact` },
   ];
 
   return (
-    <footer ref={ref as React.Ref<HTMLElement>} data-header-theme="dark" className="bg-navy-dark text-white/60 border-t border-white/10">
-      <div className="container-custom py-12 lg:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14">
+    <footer
+      ref={ref as React.Ref<HTMLElement>}
+      data-header-theme="dark"
+      className="relative overflow-hidden border-t border-white/10 bg-navy-dark text-white/60"
+    >
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_84%_10%,rgba(201,163,71,0.06)_0%,transparent_18%),radial-gradient(circle_at_10%_100%,rgba(255,255,255,0.035)_0%,transparent_26%)]" />
+        <div className="footer-pattern absolute inset-0 opacity-50" />
+      </div>
 
-          {/* Col 1 — Brand + Socials */}
+      <div className="container-custom relative py-7 lg:py-8">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-12 lg:gap-7">
           <div
+            className="lg:col-span-5"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? "translateY(0)" : "translateY(20px)",
@@ -158,21 +166,21 @@ export default function Footer({ locale, siteName, nav, footer, branches }: Foot
               transitionDelay: "0ms",
             }}
           >
-            <span className="inline-flex rounded-2xl border border-white/15 bg-white/10 px-3 py-2 shadow-[0_12px_30px_rgba(0,0,0,0.2)]">
+            <span className="inline-flex rounded-2xl border border-white/12 bg-white/[0.06] px-3 py-2">
               <Image
                 src="/branding/logo-caesar-road.svg"
                 alt={siteName}
                 width={280}
                 height={82}
-                className="h-12 w-auto brightness-0 invert md:h-14"
+                className="h-9 w-auto brightness-0 invert md:h-10"
               />
             </span>
-            <p className="mt-3 max-w-[240px] text-sm leading-relaxed text-white/55">
+            <p className="mt-2 max-w-[220px] text-[13px] leading-relaxed text-white/55">
               {footer.tagline}
             </p>
 
-            <div className="mt-7">
-              <p className="text-[10px] uppercase tracking-widest text-white/30 mb-3">
+            <div className="mt-4">
+              <p className="mb-2.5 text-[10px] uppercase tracking-widest text-white/30">
                 {footer.followUs}
               </p>
               <div className="flex flex-wrap gap-2">
@@ -183,17 +191,17 @@ export default function Footer({ locale, siteName, nav, footer, branches }: Foot
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.label}
-                    className="w-8 h-8 rounded-lg bg-white/[0.07] border border-white/10 flex items-center justify-center text-white/45 hover:text-brand-cta hover:border-brand-cta/30 hover:bg-brand-cta/10 transition-all duration-200"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-white/45 transition-all duration-300 hover:border-brand-cta/30 hover:bg-brand-cta/10 hover:text-brand-cta"
                   >
-                    <SocialIcon type={s.type} className="w-3.5 h-3.5" />
+                    <SocialIcon type={s.type} className="h-3.5 w-3.5" />
                   </a>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Col 2 — Quick Links */}
           <div
+            className="lg:col-span-3"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? "translateY(0)" : "translateY(20px)",
@@ -201,16 +209,13 @@ export default function Footer({ locale, siteName, nav, footer, branches }: Foot
               transitionDelay: "80ms",
             }}
           >
-            <h3 className="text-white/90 font-semibold text-[10px] uppercase tracking-widest mb-5">
+            <h3 className="mb-4 text-[10px] font-semibold uppercase tracking-widest text-white/90">
               {footer.quickLinks}
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-2">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/50 hover:text-brand-cta transition-colors duration-150"
-                  >
+                  <Link href={link.href} className="text-[14px] text-white/50 transition-colors duration-150 hover:text-brand-cta">
                     {link.label}
                   </Link>
                 </li>
@@ -218,9 +223,8 @@ export default function Footer({ locale, siteName, nav, footer, branches }: Foot
             </ul>
           </div>
 
-          {/* Col 3 — Branches */}
           <div
-            className="sm:col-span-2 lg:col-span-1"
+            className="sm:col-span-2 lg:col-span-4"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? "translateY(0)" : "translateY(20px)",
@@ -228,23 +232,16 @@ export default function Footer({ locale, siteName, nav, footer, branches }: Foot
               transitionDelay: "160ms",
             }}
           >
-            <h3 className="text-white/90 font-semibold text-[10px] uppercase tracking-widest mb-5">
+            <h3 className="mb-4 text-[10px] font-semibold uppercase tracking-widest text-white/90">
               {footer.branchesTitle}
             </h3>
-            <div className="space-y-5">
+            <div>
               {branches.map((branch) => (
-                <div
-                  key={branch.city}
-                  className="border-b border-white/[0.06] pb-5 last:border-0 last:pb-0"
-                >
-                  <p className="text-white/85 font-semibold text-sm mb-1">
-                    {branch.city}
-                  </p>
-                  <p className="text-white/40 text-xs leading-relaxed mb-2">
-                    {branch.address}
-                  </p>
-                  <div className="flex items-center gap-1.5 text-white/30 text-[10px] mb-3">
-                    <ClockIcon className="w-3 h-3 flex-shrink-0" />
+                <div key={branch.city} className="border-b border-white/[0.07] py-2.5 last:border-0 last:pb-0">
+                  <p className="mb-1 text-sm font-semibold text-white/85">{branch.city}</p>
+                  <p className="mb-1 text-xs leading-relaxed text-white/40">{branch.address}</p>
+                  <div className="mb-1.5 flex items-center gap-1.5 text-[10px] text-white/30">
+                    <ClockIcon className="h-3 w-3 flex-shrink-0" />
                     <span>{branch.hours}</span>
                     <span className="opacity-60">·</span>
                     <span>{footer.closedDay}: {branch.offDay}</span>
@@ -254,18 +251,18 @@ export default function Footer({ locale, siteName, nav, footer, branches }: Foot
                       href={`https://wa.me/${branch.whatsapp}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-brand-cta/15 border border-brand-cta/20 text-brand-cta text-[11px] font-medium hover:bg-brand-cta/25 hover:border-brand-cta/35 transition-all duration-150"
+                      className="inline-flex items-center gap-1.5 rounded-md border border-brand-cta/20 bg-brand-cta/12 px-2.5 py-1 text-[10px] font-medium text-brand-cta transition-all duration-150 hover:border-brand-cta/35 hover:bg-brand-cta/20"
                     >
-                      <WhatsAppIcon className="w-3 h-3" />
+                      <WhatsAppIcon className="h-3 w-3" />
                       {footer.whatsappCta}
                     </a>
                     <a
                       href={branch.mapUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.06] border border-white/[0.1] text-white/45 text-[11px] font-medium hover:text-white/75 hover:bg-white/10 transition-all duration-150"
+                      className="inline-flex items-center gap-1.5 rounded-md border border-white/[0.1] bg-white/[0.04] px-2.5 py-1 text-[10px] font-medium text-white/45 transition-all duration-150 hover:bg-white/[0.07] hover:text-white/75"
                     >
-                      <MapPinIcon className="w-3 h-3" />
+                      <MapPinIcon className="h-3 w-3" />
                       {footer.mapCta}
                     </a>
                   </div>
@@ -275,11 +272,34 @@ export default function Footer({ locale, siteName, nav, footer, branches }: Foot
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-white/[0.08] mt-10 pt-6 text-center text-[11px] text-white/25">
+        <div className="mt-5 border-t border-white/[0.08] pt-3 text-center text-[11px] text-white/25">
           {footer.rights}
         </div>
       </div>
+
+      <style jsx>{`
+        .footer-pattern {
+          background-image:
+            radial-gradient(circle at 22px 22px, rgba(232, 203, 94, 0.08) 0, rgba(232, 203, 94, 0.08) 1.2px, transparent 1.3px),
+            radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.045) 0, rgba(255, 255, 255, 0.045) 1px, transparent 1.1px),
+            linear-gradient(115deg, transparent 0%, transparent 42%, rgba(255, 255, 255, 0.03) 42.5%, transparent 43%, transparent 100%);
+          background-size: 44px 44px, 28px 28px, 100% 100%;
+          mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.9));
+        }
+
+        @media (max-width: 1024px) {
+          .footer-pattern {
+            opacity: 0.38;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .footer-pattern {
+            background-size: 38px 38px, 24px 24px, 100% 100%;
+            opacity: 0.28;
+          }
+        }
+      `}</style>
     </footer>
   );
 }

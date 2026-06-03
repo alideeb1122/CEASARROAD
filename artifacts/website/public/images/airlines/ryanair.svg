@@ -1,0 +1,5 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 90" role="img" aria-label="Ryanair">
+  <rect width="340" height="90" rx="12" fill="#ffffff"/>
+  <path d="M34 56c8-11 19-18 32-20l-6 9 12 3-14 4 5 8c-12 0-22-1-29-4z" fill="#1b3f95"/>
+  <text x="214" y="58" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" fill="#1b3f95" letter-spacing="1">RYANAIR</text>
+</svg>

@@ -35,9 +35,18 @@ export default function HeroSection({
   servicesHref,
   whatsappNumber = "971501234567",
 }: HeroSectionProps) {
+  const heroVideos = [
+    "/videos/hero/hero-travel.mp4",
+    "/videos/hero/hero-travel-2.mp4",
+    "/videos/hero/hero-travel-3.mp4",
+  ];
+
   const [mounted, setMounted] = useState(false);
   const [pointer, setPointer] = useState({ x: 50, y: 42 });
   const [wordIndex, setWordIndex] = useState(0);
+  const [slotAIndex, setSlotAIndex] = useState(0);
+  const [slotBIndex, setSlotBIndex] = useState(1);
+  const [activeSlot, setActiveSlot] = useState<"a" | "b">("a");
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setMounted(true));
@@ -52,6 +61,29 @@ export default function HeroSection({
     return () => window.clearInterval(intervalId);
   }, []);
 
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    const intervalId = window.setInterval(() => {
+      const currentVisibleIndex = activeSlot === "a" ? slotAIndex : slotBIndex;
+      const nextIndex = (currentVisibleIndex + 1) % heroVideos.length;
+
+      if (activeSlot === "a") {
+        setSlotBIndex(nextIndex);
+      } else {
+        setSlotAIndex(nextIndex);
+      }
+
+      window.setTimeout(() => {
+        setActiveSlot((prev) => (prev === "a" ? "b" : "a"));
+      }, 260);
+    }, 11200);
+
+    return () => window.clearInterval(intervalId);
+  }, [activeSlot, heroVideos.length, slotAIndex, slotBIndex]);
+
   const rotatingWords =
     locale === "ar"
       ? ["العالم", "وجهتك", "رحلتك", "آفاقك"]
@@ -63,7 +95,7 @@ export default function HeroSection({
   return (
     <section
       data-header-theme="dark"
-      className="relative bg-brand-bg overflow-hidden"
+      className="relative overflow-hidden bg-brand-bg"
       onMouseMove={(event) => {
         const rect = event.currentTarget.getBoundingClientRect();
         const x = ((event.clientX - rect.left) / rect.width) * 100;
@@ -72,10 +104,36 @@ export default function HeroSection({
       }}
       onMouseLeave={() => setPointer({ x: 50, y: 42 })}
     >
-      {/* Subtle background texture */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_#3A3F63_0%,_transparent_60%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(39,47,79,0.2)_0%,rgba(46,49,77,0)_28%,rgba(24,30,52,0.16)_100%)]" />
+        <video
+          className={`hero-video absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${activeSlot === "a" ? "opacity-100" : "opacity-0"}`}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster="/images/hero/hero-poster.jpg"
+        >
+          <source src={heroVideos[slotAIndex]} type="video/mp4" />
+        </video>
+        <video
+          className={`hero-video absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${activeSlot === "b" ? "opacity-100" : "opacity-0"}`}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster="/images/hero/hero-poster.jpg"
+        >
+          <source src={heroVideos[slotBIndex]} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-[linear-gradient(160deg,rgba(13,18,38,0.58)_0%,rgba(20,30,66,0.52)_36%,rgba(13,20,46,0.64)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.12)_0%,transparent_48%),radial-gradient(ellipse_at_88%_20%,rgba(194,169,107,0.18)_0%,transparent_54%)]" />
+      </div>
+
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_#3A3F63_0%,_transparent_60%)] opacity-70" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(39,47,79,0.24)_0%,rgba(46,49,77,0)_28%,rgba(24,30,52,0.2)_100%)]" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-cta/5 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.04)_0%,_transparent_56%)]" />
         <div className="hero-sky-glow hero-sky-glow-a absolute left-[6%] top-[10%] h-44 w-64 rounded-full bg-white/8 blur-3xl sm:h-52 sm:w-80 lg:h-64 lg:w-[28rem]" />
@@ -141,20 +199,13 @@ export default function HeroSection({
           <div className="hero-cloud hero-cloud-f absolute right-[24%] bottom-[16%] h-18 w-48 rounded-full bg-brand-cta/6 blur-2xl sm:h-22 sm:w-60 lg:h-24 lg:w-64" />
         </div>
 
-        <div className="hero-star absolute left-[12%] top-[24%] h-1.5 w-1.5 rounded-full bg-white/70" />
-        <div className="hero-star absolute left-[24%] top-[16%] h-2 w-2 rounded-full bg-brand-cta/65" />
-        <div className="hero-star absolute right-[16%] top-[22%] h-2 w-2 rounded-full bg-white/80" />
-        <div className="hero-star absolute right-[22%] bottom-[20%] h-1.5 w-1.5 rounded-full bg-white/65" />
-        <div className="hero-star absolute left-[18%] bottom-[24%] h-2 w-2 rounded-full bg-brand-cta/55" />
-        <div className="hero-star absolute right-[10%] top-[38%] h-1.5 w-1.5 rounded-full bg-white/60" />
-
         <div className="absolute inset-x-0 top-[14%] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
         <div className="absolute inset-x-[18%] top-[32%] h-px bg-gradient-to-r from-transparent via-brand-cta/12 to-transparent" />
       </div>
 
-      <div className="container-custom relative z-10 py-20 sm:py-24 lg:py-32">
+      <div className="container-custom relative z-10 py-14 sm:py-16 lg:py-20">
         <div
-          className="mx-auto flex min-h-[58vh] max-w-4xl flex-col items-center justify-center text-center sm:min-h-[62vh] lg:min-h-[68vh]"
+          className="mx-auto flex min-h-[64vh] max-w-4xl flex-col items-center justify-center text-center sm:min-h-[70vh] lg:min-h-[78vh]"
           style={reveal(mounted, 0)}
         >
           <div className="mb-6">
@@ -185,20 +236,20 @@ export default function HeroSection({
             </span>
           </h1>
           <p
-            className="mt-8 max-w-3xl text-2xl font-semibold leading-[1.42] text-brand-cta sm:mt-10 sm:text-3xl lg:text-[3.2rem]"
+            className="mt-7 max-w-3xl text-2xl font-semibold leading-[1.4] text-brand-cta sm:mt-8 sm:text-3xl lg:text-[3rem]"
             style={reveal(mounted, 200)}
           >
             <AnimatedWords text={content.heroTitleAccent} visible={mounted} baseDelay={200} />
           </p>
 
           <p
-            className="mt-12 max-w-[48rem] text-base leading-8 text-brand-muted sm:mt-14 sm:text-lg sm:leading-10 lg:mt-16 lg:text-[1.28rem]"
+            className="mt-9 max-w-[48rem] text-base leading-8 text-brand-muted sm:mt-10 sm:text-lg sm:leading-9 lg:mt-12 lg:text-[1.18rem]"
             style={reveal(mounted, 280)}
           >
             <AnimatedWords text={content.heroSubtitle} visible={mounted} baseDelay={300} step={38} />
           </p>
 
-          <div className="mt-16 flex flex-col gap-4 sm:mt-16 sm:flex-row sm:items-center sm:justify-center sm:gap-5">
+          <div className="mt-12 flex flex-col gap-4 sm:mt-12 sm:flex-row sm:items-center sm:justify-center sm:gap-5">
             <a
               href={`https://wa.me/${whatsappNumber}`}
               target="_blank"
@@ -217,7 +268,7 @@ export default function HeroSection({
           </div>
 
           <p
-            className="mt-16 text-sm font-medium text-brand-muted/90 sm:mt-20 sm:text-base"
+            className="mt-12 text-sm font-medium text-brand-muted/90 sm:mt-14 sm:text-base"
             style={reveal(mounted, 180)}
           >
             {content.heroMediaLabel}
@@ -244,11 +295,6 @@ export default function HeroSection({
           50% { transform: translate3d(24px, -14px, 0) scale(1.08); opacity: 0.88; }
         }
 
-        @keyframes heroStarPulse {
-          0%, 100% { opacity: 0.35; transform: scale(0.9); }
-          50% { opacity: 1; transform: scale(1.18); }
-        }
-
         .hero-cloud-a,
         .hero-cloud-c,
         .hero-cloud-e {
@@ -268,30 +314,6 @@ export default function HeroSection({
 
         .hero-sky-glow-b {
           animation: heroGlowDrift 20s ease-in-out infinite reverse;
-        }
-
-        .hero-star {
-          animation: heroStarPulse 5.8s ease-in-out infinite;
-        }
-
-        .hero-star:nth-of-type(2) {
-          animation-delay: 0.8s;
-        }
-
-        .hero-star:nth-of-type(3) {
-          animation-delay: 1.4s;
-        }
-
-        .hero-star:nth-of-type(4) {
-          animation-delay: 2s;
-        }
-
-        .hero-star:nth-of-type(5) {
-          animation-delay: 2.6s;
-        }
-
-        .hero-star:nth-of-type(6) {
-          animation-delay: 3.2s;
         }
 
         @media (max-width: 640px) {
@@ -318,14 +340,19 @@ export default function HeroSection({
         }
 
         @media (prefers-reduced-motion: reduce) {
+          .hero-video {
+            display: none;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
           .hero-cloud-a,
           .hero-cloud-b,
           .hero-cloud-c,
           .hero-cloud-d,
           .hero-sky-glow-a,
           .hero-sky-glow-b,
-          .hero-sky-glow-c,
-          .hero-star {
+          .hero-sky-glow-c {
             animation: none;
           }
         }

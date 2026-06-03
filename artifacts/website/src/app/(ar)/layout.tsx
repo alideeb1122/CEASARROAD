@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
 import "../globals.css";
 import Header from "@/components/layout/Header";
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: "%s | طريق القيصر",
   },
   description:
-    "طريق القيصر للسياحة والسفر — رفيقك الموثوق في رحلات لا تُنسى حول العالم",
+    "طريق القيصر للسياحة والسفر - رفيقك الموثوق في رحلات لا تنسى حول العالم",
 };
 
 export default function ArabicLayout({
