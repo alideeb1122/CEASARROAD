@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useReveal } from "./useReveal";
 
@@ -9,67 +9,71 @@ interface AirlinesSectionProps {
 }
 
 const AIRLINES = [
-  { abbr: "EK", name: "Emirates" },
-  { abbr: "TK", name: "Turkish Airlines" },
-  { abbr: "QR", name: "Qatar Airways" },
-  { abbr: "EY", name: "Etihad Airways" },
-  { abbr: "FZ", name: "flydubai" },
-  { abbr: "G9", name: "Air Arabia" },
-  { abbr: "MS", name: "EgyptAir" },
-  { abbr: "PC", name: "Pegasus Airlines" },
-  { abbr: "ME", name: "Middle East Airlines" },
-  { abbr: "IA", name: "Iraqi Airways" },
+  { name: "Emirates", src: "/images/airlines/emirates.svg" },
+  { name: "Turkish Airlines", src: "/images/airlines/turkishairlines.svg", wordmarkColor: "#C70A2C" },
+  { name: "Qatar Airways", src: "/images/airlines/qatarairways.svg" },
+  { name: "Etihad Airways", src: "/images/airlines/etihadairways.svg" },
+  { name: "Pegasus Airlines", src: "/images/airlines/pegasusairlines.svg" },
+  { name: "Saudia", src: "/images/airlines/saudia.svg" },
+  { name: "Lufthansa", src: "/images/airlines/lufthansa.svg" },
+  { name: "Singapore Airlines", src: "/images/airlines/singaporeairlines.svg" },
+  { name: "Japan Airlines", src: "/images/airlines/japanairlines.svg" },
+  { name: "Air France", src: "/images/airlines/airfrance.svg", wordmarkColor: "#002157" },
+  { name: "British Airways", src: "/images/airlines/britishairways.svg" },
+  { name: "KLM", src: "/images/airlines/klm.svg", wordmarkColor: "#00A1DE" },
+  { name: "ANA", src: "/images/airlines/ana.svg" },
+  { name: "SWISS", src: "/images/airlines/swiss.svg" },
+  { name: "Delta", src: "/images/airlines/delta.svg" },
+  { name: "United", src: "/images/airlines/united.svg" },
+  { name: "Air Canada", src: "/images/airlines/aircanada.svg" },
+  { name: "Iberia", src: "/images/airlines/iberia.svg" },
+  { name: "Oman Air", src: "/images/airlines/omanair.svg" },
+  { name: "Ryanair", src: "/images/airlines/ryanair.svg" },
 ];
 
-function AirlineBadge({ abbr, name }: { abbr: string; name: string }) {
+function AirlineLogo({ name, src, wordmarkColor }: { name: string; src: string; wordmarkColor?: string }) {
   return (
-    <div
-      className="airline-badge mx-3 flex flex-shrink-0 items-center gap-3 rounded-2xl border border-slate-200/70 bg-white/90 px-4 py-4 backdrop-blur-sm"
-      style={{
-        minWidth: "166px",
-        boxShadow: "0 8px 24px rgba(15,23,42,0.04)",
-        transition: "border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease",
-      }}
-    >
-      <span
-        className="flex-shrink-0 rounded-full bg-brand-cta"
-        style={{ width: "2.5px", height: "34px", opacity: 0.5 }}
-      />
-      <div className="flex flex-col gap-[3px] min-w-0">
-        <span
-          className="font-mono font-bold leading-none text-slate-800"
-          style={{ fontSize: "14px", letterSpacing: "0.16em" }}
-        >
-          {abbr}
-        </span>
-        <span
-          className="whitespace-nowrap font-medium leading-tight text-slate-400"
-          style={{ fontSize: "10px", letterSpacing: "0.04em" }}
-        >
-          {name}
-        </span>
-      </div>
+    <div className="airline-logo-card group flex h-[98px] items-center justify-center rounded-2xl border border-slate-200/70 bg-white/80 px-6">
+      {wordmarkColor ? (
+        <div className="flex items-center gap-2">
+          <img src={src} alt={name} loading="lazy" className="airline-logo h-8 w-auto max-w-[56px] object-contain" />
+          <span
+            className="airline-wordmark text-[15px] font-semibold tracking-[0.04em]"
+            style={{ color: wordmarkColor }}
+          >
+            {name}
+          </span>
+        </div>
+      ) : (
+        <img
+          src={src}
+          alt={name}
+          loading="lazy"
+          className="airline-logo h-12 w-auto max-w-[158px] object-contain"
+        />
+      )}
     </div>
   );
 }
 
-export default function AirlinesSection({
-  label,
-  trust,
-  locale = "ar",
-}: AirlinesSectionProps) {
+export default function AirlinesSection({ label, trust, locale = "en" }: AirlinesSectionProps) {
   const { ref, visible } = useReveal(0.1);
-  const isRtl = locale === "ar";
-  const direction = isRtl ? " reverse" : "";
+  const splitIndex = Math.ceil(AIRLINES.length / 2);
+  const rowA = AIRLINES.slice(0, splitIndex);
+  const rowB = AIRLINES.slice(splitIndex);
 
   return (
-    <section ref={ref} data-header-theme="light" className="relative overflow-hidden border-y border-slate-200/70 bg-[linear-gradient(180deg,#f8f8f4_0%,#fcfcfa_100%)]">
+    <section
+      ref={ref}
+      data-header-theme="light"
+      className="relative overflow-hidden border-y border-slate-200/70 bg-[linear-gradient(180deg,#f8f8f4_0%,#fcfcfa_100%)]"
+    >
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-[8%] top-0 h-32 w-32 rounded-full bg-brand-cta/6 blur-3xl" />
         <div className="absolute right-[10%] bottom-0 h-28 w-40 rounded-full bg-brand-section/5 blur-3xl" />
       </div>
-      {/* Header */}
-      <div className="container-custom pt-12 pb-8 lg:pt-14 lg:pb-9">
+
+      <div className="container-custom py-14 lg:py-16">
         <div
           className="text-center"
           style={{
@@ -79,75 +83,189 @@ export default function AirlinesSection({
           }}
         >
           <span className="inline-flex items-center gap-2 rounded-full border border-brand-cta/20 bg-brand-cta/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-cta">
-            <span className="w-1 h-1 rounded-full bg-brand-cta/70" />
+            <span className="h-1 w-1 rounded-full bg-brand-cta/70" />
             {label}
           </span>
-          <p className="mx-auto mt-3 max-w-2xl text-sm font-medium leading-7 text-slate-500">
-            {trust}
-          </p>
+          <p className="mx-auto mt-3 max-w-2xl text-sm font-medium leading-7 text-slate-500">{trust}</p>
         </div>
-      </div>
 
-      {/* Marquee */}
-      <div
-        className="airlines-wrap relative overflow-hidden pb-12 lg:pb-14"
-        style={{
-          opacity: visible ? 1 : 0,
-          transition: "opacity 0.8s ease 0.2s",
-        }}
-      >
-        {/* Left fade */}
         <div
-          className="pointer-events-none absolute left-0 top-0 bottom-0 z-10"
-          style={{ width: "104px", background: "linear-gradient(to right, #fafaf7 36%, transparent)" }}
-        />
-        {/* Right fade */}
-        <div
-          className="pointer-events-none absolute right-0 top-0 bottom-0 z-10"
-          style={{ width: "104px", background: "linear-gradient(to left, #fafaf7 36%, transparent)" }}
-        />
-
-        {/*
-          Track: exactly 2 copies.
-          Animation: translateX(0) → translateX(-50%).
-          At t=100% the second copy is in the exact pixel position the first copy was at t=0.
-          The loop reset is visually identical → no jump, no cut.
-        */}
-        <div
-          className="airlines-track flex items-center py-1"
+          dir={locale === "ar" ? "ltr" : undefined}
+          className="mx-auto mt-10 flex max-w-[1180px] flex-col gap-4"
           style={{
-            animation: `airlines-marquee 20s linear infinite${direction}`,
-            willChange: "transform",
-            transform: "translateZ(0)",
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(18px)",
+            transition: "opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s",
           }}
-          aria-hidden="true"
         >
-          {[...AIRLINES, ...AIRLINES].map((a, i) => (
-            <AirlineBadge key={i} abbr={a.abbr} name={a.name} />
-          ))}
+          <div className="airline-marquee-row">
+            <div className="airline-marquee-track">
+              <div className="airline-marquee-group">
+                {rowA.map((airline, idx) => (
+                  <AirlineLogo
+                    key={`${airline.name}-a-${idx}`}
+                    name={airline.name}
+                    src={airline.src}
+                    wordmarkColor={airline.wordmarkColor}
+                  />
+                ))}
+              </div>
+              <div className="airline-marquee-group" aria-hidden="true">
+                {rowA.map((airline, idx) => (
+                  <AirlineLogo
+                    key={`${airline.name}-a-copy-${idx}`}
+                    name={airline.name}
+                    src={airline.src}
+                    wordmarkColor={airline.wordmarkColor}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="airline-marquee-row reverse">
+            <div className="airline-marquee-track">
+              <div className="airline-marquee-group">
+                {rowB.map((airline, idx) => (
+                  <AirlineLogo
+                    key={`${airline.name}-b-${idx}`}
+                    name={airline.name}
+                    src={airline.src}
+                    wordmarkColor={airline.wordmarkColor}
+                  />
+                ))}
+              </div>
+              <div className="airline-marquee-group" aria-hidden="true">
+                {rowB.map((airline, idx) => (
+                  <AirlineLogo
+                    key={`${airline.name}-b-copy-${idx}`}
+                    name={airline.name}
+                    src={airline.src}
+                    wordmarkColor={airline.wordmarkColor}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <style>{`
-        @keyframes airlines-marquee {
-          from { transform: translateZ(0) translateX(0); }
-          to   { transform: translateZ(0) translateX(-50%); }
+        .airline-marquee-row {
+          overflow: hidden;
+          mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+          -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
         }
-        .airlines-wrap:hover .airlines-track {
+
+        .airline-marquee-track {
+          display: flex;
+          width: max-content;
+          animation: marqueeLeft 62s linear infinite;
+        }
+
+        .airline-marquee-group {
+          display: flex;
+          gap: 18px;
+          flex-shrink: 0;
+          padding-right: 18px;
+        }
+
+        .airline-marquee-row.reverse .airline-marquee-track {
+          animation-name: marqueeRight;
+          animation-duration: 56s;
+        }
+
+        .airline-marquee-row:hover .airline-marquee-track {
           animation-play-state: paused;
         }
-        .airline-badge:hover {
-          border-color: rgba(194, 169, 107, 0.25) !important;
-          box-shadow: 0 12px 30px rgba(15,23,42,0.08) !important;
-          transform: translateY(-3px);
+
+        .airline-logo-card {
+          flex: 0 0 260px;
+          transition: border-color 0.26s ease, background-color 0.26s ease, transform 0.26s ease, box-shadow 0.26s ease;
         }
-        @media (max-width: 768px) {
-          .airlines-track {
-            animation-duration: 12s !important;
+
+        .airline-logo {
+          opacity: 0.9;
+          filter: saturate(1.06) contrast(1.04);
+          transition: opacity 0.28s ease, filter 0.28s ease, transform 0.28s ease;
+          animation: logoBreath 4.2s ease-in-out infinite;
+        }
+
+        .airline-wordmark {
+          transition: opacity 0.28s ease, transform 0.28s ease;
+        }
+
+        .airline-logo-card:hover {
+          border-color: rgba(194, 169, 107, 0.3);
+          background: rgba(255,255,255,0.98);
+          transform: translateY(-3px);
+          box-shadow: 0 12px 28px rgba(15,23,42,0.1), 0 0 0 1px rgba(194,169,107,0.08) inset;
+        }
+
+        .airline-logo-card:hover .airline-logo {
+          opacity: 1;
+          filter: saturate(1.15) contrast(1.08);
+          transform: scale(1.04);
+        }
+
+        .airline-logo-card:hover .airline-wordmark {
+          transform: translateY(-1px);
+          opacity: 0.95;
+        }
+
+        @keyframes logoBreath {
+          0%, 100% { transform: translateY(0); opacity: 0.88; }
+          50% { transform: translateY(-2px); opacity: 1; }
+        }
+
+        .airline-logo-card:nth-child(2n) .airline-logo { animation-delay: 0.35s; }
+        .airline-logo-card:nth-child(3n) .airline-logo { animation-delay: 0.7s; }
+        .airline-logo-card:nth-child(4n) .airline-logo { animation-delay: 1.05s; }
+
+        @keyframes marqueeLeft {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+
+        @keyframes marqueeRight {
+          from { transform: translateX(-50%); }
+          to { transform: translateX(0); }
+        }
+
+        @media (max-width: 640px) {
+          .airline-marquee-group {
+            gap: 12px;
+            padding-right: 12px;
+          }
+
+          .airline-marquee-track {
+            animation-duration: 42s;
+          }
+
+          .airline-marquee-row.reverse .airline-marquee-track {
+            animation-duration: 38s;
+          }
+
+          .airline-logo-card {
+            flex-basis: 190px;
+            height: 82px;
+            border-radius: 14px;
+            padding-left: 14px;
+            padding-right: 14px;
+          }
+
+          .airline-logo {
+            height: 34px;
+            max-width: 120px;
           }
         }
+
         @media (prefers-reduced-motion: reduce) {
-          .airlines-track {
+          .airline-logo {
+            animation: none !important;
+          }
+
+          .airline-marquee-track {
             animation: none !important;
           }
         }

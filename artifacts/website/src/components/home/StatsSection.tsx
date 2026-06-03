@@ -65,8 +65,14 @@ function StatItem({ stat, active, duration, delay }: StatItemProps) {
   }, [active, stat.value, duration, delay]);
 
   return (
-    <div className="bg-brand-section px-6 py-8 text-center">
+    <article
+      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(160deg,rgba(255,255,255,0.06)_0%,rgba(255,255,255,0.02)_100%)] px-5 py-6 text-center shadow-[0_18px_40px_-28px_rgba(0,0,0,0.65)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-cta/45 hover:shadow-[0_26px_50px_-28px_rgba(0,0,0,0.7)] sm:px-6 sm:py-7"
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(201,168,76,0.24)_0%,rgba(201,168,76,0)_58%)] opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-brand-cta/60 to-transparent opacity-80" />
+
       <div
+        className="relative"
         style={{
           opacity: started ? 1 : 0,
           transform: started ? "translateY(0)" : "translateY(8px)",
@@ -79,7 +85,7 @@ function StatItem({ stat, active, duration, delay }: StatItemProps) {
           className="leading-none"
         >
           <span
-            className="text-5xl sm:text-6xl font-extrabold tracking-tight text-brand-cta"
+            className="text-4xl sm:text-5xl font-extrabold tracking-tight text-brand-cta"
             style={{
               fontVariantNumeric: "lining-nums tabular-nums",
               fontFeatureSettings: '"lnum" 1, "tnum" 1',
@@ -89,7 +95,7 @@ function StatItem({ stat, active, duration, delay }: StatItemProps) {
             {formatStatNumber(count)}
           </span>
           <span
-            className="text-3xl sm:text-4xl font-bold text-brand-cta ms-0.5"
+            className="text-2xl sm:text-3xl font-bold text-brand-cta ms-0.5"
             style={{ fontVariantNumeric: "lining-nums" }}
           >
             {stat.suffix}
@@ -101,8 +107,8 @@ function StatItem({ stat, active, duration, delay }: StatItemProps) {
             height: "2px",
             background: "var(--color-brand-cta, #C9A84C)",
             borderRadius: "9999px",
-            width: "2rem",
-            margin: "0.5rem auto 0",
+            width: "2.2rem",
+            margin: "0.65rem auto 0",
             transform: started ? "scaleX(1)" : "scaleX(0)",
             transition: "transform 0.6s ease 0.2s",
             transformOrigin: "center",
@@ -110,10 +116,10 @@ function StatItem({ stat, active, duration, delay }: StatItemProps) {
         />
       </div>
 
-      <p className="mt-3 text-sm sm:text-base text-brand-muted font-medium">
+      <p className="relative mt-3 text-sm sm:text-base text-brand-muted font-medium">
         {stat.label}
       </p>
-    </div>
+    </article>
   );
 }
 
@@ -140,16 +146,23 @@ export default function StatsSection({ label, title, stats }: StatsSectionProps)
   }, []);
 
   return (
-    <section ref={sectionRef} data-header-theme="dark" className="bg-brand-section section-padding-sm">
+    <section
+      ref={sectionRef}
+      data-header-theme="dark"
+      className="relative overflow-hidden bg-[linear-gradient(180deg,#3f466f_0%,#3a426a_100%)] section-padding-sm"
+    >
+      <div className="pointer-events-none absolute left-[6%] top-8 h-48 w-48 rounded-full bg-brand-cta/10 blur-3xl" />
+      <div className="pointer-events-none absolute right-[8%] bottom-8 h-56 w-56 rounded-full bg-brand-bg/16 blur-3xl" />
+
       <div className="container-custom">
-        <div className="text-center mb-10">
-          <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase mb-3 bg-white/10 text-brand-cta">
+        <div className="mb-10 text-center">
+          <span className="inline-block rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold tracking-widest uppercase text-brand-cta">
             {label}
           </span>
-          <h2 className="text-xl sm:text-2xl font-bold text-white">{title}</h2>
+          <h2 className="mt-3 text-xl sm:text-2xl font-bold text-white">{title}</h2>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat, i) => (
             <StatItem
               key={i}

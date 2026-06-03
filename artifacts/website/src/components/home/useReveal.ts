@@ -13,6 +13,10 @@ export function useReveal(threshold = 0.15) {
     }
     const el = ref.current;
     if (!el) return;
+    if (el.closest(".luxury-home")) {
+      setVisible(true);
+      return;
+    }
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

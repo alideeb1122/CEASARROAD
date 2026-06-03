@@ -1,0 +1,6 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 90" role="img" aria-label="Iberia">
+  <rect width="320" height="90" rx="12" fill="#ffffff"/>
+  <path d="M34 58l22-20h30l-22 20z" fill="#f2c400"/>
+  <path d="M34 66l16-15h30L64 66z" fill="#cc1f2f"/>
+  <text x="196" y="58" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700" fill="#cc1f2f" letter-spacing="1">IBERIA</text>
+</svg>

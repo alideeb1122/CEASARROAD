@@ -1,0 +1,6 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 90" role="img" aria-label="Air Canada">
+  <rect width="340" height="90" rx="12" fill="#ffffff"/>
+  <circle cx="45" cy="45" r="19" fill="#d3132a"/>
+  <path d="M45 31l4 9h10l-8 6 3 10-9-6-9 6 3-10-8-6h10z" fill="#ffffff"/>
+  <text x="215" y="57" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="700" fill="#2d2d2d" letter-spacing="1">AIR CANADA</text>
+</svg>

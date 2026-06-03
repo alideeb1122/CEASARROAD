@@ -1,0 +1,15 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="Dubai skyline">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#1f2b52"/>
+      <stop offset="100%" stop-color="#0f172f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  <rect y="540" width="1200" height="160" fill="#0b1226"/>
+  <path d="M620 130 L660 540 L580 540 Z" fill="#d7b86f" opacity="0.95"/>
+  <rect x="300" y="360" width="120" height="180" fill="#314170"/>
+  <rect x="460" y="300" width="90" height="240" fill="#3b4f82"/>
+  <rect x="720" y="320" width="110" height="220" fill="#2d3c68"/>
+  <rect x="880" y="370" width="140" height="170" fill="#344777"/>
+</svg>
