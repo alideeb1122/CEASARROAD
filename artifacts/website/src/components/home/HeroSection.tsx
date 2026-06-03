@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { WhatsAppIcon } from "./Icons";
+import AnimatedWords from "./AnimatedWords";
 
 interface HeroContent {
   heroLabel: string;
@@ -215,7 +216,9 @@ export default function HeroSection({
           </div>
 
           <h1 className="max-w-[5.7em] text-4xl font-extrabold leading-[1.3] tracking-[-0.035em] text-white sm:text-5xl lg:text-[5.25rem]">
-            <span className="block">{staticTitle}</span>
+            <span className="block">
+              <AnimatedWords text={staticTitle} visible={mounted} baseDelay={120} />
+            </span>
             <span className="mt-5 inline-flex h-[1.24em] items-start overflow-hidden align-top sm:mt-6">
               <span
                 className="flex flex-col transition-transform duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
@@ -232,12 +235,18 @@ export default function HeroSection({
               </span>
             </span>
           </h1>
-          <p className="mt-7 max-w-3xl text-2xl font-semibold leading-[1.4] text-brand-cta sm:mt-8 sm:text-3xl lg:text-[3rem]">
-            {content.heroTitleAccent}
+          <p
+            className="mt-7 max-w-3xl text-2xl font-semibold leading-[1.4] text-brand-cta sm:mt-8 sm:text-3xl lg:text-[3rem]"
+            style={reveal(mounted, 200)}
+          >
+            <AnimatedWords text={content.heroTitleAccent} visible={mounted} baseDelay={200} />
           </p>
 
-          <p className="mt-9 max-w-[48rem] text-base leading-8 text-brand-muted sm:mt-10 sm:text-lg sm:leading-9 lg:mt-12 lg:text-[1.18rem]">
-            {content.heroSubtitle}
+          <p
+            className="mt-9 max-w-[48rem] text-base leading-8 text-brand-muted sm:mt-10 sm:text-lg sm:leading-9 lg:mt-12 lg:text-[1.18rem]"
+            style={reveal(mounted, 280)}
+          >
+            <AnimatedWords text={content.heroSubtitle} visible={mounted} baseDelay={300} step={38} />
           </p>
 
           <div className="mt-12 flex flex-col gap-4 sm:mt-12 sm:flex-row sm:items-center sm:justify-center sm:gap-5">
