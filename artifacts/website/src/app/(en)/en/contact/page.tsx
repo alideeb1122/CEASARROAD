@@ -12,7 +12,7 @@ export default function EnglishContactPage() {
   const branches = en.pages.branches.branches;
   return (
     <>
-      <section className="bg-navy text-white py-20 lg:py-28">
+      <section data-header-theme="dark" className="bg-navy text-white py-20 lg:py-28">
         <RevealWrapper className="container-custom text-center">
           <p className="text-gold text-sm font-semibold uppercase tracking-widest mb-3">
             {p.label}
@@ -26,7 +26,7 @@ export default function EnglishContactPage() {
         </RevealWrapper>
       </section>
 
-      <section className="bg-white py-16 lg:py-20 border-b border-gray-100">
+      <section data-header-theme="light" className="bg-white py-16 lg:py-20 border-b border-gray-100">
         <div className="container-custom">
           <RevealWrapper className="max-w-2xl mx-auto text-center">
             <p className="text-text-muted text-base lg:text-lg leading-relaxed mb-8">
@@ -46,7 +46,7 @@ export default function EnglishContactPage() {
         </div>
       </section>
 
-      <section className="bg-background section-padding">
+      <section data-header-theme="light" className="bg-background section-padding">
         <div className="container-custom">
           <RevealWrapper className="text-center mb-10">
             <p className="text-gold text-sm font-semibold uppercase tracking-widest mb-2">

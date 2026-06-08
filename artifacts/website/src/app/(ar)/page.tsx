@@ -4,8 +4,6 @@ import HeroSection from "@/components/home/HeroSection";
 import WhyUsSection from "@/components/home/WhyUsSection";
 import StatsSection from "@/components/home/StatsSection";
 import BranchesSection from "@/components/home/BranchesSection";
-import SocialSection from "@/components/home/SocialSection";
-import TestimonialsSection from "@/components/home/TestimonialsSection";
 import FinalCtaSection from "@/components/home/FinalCtaSection";
 import AirlinesSection from "@/components/home/AirlinesSection";
 import OrbitPartnersSection from "@/components/home/OrbitPartnersSection";
@@ -69,20 +67,6 @@ export default function ArabicHomePage() {
           branchCta={p.branchCta}
           hoursLabel={p.hoursLabel}
         />
-        <SocialSection
-          label={p.socialLabel}
-          title={p.socialTitle}
-          subtitle={p.socialSubtitle}
-          socials={p.socials}
-        />
-
-        <TestimonialsSection
-          label={p.testimonialsLabel}
-          title={p.testimonialsTitle}
-          subtitle={p.testimonialsSubtitle}
-          testimonials={p.testimonials}
-        />
-
         <FinalCtaSection
           label={p.finalCtaLabel}
           title={p.finalCtaTitle}

@@ -40,6 +40,7 @@ export default function EnglishLayout({
           nav={en.nav}
           footer={en.footer}
           branches={en.pages.branches.branches}
+          branchSocials={en.pages.contact.socials}
         />
       </body>
     </html>

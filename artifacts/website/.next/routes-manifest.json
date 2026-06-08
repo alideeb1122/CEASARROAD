@@ -26,7 +26,42 @@
     }
   ],
   "headers": [],
-  "dynamicRoutes": [],
+  "dynamicRoutes": [
+    {
+      "page": "/en/services/[serviceSlug]",
+      "regex": "^/en/services/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPserviceSlug": "nxtPserviceSlug"
+      },
+      "namedRegex": "^/en/services/(?<nxtPserviceSlug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/en/services/[serviceSlug]/[itemSlug]",
+      "regex": "^/en/services/([^/]+?)/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPserviceSlug": "nxtPserviceSlug",
+        "nxtPitemSlug": "nxtPitemSlug"
+      },
+      "namedRegex": "^/en/services/(?<nxtPserviceSlug>[^/]+?)/(?<nxtPitemSlug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/services/[serviceSlug]",
+      "regex": "^/services/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPserviceSlug": "nxtPserviceSlug"
+      },
+      "namedRegex": "^/services/(?<nxtPserviceSlug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/services/[serviceSlug]/[itemSlug]",
+      "regex": "^/services/([^/]+?)/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPserviceSlug": "nxtPserviceSlug",
+        "nxtPitemSlug": "nxtPitemSlug"
+      },
+      "namedRegex": "^/services/(?<nxtPserviceSlug>[^/]+?)/(?<nxtPitemSlug>[^/]+?)(?:/)?$"
+    }
+  ],
   "staticRoutes": [
     {
       "page": "/",
