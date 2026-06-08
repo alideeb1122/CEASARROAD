@@ -1,7 +1,7 @@
 {
   "/(ar)/services/page": "app/(ar)/services/page.js",
-  "/(en)/en/services/page": "app/(en)/en/services/page.js",
+  "/(ar)/page": "app/(ar)/page.js",
   "/(ar)/services/[serviceSlug]/page": "app/(ar)/services/[serviceSlug]/page.js",
-  "/(en)/en/services/[serviceSlug]/page": "app/(en)/en/services/[serviceSlug]/page.js",
+  "/(en)/en/page": "app/(en)/en/page.js",
   "/(ar)/services/[serviceSlug]/[itemSlug]/page": "app/(ar)/services/[serviceSlug]/[itemSlug]/page.js"
 }

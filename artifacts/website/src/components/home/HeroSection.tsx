@@ -35,6 +35,7 @@ export default function HeroSection({
   servicesHref,
   whatsappNumber = "971501234567",
 }: HeroSectionProps) {
+  const isArabic = locale === "ar";
   const heroVideos = [
     "/videos/hero/hero-travel.mp4",
     "/videos/hero/hero-travel-2.mp4",
@@ -43,7 +44,6 @@ export default function HeroSection({
 
   const [mounted, setMounted] = useState(false);
   const [pointer, setPointer] = useState({ x: 50, y: 42 });
-  const [wordIndex, setWordIndex] = useState(0);
   const [slotAIndex, setSlotAIndex] = useState(0);
   const [slotBIndex, setSlotBIndex] = useState(1);
   const [activeSlot, setActiveSlot] = useState<"a" | "b">("a");
@@ -51,14 +51,6 @@ export default function HeroSection({
   useEffect(() => {
     const id = requestAnimationFrame(() => setMounted(true));
     return () => cancelAnimationFrame(id);
-  }, []);
-
-  useEffect(() => {
-    const intervalId = window.setInterval(() => {
-      setWordIndex((current) => (current + 1) % 4);
-    }, 3200);
-
-    return () => window.clearInterval(intervalId);
   }, []);
 
   useEffect(() => {
@@ -83,14 +75,6 @@ export default function HeroSection({
 
     return () => window.clearInterval(intervalId);
   }, [activeSlot, heroVideos.length, slotAIndex, slotBIndex]);
-
-  const rotatingWords =
-    locale === "ar"
-      ? ["العالم", "وجهتك", "رحلتك", "آفاقك"]
-      : ["World", "Destination", "Journey", "Horizons"];
-
-  const staticTitle =
-    locale === "ar" ? content.heroTitle.replace(/\s+\S+$/, "") : "Your Gateway to the";
 
   return (
     <section
@@ -159,16 +143,6 @@ export default function HeroSection({
           }}
         />
         <div
-          className="absolute inset-0 opacity-70 transition-transform duration-500 ease-out"
-          style={{
-            transform: `translate(${(pointer.x - 50) * 0.08}px, ${(pointer.y - 42) * 0.08}px)`,
-          }}
-        >
-          <div className="absolute inset-x-[12%] top-[20%] h-px bg-gradient-to-r from-transparent via-white/12 to-transparent" />
-          <div className="absolute inset-x-[20%] top-[34%] h-px bg-gradient-to-r from-transparent via-brand-cta/16 to-transparent" />
-          <div className="absolute inset-x-[16%] bottom-[22%] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-        </div>
-        <div
           className="absolute inset-x-[10%] bottom-[8%] h-28 rounded-[50%] opacity-55 blur-3xl transition-transform duration-900 ease-out"
           style={{
             transform: `translate(${(pointer.x - 50) * 0.12}px, ${(pointer.y - 42) * 0.04}px)`,
@@ -199,50 +173,38 @@ export default function HeroSection({
           <div className="hero-cloud hero-cloud-f absolute right-[24%] bottom-[16%] h-18 w-48 rounded-full bg-brand-cta/6 blur-2xl sm:h-22 sm:w-60 lg:h-24 lg:w-64" />
         </div>
 
-        <div className="absolute inset-x-0 top-[14%] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-        <div className="absolute inset-x-[18%] top-[32%] h-px bg-gradient-to-r from-transparent via-brand-cta/12 to-transparent" />
       </div>
 
-      <div className="container-custom relative z-10 py-14 sm:py-16 lg:py-20">
+      <div className="container-custom relative z-10 py-12 sm:py-14 lg:py-16">
         <div
-          className="mx-auto flex min-h-[64vh] max-w-4xl flex-col items-center justify-center pt-2 text-center sm:min-h-[70vh] sm:pt-4 lg:min-h-[78vh] lg:-translate-y-6"
+          className="relative mx-auto flex min-h-[58vh] max-w-4xl flex-col items-center justify-center pt-1 text-center sm:min-h-[62vh] sm:pt-2 lg:min-h-[66vh] lg:-translate-y-3"
           style={reveal(mounted, 0)}
         >
-          <h1 className="max-w-[5.7em] text-4xl font-extrabold leading-[1.3] tracking-[-0.035em] text-white sm:text-5xl lg:text-[5.25rem]">
-            <span className="block">
-              <AnimatedWords text={staticTitle} visible={mounted} baseDelay={120} />
-            </span>
-            <span className="mt-5 inline-flex h-[1.24em] items-start overflow-hidden align-top sm:mt-6">
-              <span
-                className="flex flex-col transition-transform duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
-                style={{ transform: `translateY(-${wordIndex * 1.24}em)` }}
-              >
-                {rotatingWords.map((word) => (
-                  <span
-                    key={word}
-                    className="flex h-[1.24em] items-center justify-center pb-[0.06em] text-brand-cta"
-                  >
-                    {word}
-                  </span>
-                ))}
-              </span>
+          <div className="relative z-10 flex w-full flex-col items-center">
+          <h1 className={`text-center font-extrabold leading-[1.04] tracking-[-0.04em] text-white ${isArabic ? "text-4xl sm:text-[3.8rem] lg:text-[4.45rem]" : "text-[3.35rem] sm:text-[4rem] lg:text-[4.5rem]"}`}>
+            <span className="text-brand-cta">
+              <AnimatedWords text={content.heroTitle} visible={mounted} baseDelay={120} />
             </span>
           </h1>
-          <p
-            className="mt-7 max-w-3xl text-2xl font-semibold leading-[1.4] text-brand-cta sm:mt-8 sm:text-3xl lg:text-[3rem]"
-            style={reveal(mounted, 200)}
-          >
-            <AnimatedWords text={content.heroTitleAccent} visible={mounted} baseDelay={200} />
-          </p>
+          {content.heroTitleAccent ? (
+            <p
+              className={`max-w-3xl font-semibold leading-[1.35] text-white ${isArabic ? "mt-6 text-[1.95rem] sm:mt-7 sm:text-[2.15rem] lg:text-[2.25rem]" : "mt-7 text-[1.75rem] sm:mt-8 sm:text-[2rem] lg:text-[2.15rem]"}`}
+              style={reveal(mounted, 200)}
+            >
+              <AnimatedWords text={content.heroTitleAccent} visible={mounted} baseDelay={200} />
+            </p>
+          ) : null}
 
-          <p
-            className="mt-9 max-w-[48rem] text-base leading-8 text-brand-muted sm:mt-10 sm:text-lg sm:leading-9 lg:mt-12 lg:text-[1.18rem]"
-            style={reveal(mounted, 280)}
-          >
-            <AnimatedWords text={content.heroSubtitle} visible={mounted} baseDelay={300} step={38} />
-          </p>
+          {content.heroSubtitle ? (
+            <p
+              className="mt-9 max-w-[48rem] text-base leading-8 text-brand-muted sm:mt-10 sm:text-lg sm:leading-9 lg:mt-12 lg:text-[1.18rem]"
+              style={reveal(mounted, 280)}
+            >
+              <AnimatedWords text={content.heroSubtitle} visible={mounted} baseDelay={300} step={38} />
+            </p>
+          ) : null}
 
-          <div className="mt-12 flex flex-col gap-4 sm:mt-12 sm:flex-row sm:items-center sm:justify-center sm:gap-5">
+          <div className="mt-10 flex flex-col gap-4 sm:mt-10 sm:flex-row sm:items-center sm:justify-center sm:gap-5">
             <a
               href={`https://wa.me/${whatsappNumber}`}
               target="_blank"
@@ -260,12 +222,15 @@ export default function HeroSection({
             </Link>
           </div>
 
-          <p
-            className="mt-12 text-sm font-medium text-brand-muted/90 sm:mt-14 sm:text-base"
-            style={reveal(mounted, 180)}
-          >
-            {content.heroMediaLabel}
-          </p>
+          {content.heroMediaLabel ? (
+            <p
+              className="mt-6 text-sm font-medium text-white/72 sm:mt-7 sm:text-base"
+              style={reveal(mounted, 180)}
+            >
+              {content.heroMediaLabel}
+            </p>
+          ) : null}
+          </div>
         </div>
       </div>
 
