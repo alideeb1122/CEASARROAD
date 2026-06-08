@@ -205,16 +205,9 @@ export default function HeroSection({
 
       <div className="container-custom relative z-10 py-14 sm:py-16 lg:py-20">
         <div
-          className="mx-auto flex min-h-[64vh] max-w-4xl flex-col items-center justify-center text-center sm:min-h-[70vh] lg:min-h-[78vh]"
+          className="mx-auto flex min-h-[64vh] max-w-4xl flex-col items-center justify-center pt-2 text-center sm:min-h-[70vh] sm:pt-4 lg:min-h-[78vh] lg:-translate-y-6"
           style={reveal(mounted, 0)}
         >
-          <div className="mb-6">
-            <span className="inline-flex items-center gap-2 rounded-full border border-brand-cta/30 bg-brand-cta/10 px-5 py-2 text-sm font-medium text-brand-cta backdrop-blur-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-brand-cta animate-pulse" />
-              {content.heroLabel}
-            </span>
-          </div>
-
           <h1 className="max-w-[5.7em] text-4xl font-extrabold leading-[1.3] tracking-[-0.035em] text-white sm:text-5xl lg:text-[5.25rem]">
             <span className="block">
               <AnimatedWords text={staticTitle} visible={mounted} baseDelay={120} />

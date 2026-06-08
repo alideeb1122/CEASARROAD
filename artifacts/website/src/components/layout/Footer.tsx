@@ -92,7 +92,10 @@ function SocialIcon({ type, className }: { type: string; className?: string }) {
 interface FooterSocial {
   type: string;
   url: string;
-  label: string;
+  label?: string;
+  branch?: string;
+  platform?: string;
+  handle?: string;
 }
 
 interface FooterContent {
@@ -130,9 +133,10 @@ interface FooterProps {
   nav: NavContent;
   footer: FooterContent;
   branches: BranchData[];
+  branchSocials: FooterSocial[];
 }
 
-export default function Footer({ locale, siteName, nav, footer, branches }: FooterProps) {
+export default function Footer({ locale, siteName, nav, footer, branches, branchSocials }: FooterProps) {
   const prefix = locale === "ar" ? "" : "/en";
   const { ref, visible } = useReveal(0.05);
 
@@ -143,6 +147,9 @@ export default function Footer({ locale, siteName, nav, footer, branches }: Foot
     { label: nav.about, href: `${prefix}/about` },
     { label: nav.contact, href: `${prefix}/contact` },
   ];
+
+  const getBranchSocials = (branchCity: string) =>
+    branchSocials.filter((social) => social.branch === branchCity);
 
   return (
     <footer
@@ -185,8 +192,9 @@ export default function Footer({ locale, siteName, nav, footer, branches }: Foot
               </p>
               <div className="flex flex-wrap gap-2">
                 {footer.socials.map((s) => (
+                  !s.branch ? (
                   <a
-                    key={s.type}
+                    key={`${s.type}-${s.url}`}
                     href={s.url}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -195,9 +203,11 @@ export default function Footer({ locale, siteName, nav, footer, branches }: Foot
                   >
                     <SocialIcon type={s.type} className="h-3.5 w-3.5" />
                   </a>
+                  ) : null
                 ))}
               </div>
             </div>
+
           </div>
 
           <div
@@ -236,38 +246,68 @@ export default function Footer({ locale, siteName, nav, footer, branches }: Foot
               {footer.branchesTitle}
             </h3>
             <div>
-              {branches.map((branch) => (
-                <div key={branch.city} className="border-b border-white/[0.07] py-2.5 last:border-0 last:pb-0">
-                  <p className="mb-1 text-sm font-semibold text-white/85">{branch.city}</p>
-                  <p className="mb-1 text-xs leading-relaxed text-white/40">{branch.address}</p>
-                  <div className="mb-1.5 flex items-center gap-1.5 text-[10px] text-white/30">
-                    <ClockIcon className="h-3 w-3 flex-shrink-0" />
-                    <span>{branch.hours}</span>
-                    <span className="opacity-60">·</span>
-                    <span>{footer.closedDay}: {branch.offDay}</span>
+              {branches.map((branch) => {
+                const branchSocials = getBranchSocials(branch.city);
+
+                return (
+                  <div key={branch.city} className="border-b border-white/[0.07] py-2.5 last:border-0 last:pb-0">
+                    <p className="mb-1 text-sm font-semibold text-white/85">{branch.city}</p>
+                    <p className="mb-1 text-xs leading-relaxed text-white/40">{branch.address}</p>
+                    <div className="mb-1.5 flex items-center gap-1.5 text-[10px] text-white/30">
+                      <ClockIcon className="h-3 w-3 flex-shrink-0" />
+                      <span>{branch.hours}</span>
+                      <span className="opacity-60">•</span>
+                      <span>{footer.closedDay}: {branch.offDay}</span>
+                    </div>
+                    <div className="mb-2 flex flex-wrap items-center gap-1.5">
+                      <a
+                        href={`https://wa.me/${branch.whatsapp}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`WhatsApp ${branch.city}`}
+                        title={`${locale === "ar" ? "واتساب" : "WhatsApp"} ${branch.city}`}
+                        className="group relative flex h-7 w-7 items-center justify-center rounded-md border border-brand-cta/20 bg-brand-cta/12 text-brand-cta transition-all duration-300 hover:border-brand-cta/35 hover:bg-brand-cta/20"
+                      >
+                        <WhatsAppIcon className="h-3.5 w-3.5" />
+                        <span className="pointer-events-none absolute -top-8 right-1/2 translate-x-1/2 whitespace-nowrap rounded-md bg-white px-2 py-1 text-[10px] font-medium text-navy opacity-0 shadow-lg transition-all duration-200 group-hover:-translate-y-0.5 group-hover:opacity-100">
+                          {locale === "ar" ? "واتساب" : "WhatsApp"}
+                        </span>
+                      </a>
+                      {branch.mapUrl ? (
+                        <a
+                          href={branch.mapUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${footer.mapCta} ${branch.city}`}
+                          title={`${footer.mapCta} ${branch.city}`}
+                          className="group relative flex h-7 w-7 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-white/50 transition-all duration-300 hover:border-brand-cta/30 hover:bg-brand-cta/10 hover:text-brand-cta"
+                        >
+                          <MapPinIcon className="h-3.5 w-3.5" />
+                          <span className="pointer-events-none absolute -top-8 right-1/2 translate-x-1/2 whitespace-nowrap rounded-md bg-white px-2 py-1 text-[10px] font-medium text-navy opacity-0 shadow-lg transition-all duration-200 group-hover:-translate-y-0.5 group-hover:opacity-100">
+                            {footer.mapCta}
+                          </span>
+                        </a>
+                      ) : null}
+                      {branchSocials.map((social) => (
+                        <a
+                          key={`${branch.city}-${social.type}-${social.url}`}
+                          href={social.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${social.label} ${branch.city}`}
+                          title={`${social.platform ?? social.label} ${branch.city}`}
+                          className="group relative flex h-7 w-7 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-white/50 transition-all duration-300 hover:border-brand-cta/30 hover:bg-brand-cta/10 hover:text-brand-cta"
+                        >
+                          <SocialIcon type={social.type} className="h-3.5 w-3.5" />
+                          <span className="pointer-events-none absolute -top-8 right-1/2 translate-x-1/2 whitespace-nowrap rounded-md bg-white px-2 py-1 text-[10px] font-medium text-navy opacity-0 shadow-lg transition-all duration-200 group-hover:-translate-y-0.5 group-hover:opacity-100">
+                            {social.platform ?? social.label}
+                          </span>
+                        </a>
+                      ))}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <a
-                      href={`https://wa.me/${branch.whatsapp}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-md border border-brand-cta/20 bg-brand-cta/12 px-2.5 py-1 text-[10px] font-medium text-brand-cta transition-all duration-150 hover:border-brand-cta/35 hover:bg-brand-cta/20"
-                    >
-                      <WhatsAppIcon className="h-3 w-3" />
-                      {footer.whatsappCta}
-                    </a>
-                    <a
-                      href={branch.mapUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-md border border-white/[0.1] bg-white/[0.04] px-2.5 py-1 text-[10px] font-medium text-white/45 transition-all duration-150 hover:bg-white/[0.07] hover:text-white/75"
-                    >
-                      <MapPinIcon className="h-3 w-3" />
-                      {footer.mapCta}
-                    </a>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

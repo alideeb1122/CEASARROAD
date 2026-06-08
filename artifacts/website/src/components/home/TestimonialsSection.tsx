@@ -8,6 +8,7 @@ interface Testimonial {
   name: string;
   text: string;
   context: string;
+  gender?: "male" | "female";
 }
 
 interface TestimonialsSectionProps {
@@ -29,7 +30,9 @@ function pickVisual(context: string, index: number): string {
   return ["/images/branches-dubai.jpg", "/images/branches-erbil.jpg", "/images/branches-homs.jpg"][index % 3];
 }
 
-function pickAvatar(name: string, index: number): string {
+function pickAvatar(name: string, index: number, gender?: "male" | "female"): string {
+  if (gender === "male") return "/images/testimonial-avatar-mohamed.jpg";
+  if (gender === "female") return "/images/testimonial-avatar-nour.jpg";
   const normalized = name.toLowerCase();
   if (normalized.includes("mohamed") || normalized.includes("mohammad") || normalized.includes("محمد")) {
     return "/images/testimonial-avatar-mohamed.jpg";
@@ -72,7 +75,7 @@ export default function TestimonialsSection({
       testimonials.map((t, i) => ({
         ...t,
         image: pickVisual(t.context, i),
-        avatar: pickAvatar(t.name, i),
+        avatar: pickAvatar(t.name, i, t.gender),
       })),
     [testimonials]
   );
@@ -215,4 +218,3 @@ export default function TestimonialsSection({
     </section>
   );
 }
-

@@ -1,13 +1,17 @@
 {
   "/_not-found/page": "/_not-found",
-  "/(ar)/contact/page": "/contact",
   "/(ar)/branches/page": "/branches",
-  "/(ar)/page": "/",
-  "/(ar)/about/page": "/about",
+  "/(ar)/contact/page": "/contact",
   "/(ar)/services/page": "/services",
-  "/(en)/en/contact/page": "/en/contact",
-  "/(en)/en/branches/page": "/en/branches",
-  "/(en)/en/services/page": "/en/services",
+  "/(ar)/page": "/",
+  "/(ar)/services/[serviceSlug]/page": "/services/[serviceSlug]",
+  "/(ar)/services/[serviceSlug]/[itemSlug]/page": "/services/[serviceSlug]/[itemSlug]",
+  "/(ar)/about/page": "/about",
   "/(en)/en/page": "/en",
+  "/(en)/en/services/[serviceSlug]/page": "/en/services/[serviceSlug]",
+  "/(en)/en/branches/page": "/en/branches",
+  "/(en)/en/contact/page": "/en/contact",
+  "/(en)/en/services/page": "/en/services",
+  "/(en)/en/services/[serviceSlug]/[itemSlug]/page": "/en/services/[serviceSlug]/[itemSlug]",
   "/(en)/en/about/page": "/en/about"
 }

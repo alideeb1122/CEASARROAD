@@ -9,7 +9,7 @@ export default function ArabicBranchesPage() {
   const p = ar.pages.branches;
   return (
     <>
-      <section className="bg-navy text-white py-20 lg:py-28">
+      <section data-header-theme="dark" className="bg-navy text-white py-20 lg:py-28">
         <RevealWrapper className="container-custom text-center">
           <p className="text-gold text-sm font-semibold uppercase tracking-widest mb-3">
             {p.label}
@@ -23,7 +23,7 @@ export default function ArabicBranchesPage() {
         </RevealWrapper>
       </section>
 
-      <section className="bg-background section-padding">
+      <section data-header-theme="light" className="bg-background section-padding">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             {p.branches.map((branch, i) => (

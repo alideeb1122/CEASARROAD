@@ -40,6 +40,7 @@ export default function ArabicLayout({
           nav={ar.nav}
           footer={ar.footer}
           branches={ar.pages.branches.branches}
+          branchSocials={ar.pages.contact.socials}
         />
       </body>
     </html>

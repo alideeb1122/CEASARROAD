@@ -3,17 +3,20 @@ import { ar } from "@/lib/content/ar";
 import FinalCtaSection from "@/components/shared/FinalCtaSection";
 import RevealWrapper from "@/components/shared/RevealWrapper";
 import { getServiceIcon, MapPinIcon, ClockIcon, GlobeIcon } from "@/components/home/Icons";
+import AboutServicesCarousel from "@/components/about/AboutServicesCarousel";
+import BranchesSection from "@/components/home/BranchesSection";
 
 export const metadata: Metadata = { title: "من نحن" };
 
 export default function ArabicAboutPage() {
   const p = ar.pages.about;
+  const hp = ar.pages.home;
   const branches = ar.pages.branches.branches;
 
   return (
     <>
       {/* 1. Premium Hero */}
-      <section className="bg-navy text-white py-24 lg:py-36 relative overflow-hidden">
+      <section data-header-theme="dark" className="bg-navy text-white py-24 lg:py-36 relative overflow-hidden">
         <div className="absolute inset-0 opacity-5 pointer-events-none">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full border border-white/30" />
           <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full border border-white/20" />
@@ -39,7 +42,7 @@ export default function ArabicAboutPage() {
       </section>
 
       {/* 2. Who We Are */}
-      <section className="bg-white section-padding">
+      <section data-header-theme="light" className="bg-white section-padding">
         <div className="container-custom">
           <RevealWrapper className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-24 items-start">
             <div>
@@ -81,7 +84,7 @@ export default function ArabicAboutPage() {
       </section>
 
       {/* 3. Mission + Vision */}
-      <section className="bg-surface section-padding">
+      <section data-header-theme="light" className="bg-surface section-padding">
         <div className="container-custom">
           <RevealWrapper className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="bg-white rounded-2xl border border-gray-100 p-8 lg:p-10">
@@ -113,7 +116,7 @@ export default function ArabicAboutPage() {
       </section>
 
       {/* 4. Values */}
-      <section className="bg-white section-padding">
+      <section data-header-theme="light" className="bg-white section-padding">
         <div className="container-custom">
           <RevealWrapper className="text-center mb-12">
             <span className="inline-block text-gold text-xs font-semibold uppercase tracking-widest mb-3">
@@ -143,52 +146,56 @@ export default function ArabicAboutPage() {
       </section>
 
       {/* 5. Regional Presence */}
-      <section className="bg-surface section-padding">
-        <div className="container-custom">
-          <RevealWrapper className="text-center mb-12">
-            <span className="inline-block text-gold text-xs font-semibold uppercase tracking-widest mb-3">
-              {p.presenceLabel}
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-text-primary mb-3">
-              {p.presenceTitle}
-            </h2>
-            <p className="text-text-muted max-w-xl mx-auto text-base leading-relaxed">
-              {p.presenceSubtitle}
-            </p>
-          </RevealWrapper>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
-            {branches.map((branch, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-2xl border border-gray-100 p-6 hover:border-gold/30 hover:shadow-md transition-all duration-200"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <p className="font-bold text-text-primary text-lg">{branch.city}</p>
-                    <p className="text-xs text-text-muted mt-0.5">{branch.country}</p>
-                  </div>
-                  <div className="w-9 h-9 rounded-xl bg-gold/10 flex items-center justify-center flex-shrink-0">
-                    <MapPinIcon className="w-4 h-4 text-gold" />
-                  </div>
-                </div>
-                <p className="text-sm text-text-muted leading-relaxed mb-4">{branch.address}</p>
-                <div className="flex items-center gap-2 text-xs text-text-muted border-t border-gray-100 pt-4">
-                  <ClockIcon className="w-3.5 h-3.5 text-gold flex-shrink-0" />
-                  <span>{branch.hours}</span>
-                </div>
-                {branch.description && (
-                  <p className="text-xs text-text-muted mt-3 leading-relaxed border-t border-gray-100 pt-3">
-                    {branch.description}
-                  </p>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <BranchesSection
+        label={p.presenceLabel}
+        title={p.presenceTitle}
+        subtitle={p.presenceSubtitle}
+        branches={branches}
+        branchCta="تواصل مع الفرع"
+        hoursLabel="ساعات العمل"
+      />
+
+      <AboutServicesCarousel
+        label={hp.servicesLabel}
+        title={hp.servicesTitle}
+        subtitle={hp.servicesSubtitle}
+        locale="ar"
+        items={[
+          {
+            title: p.storyTitle,
+            subtitle: p.storyText,
+            image: "/images/gallery/gallery-5.svg",
+            imageAlt: p.storyTitle,
+          },
+          {
+            title: p.values[0].title,
+            subtitle: p.values[0].desc,
+            image: "/images/gallery/gallery-1.svg",
+            imageAlt: p.values[0].title,
+          },
+          {
+            title: p.values[1].title,
+            subtitle: p.values[1].desc,
+            image: "/images/gallery/gallery-2.svg",
+            imageAlt: p.values[1].title,
+          },
+          {
+            title: p.values[2].title,
+            subtitle: p.values[2].desc,
+            image: "/images/gallery/gallery-3.svg",
+            imageAlt: p.values[2].title,
+          },
+          {
+            title: p.values[3].title,
+            subtitle: p.values[3].desc,
+            image: "/images/gallery/gallery-4.svg",
+            imageAlt: p.values[3].title,
+          },
+        ]}
+      />
 
       {/* 6. Trust Numbers */}
-      <section className="bg-navy py-16 lg:py-20">
+      <section data-header-theme="dark" className="bg-navy py-16 lg:py-20">
         <div className="container-custom">
           <RevealWrapper className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 text-center">
             {p.stats.map((stat, i) => (
