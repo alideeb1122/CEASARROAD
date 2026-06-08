@@ -15,13 +15,12 @@ export const en = {
   pages: {
     home: {
       heroLabel: "Caesar Road Travel & Tourism",
-      heroTitle: "Your Gateway to the World",
-      heroTitleAccent: "Journeys, thoughtfully arranged",
-      heroSubtitle:
-        "From your first enquiry to the moment you arrive, we handle flights, visas, stays, and insurance with calm precision and dependable care.",
+      heroTitle: "Refined Travel Starts Here",
+      heroTitleAccent: "Caesar Road arranges your journey beautifully",
+      heroSubtitle: "",
       heroWhatsappCta: "Chat on WhatsApp",
       heroServicesCta: "Explore Services",
-      heroMediaLabel: "Where your next chapter begins",
+      heroMediaLabel: "",
 
       servicesLabel: "What We Offer",
       servicesTitle: "Everything for a Perfect Journey",

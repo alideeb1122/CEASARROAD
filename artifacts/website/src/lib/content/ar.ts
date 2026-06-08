@@ -15,13 +15,12 @@ export const ar = {
   pages: {
     home: {
       heroLabel: "طريق القيصر للسياحة والسفر",
-      heroTitle: "رحلتك تبدأ من هنا",
-      heroTitleAccent: "خدمة واثقة وتجربة تليق بك",
-      heroSubtitle:
-        "من أول رسالة حتى لحظة الوصول، نرتّب لك التذاكر والتأشيرات والحجوزات بخدمة سريعة وواضحة تمنحك راحة أكبر ونتيجة أضمن.",
+      heroTitle: "سفرٌ أرقى يبدأ من هنا",
+      heroTitleAccent: "طريق القيصر يرتّب رحلتك بذوق يليق بك",
+      heroSubtitle: "",
       heroWhatsappCta: "تواصل عبر واتساب",
       heroServicesCta: "اكتشف خدماتنا",
-      heroMediaLabel: "ومن هنا تبدأ الحكاية",
+      heroMediaLabel: "",
 
       servicesLabel: "خدماتنا",
       servicesTitle: "كل ما تحتاجه للسفر في مكان واحد",
