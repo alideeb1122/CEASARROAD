@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { withBasePath } from "@/lib/base-path";
 import { useEffect, useMemo, useState } from "react";
 
 type IntroPhase = "enter" | "exit" | "done";
@@ -80,7 +81,7 @@ export default function HomepageIntro({
               <div className="homepage-intro-halo homepage-intro-halo-b" />
               <div className="homepage-intro-mark-glow" />
               <Image
-                src="/branding/logo-caesar-mark.svg"
+          src={withBasePath("/branding/logo-caesar-mark.svg")}
                 alt="Caesar Road"
                 width={210}
                 height={296}

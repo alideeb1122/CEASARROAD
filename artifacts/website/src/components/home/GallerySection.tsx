@@ -3,6 +3,7 @@
 import Image from "next/image";
 import SectionHeading from "./SectionHeading";
 import { useReveal } from "./useReveal";
+import { withBasePath } from "@/lib/base-path";
 
 export interface GalleryItem {
   src: string;
@@ -49,7 +50,7 @@ export default function GallerySection({
               }}
             >
               <Image
-                src={item.src}
+                src={withBasePath(item.src)}
                 alt={item.alt}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

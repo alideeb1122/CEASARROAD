@@ -4,6 +4,7 @@ import Link from "next/link";
 import RevealWrapper from "@/components/shared/RevealWrapper";
 import FinalCtaSection from "@/components/shared/FinalCtaSection";
 import { ChevronRightIcon, CheckCircleIcon, WhatsAppIcon } from "@/components/home/Icons";
+import { withBasePath } from "@/lib/base-path";
 import type { Locale, ServiceItemRecord, ServiceRecord } from "@/lib/data/services";
 
 interface ServiceItemPageProps {
@@ -109,7 +110,7 @@ export default function ServiceItemPage({
               <div className="relative aspect-[16/9] overflow-hidden rounded-[24px]">
                 {heroImage ? (
                   <img
-                    src={heroImage}
+                    src={withBasePath(heroImage)}
                     alt={item.landmarkAlt ?? item.imageAlt ?? item.title}
                     style={{ objectPosition: heroPosition }}
                     className="h-full w-full object-cover"
@@ -139,7 +140,7 @@ export default function ServiceItemPage({
               {requirementsImage ? (
                 <div className="mb-6 overflow-hidden rounded-[24px] border border-white bg-white shadow-[0_16px_40px_-32px_rgba(23,34,63,0.35)]">
                   <img
-                    src={requirementsImage}
+                    src={withBasePath(requirementsImage)}
                     alt={item.requirementsImageAlt ?? item.imageAlt ?? item.title}
                     style={{ objectPosition: requirementsPosition }}
                     className="h-44 w-full object-cover"
@@ -170,7 +171,7 @@ export default function ServiceItemPage({
               {servicesImage ? (
                 <div className="mb-6 overflow-hidden rounded-[24px] border border-slate-200 bg-[#f8f7f3]">
                   <img
-                    src={servicesImage}
+                    src={withBasePath(servicesImage)}
                     alt={item.servicesImageAlt ?? item.landmarkAlt ?? item.imageAlt ?? item.title}
                     style={{ objectPosition: servicesPosition }}
                     className="h-44 w-full object-cover"

@@ -3,6 +3,7 @@
 import SectionHeading from "./SectionHeading";
 import { MapPinIcon, ClockIcon, ExternalLinkIcon, WhatsAppIcon } from "./Icons";
 import { useReveal } from "./useReveal";
+import { withBasePath } from "@/lib/base-path";
 
 interface Branch {
   city: string;
@@ -24,10 +25,10 @@ interface BranchesSectionProps {
 
 function getBranchLandmark(city: string): string {
   const normalized = city.trim().toLowerCase();
-  if (normalized.includes("dubai") || normalized.includes("دبي")) return "/images/branches-dubai.jpg";
-  if (normalized.includes("erbil") || normalized.includes("أربيل")) return "/images/branches-erbil.jpg";
-  if (normalized.includes("homs") || normalized.includes("حمص")) return "/images/branches-homs.jpg";
-  return "/images/branches-dubai.jpg";
+  if (normalized.includes("dubai") || normalized.includes("ط¯ط¨ظٹ")) return withBasePath("/images/branches-dubai.jpg");
+  if (normalized.includes("erbil") || normalized.includes("ط£ط±ط¨ظٹظ„")) return withBasePath("/images/branches-erbil.jpg");
+  if (normalized.includes("homs") || normalized.includes("ط­ظ…طµ")) return withBasePath("/images/branches-homs.jpg");
+  return withBasePath("/images/branches-dubai.jpg");
 }
 
 export default function BranchesSection({
@@ -61,7 +62,6 @@ export default function BranchesSection({
             >
               <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_86%_12%,rgba(194,169,107,0.2)_0%,rgba(194,169,107,0.04)_24%,transparent_54%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-              {/* Card header */}
               <div className="relative z-10 overflow-hidden bg-brand-bg px-6 py-5">
                 <div
                   className="absolute inset-0 scale-[1.16] bg-cover bg-center opacity-0 transition-all duration-700 group-hover:scale-100 group-hover:opacity-55"
@@ -77,9 +77,7 @@ export default function BranchesSection({
                 </p>
               </div>
 
-              {/* Card body */}
               <div className="relative z-10 flex flex-1 flex-col gap-4 p-6">
-                {/* Address */}
                 <a
                   href={branch.mapUrl}
                   target="_blank"
@@ -91,7 +89,6 @@ export default function BranchesSection({
                   <ExternalLinkIcon className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 opacity-0 group-hover/link:opacity-100 transition-opacity" />
                 </a>
 
-                {/* Working hours */}
                 <div className="flex items-start gap-3 text-sm text-text-muted">
                   <ClockIcon className="branch-clock-icon mt-0.5 h-4 w-4 flex-shrink-0 text-brand-cta" />
                   <div>
@@ -102,10 +99,8 @@ export default function BranchesSection({
                   </div>
                 </div>
 
-                {/* Spacer */}
                 <div className="flex-1" />
 
-                {/* WhatsApp CTA */}
                 <a
                   href={`https://wa.me/${branch.whatsapp}`}
                   target="_blank"

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useReveal } from "./useReveal";
+import { withBasePath } from "@/lib/base-path";
 
 interface OrbitPartnersSectionProps {
   locale?: "ar" | "en";
@@ -259,7 +260,7 @@ export default function OrbitPartnersSection({
               <div className="argo-orbit-ring argo-orbit-ring-a" />
               <div className="argo-orbit-ring argo-orbit-ring-b" />
               <Image
-                src="/images/partners/csr-logo.png"
+                src={withBasePath("/images/partners/csr-logo.png")}
                 alt="Argo Fly"
                 width={560}
                 height={220}
@@ -283,7 +284,7 @@ export default function OrbitPartnersSection({
                 >
                   <div className="airline-layer airline-layer-current">
                     <Image
-                      src={airline.logo}
+                      src={withBasePath(airline.logo)}
                       alt={airline.name}
                       width={168}
                       height={168}
@@ -296,7 +297,7 @@ export default function OrbitPartnersSection({
 
                   <div className="airline-layer airline-layer-next">
                     <Image
-                      src={incomingAirline.logo}
+                      src={withBasePath(incomingAirline.logo)}
                       alt={incomingAirline.name}
                       width={168}
                       height={168}
