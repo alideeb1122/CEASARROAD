@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useLayoutEffect, useState } from "react";
 import MobileMenu from "./MobileMenu";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
+import { withBasePath } from "@/lib/base-path";
 
 interface NavContent {
   home: string;
@@ -123,7 +124,7 @@ export default function Header({
               className="group flex flex-shrink-0 items-center"
             >
               <Image
-                src={useLightBrand ? "/branding/logo-caesar-road-white.svg" : "/branding/logo-caesar-road.svg"}
+                src={withBasePath(useLightBrand ? "/branding/logo-caesar-road-white.svg" : "/branding/logo-caesar-road.svg")}
                 alt={siteName}
                 width={300}
                 height={90}

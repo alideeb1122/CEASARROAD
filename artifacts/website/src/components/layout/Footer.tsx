@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useReveal } from "@/components/home/useReveal";
+import { withBasePath } from "@/lib/base-path";
 
 type IconProps = { className?: string };
 
@@ -175,7 +176,7 @@ export default function Footer({ locale, siteName, nav, footer, branches, branch
           >
             <span className="inline-flex rounded-2xl border border-white/12 bg-white/[0.06] px-3 py-2">
               <Image
-                src="/branding/logo-caesar-road.svg"
+                src={withBasePath("/branding/logo-caesar-road.svg")}
                 alt={siteName}
                 width={280}
                 height={82}

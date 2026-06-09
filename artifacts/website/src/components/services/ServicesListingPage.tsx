@@ -4,6 +4,7 @@ import Link from "next/link";
 import RevealWrapper from "@/components/shared/RevealWrapper";
 import FinalCtaSection from "@/components/shared/FinalCtaSection";
 import { ChevronRightIcon, WhatsAppIcon, getServiceIcon } from "@/components/home/Icons";
+import { withBasePath } from "@/lib/base-path";
 import type { Locale, ServiceRecord } from "@/lib/data/services";
 
 interface ServicesListingPageProps {
@@ -33,7 +34,7 @@ export default function ServicesListingPage({ locale, content, common }: Service
   const isRtl = locale === "ar";
   const servicesBaseHref = locale === "ar" ? "/services" : "/en/services";
   const homeHref = locale === "ar" ? "/" : "/en";
-  const heroBackground = "/images/hero/services-travel-docs.jpg";
+  const heroBackground = withBasePath("/images/hero/services-travel-docs.jpg");
 
   return (
     <>
@@ -157,7 +158,7 @@ export default function ServicesListingPage({ locale, content, common }: Service
                     {service.previewImage ? (
                       <div className="mb-5 overflow-hidden rounded-[24px] border border-slate-200/70 bg-[#f8f7f3]">
                         <img
-                          src={service.previewImage}
+                          src={withBasePath(service.previewImage)}
                           alt={service.previewImageAlt ?? service.title}
                           loading="lazy"
                           style={{ objectPosition: service.previewImagePosition ?? "center center" }}

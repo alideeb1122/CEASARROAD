@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronRightIcon } from "@/components/home/Icons";
+import { withBasePath } from "@/lib/base-path";
 
 type CarouselItem = {
   title: string;
@@ -82,7 +83,7 @@ export default function AboutServicesCarousel({
                     filter: `blur(${pos.blur}px)`,
                   }}
                 >
-                  <img src={item.image} alt={item.imageAlt} className="h-full w-full object-cover" />
+                  <img src={withBasePath(item.image)} alt={item.imageAlt} className="h-full w-full object-cover" />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,12,20,0.06),rgba(9,12,20,0.14)_35%,rgba(9,12,20,0.72)_86%)]" />
                 </button>
               );

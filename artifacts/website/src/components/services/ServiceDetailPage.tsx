@@ -5,6 +5,7 @@ import RevealWrapper from "@/components/shared/RevealWrapper";
 import FinalCtaSection from "@/components/shared/FinalCtaSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import { ChevronRightIcon, CheckCircleIcon, WhatsAppIcon, getServiceIcon } from "@/components/home/Icons";
+import { withBasePath } from "@/lib/base-path";
 import type { Locale, ServiceRecord } from "@/lib/data/services";
 
 type ServiceTestimonial = {
@@ -44,12 +45,13 @@ export default function ServiceDetailPage({
   const isRtl = locale === "ar";
   const baseHref = locale === "ar" ? "/services" : "/en/services";
   const homeHref = locale === "ar" ? "/" : "/en";
-  const heroBackground =
+  const heroBackground = withBasePath(
     service.slug === "flight-booking"
       ? "/images/hero/flight-booking-hero.jpg"
       : service.slug === "study-abroad"
         ? "/images/hero/study-abroad-hero.jpg"
-        : service.previewImage ?? "/images/hero/hero-poster.jpg";
+        : service.previewImage ?? "/images/hero/hero-poster.jpg",
+  );
   const serviceTestimonials = common.customerVoices.map((voice, index) => ({
     ...voice,
     context: service.items[index]?.shortLabel ?? service.title,
@@ -172,7 +174,7 @@ export default function ServiceDetailPage({
                   <div className="relative aspect-[4/3] overflow-hidden rounded-[24px] bg-[linear-gradient(135deg,rgba(15,29,58,1),rgba(33,53,92,0.94))] text-white">
                     {item.image || service.previewImage ? (
                       <img
-                        src={item.image ?? service.previewImage}
+                        src={withBasePath(item.image ?? service.previewImage)}
                         alt={item.imageAlt ?? service.previewImageAlt ?? item.title}
                         loading="lazy"
                         style={{ objectPosition: item.imagePosition ?? service.previewImagePosition ?? "center center" }}
@@ -209,7 +211,7 @@ export default function ServiceDetailPage({
               <div className="flex justify-center lg:justify-start">
                 <div className="flex h-44 w-44 items-center justify-center rounded-[34px] border border-gold/20 bg-gradient-to-br from-navy to-slate-900 p-6 shadow-[0_20px_50px_-28px_rgba(15,23,42,0.5)]">
                   <img
-                    src="/images/partners/csr-logo.png"
+                    src={withBasePath("/images/partners/csr-logo.png")}
                     alt="\u0645\u0646\u0635\u0629 \u0623\u0631\u063a\u0648"
                     className="h-full w-full object-contain"
                   />

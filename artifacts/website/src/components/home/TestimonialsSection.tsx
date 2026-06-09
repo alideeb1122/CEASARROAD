@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import SectionHeading from "./SectionHeading";
 import { useReveal } from "./useReveal";
+import { withBasePath } from "@/lib/base-path";
 
 interface Testimonial {
   name: string;
@@ -24,29 +25,29 @@ function isArabicText(text: string): boolean {
 
 function pickVisual(context: string, index: number): string {
   const normalized = context.toLowerCase();
-  if (normalized.includes("dubai") || normalized.includes("دبي")) return "/images/branches-dubai.jpg";
-  if (normalized.includes("erbil") || normalized.includes("أربيل")) return "/images/branches-erbil.jpg";
-  if (normalized.includes("homs") || normalized.includes("حمص")) return "/images/branches-homs.jpg";
-  return ["/images/branches-dubai.jpg", "/images/branches-erbil.jpg", "/images/branches-homs.jpg"][index % 3];
+  if (normalized.includes("dubai") || normalized.includes("ط¯ط¨ظٹ")) return withBasePath("/images/branches-dubai.jpg");
+  if (normalized.includes("erbil") || normalized.includes("ط£ط±ط¨ظٹظ„")) return withBasePath("/images/branches-erbil.jpg");
+  if (normalized.includes("homs") || normalized.includes("ط­ظ…طµ")) return withBasePath("/images/branches-homs.jpg");
+  return [withBasePath("/images/branches-dubai.jpg"), withBasePath("/images/branches-erbil.jpg"), withBasePath("/images/branches-homs.jpg")][index % 3];
 }
 
 function pickAvatar(name: string, index: number, gender?: "male" | "female"): string {
-  if (gender === "male") return "/images/testimonial-avatar-mohamed.jpg";
-  if (gender === "female") return "/images/testimonial-avatar-nour.jpg";
+  if (gender === "male") return withBasePath("/images/testimonial-avatar-mohamed.jpg");
+  if (gender === "female") return withBasePath("/images/testimonial-avatar-nour.jpg");
   const normalized = name.toLowerCase();
-  if (normalized.includes("mohamed") || normalized.includes("mohammad") || normalized.includes("محمد")) {
-    return "/images/testimonial-avatar-mohamed.jpg";
+  if (normalized.includes("mohamed") || normalized.includes("mohammad") || normalized.includes("ظ…ط­ظ…ط¯")) {
+    return withBasePath("/images/testimonial-avatar-mohamed.jpg");
   }
-  if (normalized.includes("nour") || normalized.includes("نور")) {
-    return "/images/testimonial-avatar-nour.jpg";
+  if (normalized.includes("nour") || normalized.includes("ظ†ظˆط±")) {
+    return withBasePath("/images/testimonial-avatar-nour.jpg");
   }
-  if (normalized.includes("reem") || normalized.includes("ريم")) {
-    return "/images/testimonial-avatar-reem.jpg";
+  if (normalized.includes("reem") || normalized.includes("ط±ظٹظ…")) {
+    return withBasePath("/images/testimonial-avatar-reem.jpg");
   }
   return [
-    "/images/testimonial-avatar-mohamed.jpg",
-    "/images/testimonial-avatar-nour.jpg",
-    "/images/testimonial-avatar-reem.jpg",
+    withBasePath("/images/testimonial-avatar-mohamed.jpg"),
+    withBasePath("/images/testimonial-avatar-nour.jpg"),
+    withBasePath("/images/testimonial-avatar-reem.jpg"),
   ][index % 3];
 }
 
@@ -77,7 +78,7 @@ export default function TestimonialsSection({
         image: pickVisual(t.context, i),
         avatar: pickAvatar(t.name, i, t.gender),
       })),
-    [testimonials]
+    [testimonials],
   );
 
   useEffect(() => {
@@ -121,7 +122,7 @@ export default function TestimonialsSection({
                 type="button"
                 onClick={prev}
                 className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-500 transition-all duration-200 hover:border-brand-cta/60 hover:bg-brand-bg hover:text-brand-cta"
-                aria-label={isArabic ? "السابق" : "Previous"}
+                aria-label={isArabic ? "ط§ظ„ط³ط§ط¨ظ‚" : "Previous"}
               >
                 <ArrowIcon dir={isArabic ? "right" : "left"} />
               </button>
@@ -147,7 +148,7 @@ export default function TestimonialsSection({
                 type="button"
                 onClick={next}
                 className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-500 transition-all duration-200 hover:border-brand-cta/60 hover:bg-brand-bg hover:text-brand-cta"
-                aria-label={isArabic ? "التالي" : "Next"}
+                aria-label={isArabic ? "ط§ظ„طھط§ظ„ظٹ" : "Next"}
               >
                 <ArrowIcon dir={isArabic ? "left" : "right"} />
               </button>
@@ -180,7 +181,7 @@ export default function TestimonialsSection({
                   key={i}
                   type="button"
                   onClick={() => setActive(i)}
-                  aria-label={isArabic ? `اذهب للرأي ${i + 1}` : `Go to testimonial ${i + 1}`}
+                  aria-label={isArabic ? `ط§ط°ظ‡ط¨ ظ„ظ„ط±ط£ظٹ ${i + 1}` : `Go to testimonial ${i + 1}`}
                   className={`h-2.5 rounded-full transition-all duration-300 ${
                     i === active ? "w-7 bg-brand-cta" : "w-2.5 bg-slate-300 hover:bg-slate-400"
                   }`}
@@ -207,7 +208,7 @@ export default function TestimonialsSection({
             <div className="relative z-10 flex h-full min-h-[430px] items-end p-6">
               <div className="rounded-xl border border-white/20 bg-black/25 px-4 py-3 backdrop-blur-sm">
                 <p className="text-xs font-semibold uppercase tracking-[0.15em] text-brand-cta">
-                  {isArabic ? "تجربة عميل" : "Client Story"}
+                  {isArabic ? "طھط¬ط±ط¨ط© ط¹ظ…ظٹظ„" : "Client Story"}
                 </p>
                 <p className="mt-1 text-lg font-bold text-white">{items[active]?.name}</p>
               </div>

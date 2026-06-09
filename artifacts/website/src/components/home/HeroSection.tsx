@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { WhatsAppIcon } from "./Icons";
 import AnimatedWords from "./AnimatedWords";
+import { withBasePath } from "@/lib/base-path";
 
 interface HeroContent {
   heroLabel: string;
@@ -37,9 +38,9 @@ export default function HeroSection({
 }: HeroSectionProps) {
   const isArabic = locale === "ar";
   const heroVideos = [
-    "/videos/hero/hero-travel.mp4",
-    "/videos/hero/hero-travel-2.mp4",
-    "/videos/hero/hero-travel-3.mp4",
+    withBasePath("/videos/hero/hero-travel.mp4"),
+    withBasePath("/videos/hero/hero-travel-2.mp4"),
+    withBasePath("/videos/hero/hero-travel-3.mp4"),
   ];
 
   const [mounted, setMounted] = useState(false);
@@ -96,7 +97,7 @@ export default function HeroSection({
           loop
           playsInline
           preload="auto"
-          poster="/images/hero/hero-poster.jpg"
+          poster={withBasePath("/images/hero/hero-poster.jpg")}
         >
           <source src={heroVideos[slotAIndex]} type="video/mp4" />
         </video>
@@ -107,7 +108,7 @@ export default function HeroSection({
           loop
           playsInline
           preload="auto"
-          poster="/images/hero/hero-poster.jpg"
+          poster={withBasePath("/images/hero/hero-poster.jpg")}
         >
           <source src={heroVideos[slotBIndex]} type="video/mp4" />
         </video>
