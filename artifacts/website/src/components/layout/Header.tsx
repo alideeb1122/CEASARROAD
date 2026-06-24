@@ -1,18 +1,17 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLayoutEffect, useState } from "react";
-import MobileMenu from "./MobileMenu";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 import { withBasePath } from "@/lib/base-path";
+import MobileMenu from "./MobileMenu";
 
 interface NavContent {
   home: string;
   services: string;
   branches: string;
-  about: string;
   contact: string;
   switchLang: string;
 }
@@ -38,8 +37,8 @@ export default function Header({
       : locale === "ar"
         ? "/"
         : "/en");
-  const normalize = (p: string) =>
-    p.endsWith("/") && p.length > 1 ? p.slice(0, -1) : p;
+  const normalize = (path: string) =>
+    path.endsWith("/") && path.length > 1 ? path.slice(0, -1) : path;
   const normalizedCurrentPath = normalize(currentPath);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -51,15 +50,19 @@ export default function Header({
     { label: nav.home, href: locale === "ar" ? "/" : "/en" },
     { label: nav.services, href: `${prefix}/services` },
     { label: nav.branches, href: `${prefix}/branches` },
-    { label: nav.about, href: `${prefix}/about` },
     { label: nav.contact, href: `${prefix}/contact` },
   ];
 
   const isActive = (href: string) => {
-    const norm = normalizedCurrentPath;
     const normHref = normalize(href);
-    if (normHref === "/" || normHref === "/en") return norm === normHref;
-    return norm === normHref || norm.startsWith(normHref + "/");
+    if (normHref === "/" || normHref === "/en") {
+      return normalizedCurrentPath === normHref;
+    }
+
+    return (
+      normalizedCurrentPath === normHref ||
+      normalizedCurrentPath.startsWith(normHref + "/")
+    );
   };
 
   useLayoutEffect(() => {
@@ -80,8 +83,7 @@ export default function Header({
     };
 
     const onScroll = () => {
-      const nextScrolled = window.scrollY > 56;
-      setIsScrolled(nextScrolled);
+      setIsScrolled(window.scrollY > 56);
       setHeaderTheme(resolveTheme());
     };
 
@@ -91,8 +93,6 @@ export default function Header({
   }, [normalizedCurrentPath]);
 
   const isDarkHeaderMode = headerTheme === "dark";
-  const useLightBrand = isDarkHeaderMode;
-
   const headerClasses = isDarkHeaderMode
     ? "border-white/12 bg-white/[0.08] shadow-[0_18px_40px_rgba(6,14,28,0.18)]"
     : "border-slate-200/70 bg-white/72 shadow-[0_12px_36px_rgba(15,23,42,0.12)]";
@@ -105,18 +105,23 @@ export default function Header({
   const inactiveNavClasses = isDarkHeaderMode
     ? "text-white/82 hover:bg-white/10 hover:text-white"
     : "text-slate-600 hover:bg-white hover:text-slate-900";
-  const mobileButtonClasses =
-    isDarkHeaderMode
-      ? "border-white/20 text-white/82 hover:bg-white/10 hover:text-white"
-      : "border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900";
-  const brandImageClasses = "h-12 sm:h-14 lg:h-16";
+  const mobileButtonClasses = isDarkHeaderMode
+    ? "border-white/20 text-white/82 hover:bg-white/10 hover:text-white"
+    : "border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900";
+  const brandImageClasses = "h-[3.55rem] sm:h-[3.95rem] lg:h-[4.6rem]";
 
   return (
     <>
       <header
         className={`sticky top-0 z-50 border-b backdrop-blur-2xl supports-[backdrop-filter]:bg-white/10 transition-[background-color,border-color,box-shadow] duration-300 ${headerClasses}`}
       >
-        <div className={`pointer-events-none absolute inset-0 ${isDarkHeaderMode ? "bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.04))]" : "bg-[linear-gradient(180deg,rgba(255,255,255,0.14),rgba(255,255,255,0.08))]"}`} />
+        <div
+          className={`pointer-events-none absolute inset-0 ${
+            isDarkHeaderMode
+              ? "bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.04))]"
+              : "bg-[linear-gradient(180deg,rgba(255,255,255,0.14),rgba(255,255,255,0.08))]"
+          }`}
+        />
         <div className="container-custom">
           <div className="relative flex h-[74px] items-center justify-between lg:h-[92px]">
             <Link
@@ -124,7 +129,7 @@ export default function Header({
               className="group flex flex-shrink-0 items-center"
             >
               <Image
-                src={withBasePath(useLightBrand ? "/branding/logo-caesar-road-white.svg" : "/branding/logo-caesar-road.svg")}
+                src={withBasePath("/branding/logo-tariq-alkaiser-gold.png")}
                 alt={siteName}
                 width={300}
                 height={90}
@@ -133,15 +138,15 @@ export default function Header({
               />
             </Link>
 
-            <nav className={`hidden items-center gap-1 rounded-full border px-2 py-1.5 lg:flex lg:gap-1.5 lg:px-2.5 ${navShellClasses}`}>
+            <nav
+              className={`hidden items-center gap-1 rounded-full border px-2 py-1.5 lg:flex lg:gap-1.5 lg:px-2.5 ${navShellClasses}`}
+            >
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                    isActive(item.href)
-                      ? activeNavClasses
-                      : inactiveNavClasses
+                    isActive(item.href) ? activeNavClasses : inactiveNavClasses
                   }`}
                 >
                   {item.label}
@@ -157,7 +162,7 @@ export default function Header({
                 aria-label={locale === "ar" ? "فتح القائمة" : "Open menu"}
               >
                 <svg
-                  className="w-6 h-6"
+                  className="h-6 w-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -185,4 +190,3 @@ export default function Header({
     </>
   );
 }
-

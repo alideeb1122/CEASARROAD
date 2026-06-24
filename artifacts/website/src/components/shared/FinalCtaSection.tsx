@@ -8,6 +8,7 @@ interface FinalCtaSectionProps {
   subtitle: string;
   ctaBtn: string;
   whatsapp: string;
+  whatsappHref?: string;
 }
 
 export default function FinalCtaSection({
@@ -15,6 +16,7 @@ export default function FinalCtaSection({
   subtitle,
   ctaBtn,
   whatsapp,
+  whatsappHref,
 }: FinalCtaSectionProps) {
   const { ref, visible } = useReveal(0.1);
 
@@ -37,7 +39,7 @@ export default function FinalCtaSection({
           </p>
           <div className="mt-8">
             <a
-              href={`https://wa.me/${whatsapp}`}
+              href={whatsappHref ?? `https://wa.me/${whatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-[#25D366] text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-lg hover:bg-[#1fba58] transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5"

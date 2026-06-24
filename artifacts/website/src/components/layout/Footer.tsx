@@ -53,32 +53,6 @@ function LinkedInIcon({ className }: IconProps) {
   );
 }
 
-function WhatsAppIcon({ className }: IconProps) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" stroke="none">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
-    </svg>
-  );
-}
-
-function MapPinIcon({ className }: IconProps) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-      <circle cx="12" cy="10" r="3" />
-    </svg>
-  );
-}
-
-function ClockIcon({ className }: IconProps) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10" />
-      <polyline points="12 6 12 12 16 14" />
-    </svg>
-  );
-}
-
 function SocialIcon({ type, className }: { type: string; className?: string }) {
   switch (type) {
     case "instagram": return <InstagramIcon className={className} />;
@@ -95,8 +69,6 @@ interface FooterSocial {
   url: string;
   label?: string;
   branch?: string;
-  platform?: string;
-  handle?: string;
 }
 
 interface FooterContent {
@@ -115,17 +87,7 @@ interface NavContent {
   home: string;
   services: string;
   branches: string;
-  about: string;
   contact: string;
-}
-
-interface BranchData {
-  city: string;
-  address: string;
-  whatsapp: string;
-  hours: string;
-  offDay: string;
-  mapUrl: string;
 }
 
 interface FooterProps {
@@ -133,24 +95,25 @@ interface FooterProps {
   siteName: string;
   nav: NavContent;
   footer: FooterContent;
-  branches: BranchData[];
-  branchSocials: FooterSocial[];
 }
 
-export default function Footer({ locale, siteName, nav, footer, branches, branchSocials }: FooterProps) {
+export default function Footer({ locale, siteName, nav, footer }: FooterProps) {
   const prefix = locale === "ar" ? "" : "/en";
   const { ref, visible } = useReveal(0.05);
+  const hotlineNumber = "+971 52 901 5091";
+  const hotlineWhatsapp = hotlineNumber.replace(/[^\d]/g, "");
+  const hotlineTitle = locale === "ar" ? "الخط الساخن" : "HOTLINE";
+  const hotlineText =
+    locale === "ar"
+      ? "للمزيد من المعلومات تواصل معنا"
+      : "For more information please contact";
 
   const navLinks = [
     { label: nav.home, href: locale === "ar" ? "/" : "/en" },
     { label: nav.services, href: `${prefix}/services` },
     { label: nav.branches, href: `${prefix}/branches` },
-    { label: nav.about, href: `${prefix}/about` },
     { label: nav.contact, href: `${prefix}/contact` },
   ];
-
-  const getBranchSocials = (branchCity: string) =>
-    branchSocials.filter((social) => social.branch === branchCity);
 
   return (
     <footer
@@ -164,9 +127,9 @@ export default function Footer({ locale, siteName, nav, footer, branches, branch
       </div>
 
       <div className="container-custom relative py-7 lg:py-8">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-12 lg:gap-7">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.05fr)_minmax(220px,0.8fr)_minmax(240px,0.95fr)] lg:items-start lg:gap-14">
           <div
-            className="lg:col-span-5"
+            className="max-w-[24rem]"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? "translateY(0)" : "translateY(20px)",
@@ -174,15 +137,13 @@ export default function Footer({ locale, siteName, nav, footer, branches, branch
               transitionDelay: "0ms",
             }}
           >
-            <span className="inline-flex rounded-2xl border border-white/12 bg-white/[0.06] px-3 py-2">
-              <Image
-                src={withBasePath("/branding/logo-caesar-road.svg")}
-                alt={siteName}
-                width={280}
-                height={82}
-                className="h-9 w-auto brightness-0 invert md:h-10"
-              />
-            </span>
+            <Image
+              src={withBasePath("/branding/logo-tariq-alkaiser-gold.png")}
+              alt={siteName}
+              width={1080}
+              height={1080}
+              className="h-[4.5rem] w-[4.5rem] object-contain md:h-[5rem] md:w-[5rem]"
+            />
             <p className="mt-2 max-w-[220px] text-[13px] leading-relaxed text-white/55">
               {footer.tagline}
             </p>
@@ -192,27 +153,26 @@ export default function Footer({ locale, siteName, nav, footer, branches, branch
                 {footer.followUs}
               </p>
               <div className="flex flex-wrap gap-2">
-                {footer.socials.map((s) => (
+                {footer.socials.map((s) =>
                   !s.branch ? (
-                  <a
-                    key={`${s.type}-${s.url}`}
-                    href={s.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={s.label}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-white/45 transition-all duration-300 hover:border-brand-cta/30 hover:bg-brand-cta/10 hover:text-brand-cta"
-                  >
-                    <SocialIcon type={s.type} className="h-3.5 w-3.5" />
-                  </a>
+                    <a
+                      key={`${s.type}-${s.url}`}
+                      href={s.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={s.label}
+                      className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-white/45 transition-all duration-300 hover:border-brand-cta/30 hover:bg-brand-cta/10 hover:text-brand-cta"
+                    >
+                      <SocialIcon type={s.type} className="h-3.5 w-3.5" />
+                    </a>
                   ) : null
-                ))}
+                )}
               </div>
             </div>
-
           </div>
 
           <div
-            className="lg:col-span-3"
+            className="lg:justify-self-center"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? "translateY(0)" : "translateY(20px)",
@@ -235,7 +195,7 @@ export default function Footer({ locale, siteName, nav, footer, branches, branch
           </div>
 
           <div
-            className="sm:col-span-2 lg:col-span-4"
+            className="max-w-[22rem] lg:justify-self-end"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? "translateY(0)" : "translateY(20px)",
@@ -243,72 +203,25 @@ export default function Footer({ locale, siteName, nav, footer, branches, branch
               transitionDelay: "160ms",
             }}
           >
-            <h3 className="mb-4 text-[10px] font-semibold uppercase tracking-widest text-white/90">
-              {footer.branchesTitle}
-            </h3>
-            <div>
-              {branches.map((branch) => {
-                const branchSocials = getBranchSocials(branch.city);
-
-                return (
-                  <div key={branch.city} className="border-b border-white/[0.07] py-2.5 last:border-0 last:pb-0">
-                    <p className="mb-1 text-sm font-semibold text-white/85">{branch.city}</p>
-                    <p className="mb-1 text-xs leading-relaxed text-white/40">{branch.address}</p>
-                    <div className="mb-1.5 flex items-center gap-1.5 text-[10px] text-white/30">
-                      <ClockIcon className="h-3 w-3 flex-shrink-0" />
-                      <span>{branch.hours}</span>
-                      <span className="opacity-60">•</span>
-                      <span>{footer.closedDay}: {branch.offDay}</span>
-                    </div>
-                    <div className="mb-2 flex flex-wrap items-center gap-1.5">
-                      <a
-                        href={`https://wa.me/${branch.whatsapp}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`WhatsApp ${branch.city}`}
-                        title={`${locale === "ar" ? "واتساب" : "WhatsApp"} ${branch.city}`}
-                        className="group relative flex h-7 w-7 items-center justify-center rounded-md border border-brand-cta/20 bg-brand-cta/12 text-brand-cta transition-all duration-300 hover:border-brand-cta/35 hover:bg-brand-cta/20"
-                      >
-                        <WhatsAppIcon className="h-3.5 w-3.5" />
-                        <span className="pointer-events-none absolute -top-8 right-1/2 translate-x-1/2 whitespace-nowrap rounded-md bg-white px-2 py-1 text-[10px] font-medium text-navy opacity-0 shadow-lg transition-all duration-200 group-hover:-translate-y-0.5 group-hover:opacity-100">
-                          {locale === "ar" ? "واتساب" : "WhatsApp"}
-                        </span>
-                      </a>
-                      {branch.mapUrl ? (
-                        <a
-                          href={branch.mapUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`${footer.mapCta} ${branch.city}`}
-                          title={`${footer.mapCta} ${branch.city}`}
-                          className="group relative flex h-7 w-7 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-white/50 transition-all duration-300 hover:border-brand-cta/30 hover:bg-brand-cta/10 hover:text-brand-cta"
-                        >
-                          <MapPinIcon className="h-3.5 w-3.5" />
-                          <span className="pointer-events-none absolute -top-8 right-1/2 translate-x-1/2 whitespace-nowrap rounded-md bg-white px-2 py-1 text-[10px] font-medium text-navy opacity-0 shadow-lg transition-all duration-200 group-hover:-translate-y-0.5 group-hover:opacity-100">
-                            {footer.mapCta}
-                          </span>
-                        </a>
-                      ) : null}
-                      {branchSocials.map((social) => (
-                        <a
-                          key={`${branch.city}-${social.type}-${social.url}`}
-                          href={social.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`${social.label} ${branch.city}`}
-                          title={`${social.platform ?? social.label} ${branch.city}`}
-                          className="group relative flex h-7 w-7 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-white/50 transition-all duration-300 hover:border-brand-cta/30 hover:bg-brand-cta/10 hover:text-brand-cta"
-                        >
-                          <SocialIcon type={social.type} className="h-3.5 w-3.5" />
-                          <span className="pointer-events-none absolute -top-8 right-1/2 translate-x-1/2 whitespace-nowrap rounded-md bg-white px-2 py-1 text-[10px] font-medium text-navy opacity-0 shadow-lg transition-all duration-200 group-hover:-translate-y-0.5 group-hover:opacity-100">
-                            {social.platform ?? social.label}
-                          </span>
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
+            <div className="rounded-[26px] border border-white/10 bg-white/[0.035] p-5 shadow-[0_20px_40px_-30px_rgba(0,0,0,0.45)] backdrop-blur-[2px]">
+              <span className="inline-flex rounded-full border border-[#c94b4b]/22 bg-[#c94b4b]/10 px-3 py-1 text-[0.66rem] font-semibold tracking-[0.18em] text-[#f08b8b]">
+                {locale === "ar" ? "\u0648\u0627\u062a\u0633\u0627\u0628 \u0645\u0628\u0627\u0634\u0631" : "DIRECT WHATSAPP"}
+              </span>
+              <h3 className="mt-3 text-[1.15rem] font-semibold text-white">
+                {locale === "ar" ? "\u0627\u0644\u062e\u0637 \u0627\u0644\u0633\u0627\u062e\u0646" : "Hotline"}
+              </h3>
+              <p className="mt-1 text-sm leading-6 text-white/58">
+                {locale === "ar" ? "\u0644\u0644\u062d\u062c\u0648\u0632\u0627\u062a \u0648\u0627\u0644\u0627\u0633\u062a\u0641\u0633\u0627\u0631\u0627\u062a \u0627\u0644\u0633\u0631\u064a\u0639\u0629." : "For fast bookings and quick questions."}
+              </p>
+              <a
+                href={`https://wa.me/${hotlineWhatsapp}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-2 rounded-2xl border border-[#be4545]/26 bg-[#b83c3c]/12 px-4 py-3 text-[0.95rem] font-semibold text-[#f18686] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#d15353]/40 hover:bg-[#b83c3c]/18 hover:text-[#ff9d9d]"
+              >
+                <span className="h-2.5 w-2.5 rounded-full bg-current opacity-80" aria-hidden="true" />
+                {locale === "ar" ? "\u0627\u0628\u062f\u0623 \u0627\u0644\u0645\u062d\u0627\u062f\u062b\u0629" : "Start chat"}
+              </a>
             </div>
           </div>
         </div>

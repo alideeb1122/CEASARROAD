@@ -369,7 +369,7 @@ export const en = {
           country: "United Arab Emirates",
           address: "Al Barsha 1 – Al Bidaya Building – Office 302",
           mapUrl: "https://maps.app.goo.gl/NzAPJUiPULQs8YUz8",
-          whatsapp: "971XXXXXXXXX",
+          whatsapp: "971529015091",
           hours: "10:00 AM – 6:00 PM",
           offDay: "Sunday",
           description:
@@ -380,7 +380,7 @@ export const en = {
           country: "Iraq — Kurdistan Region",
           address: "Bakhtiary – Street 20 – opposite Qassab Erbil",
           mapUrl: "https://maps.app.goo.gl/v9wdBeigiUvSf4gbA",
-          whatsapp: "964XXXXXXXXX",
+          whatsapp: "9647509548130",
           hours: "10:00 AM – 8:00 PM",
           offDay: "Friday",
           description:
@@ -392,7 +392,7 @@ export const en = {
           address:
             "Western Corniche – beside Al-Dablan Garden – opposite Khairi Allah Broasted",
           mapUrl: "https://maps.app.goo.gl/oyDdPQpz9wQf2BMG7",
-          whatsapp: "963XXXXXXXXX",
+          whatsapp: "963960641418",
           hours: "8:00 AM – 4:00 PM",
           offDay: "Friday",
           description:

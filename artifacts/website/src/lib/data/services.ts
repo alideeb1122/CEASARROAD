@@ -1,4 +1,36 @@
+import { visaAudiencesAr, visaAudiencesEn } from "@/lib/data/visa-audiences";
+
 export type Locale = "ar" | "en";
+
+export type ServiceOfferingRecord = {
+  name: string;
+  validity: string;
+  turnaround: string;
+};
+
+export type ServiceNationalityVariantRecord = {
+  slug: string;
+  label: string;
+  requirements?: string[];
+  offerings: ServiceOfferingRecord[];
+  contactNote?: string;
+};
+
+export type ServiceAudienceExtraDestinationRecord = {
+  slug: string;
+  title: string;
+  summary: string;
+  requirements: string[];
+  offerings: ServiceOfferingRecord[];
+  contactNote: string;
+};
+
+export type ServiceAudienceRecord = {
+  slug: string;
+  label: string;
+  featuredItemSlugs: string[];
+  secondaryDestinations: ServiceAudienceExtraDestinationRecord[];
+};
 
 export function decodeArabicMojibake(text: string) {
   const arabicCount = Array.from(text).filter((char) => /[?-?]/.test(char)).length;
@@ -41,12 +73,9 @@ export type ServiceItemRecord = {
   requirementsTitle: string;
   requirements: string[];
   servicesTitle: string;
-  offerings: Array<{
-    name: string;
-    validity: string;
-    turnaround: string;
-  }>;
+  offerings: ServiceOfferingRecord[];
   contactNote: string;
+  nationalityVariants?: ServiceNationalityVariantRecord[];
 };
 
 export type ServiceRecord = {
@@ -66,6 +95,7 @@ export type ServiceRecord = {
   previewImageAlt?: string;
   previewImagePosition?: string;
   items: ServiceItemRecord[];
+  audiences?: ServiceAudienceRecord[];
   testimonials?: Array<{
     name: string;
     text: string;
@@ -108,6 +138,9 @@ type ServicesDictionary = {
   };
 };
 
+const FLIGHT_BOOKING_WHATSAPP = "963960641418";
+const GENERAL_SERVICES_WHATSAPP = "963960641428";
+
 export const servicesContent: Record<Locale, ServicesDictionary> = {
   "ar": {
     "listing": {
@@ -134,7 +167,7 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
       "ctaTitle": "ابدأ من الخيار المناسب لك",
       "ctaSubtitle": "راسلنا عبر واتساب وسنوجّهك مباشرة إلى الخدمة أو الوجهة أو نوع الحجز الأنسب لطلبك.",
       "ctaBtn": "تواصل عبر واتساب",
-      "whatsapp": "971501234567",
+      "whatsapp": "963960641428",
       "services": [
         {
           "slug": "visa-residency",
@@ -149,7 +182,7 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
             "متابعة مباشرة حتى يتحرك الطلب"
           ],
           "cardCta": "عرض الوجهات",
-          "heroTitle": "التأشيرات والإقامات بشكل أوضح وأكثر ثقة",
+          "heroTitle": "التأشيرات والإقامات بشكل أوضح",
           "heroSubtitle": "نرتب الوجهات والمتطلبات ومسارات الخدمة بطريقة تساعد العميل على اتخاذ القرار أسرع وبدء الإجراء الصحيح دون ارتباك.",
           "optionsTitle": "الوجهات المتاحة ومسارات الخدمة",
           "optionsSubtitle": "افتح كل وجهة لمراجعة المتطلبات والمدة ووقت الإنجاز والدعم المرتبط بالحالة.",
@@ -158,30 +191,95 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
               "slug": "oman",
               "title": "سلطنة عُمان",
               "shortLabel": "عُمان",
-              "summary": "نموذج أولي لصفحة وجهة تتضمن المتطلبات وخيارات الخدمة بشكل واضح.",
+              "summary": "خيارات عُمان أوضح، بخطوات أسهل ومتطلبات مرتبة من البداية.",
               "heroTag": "خيار متاح",
-              "description": "هذه الصفحة تعرض نبذة مختصرة عن الوجهة، والأوراق المطلوبة، والخدمات المتاحة ضمن مسار مرتب وسهل القراءة.",
+              "description": "خدمات عُمان مرتبة بشكل أوضح لتراجع الخيارات بسرعة وتبدأ بالإجراء المناسب بثقة.",
               "requirementsTitle": "المتطلبات الرسمية",
               "requirements": [
-                "جواز سفر ساري المفعول",
-                "صورة شخصية حديثة",
-                "نسخة هوية أو إقامة عند الحاجة",
-                "تفاصيل السفر أو معلومات الحجز الأولي"
+                "صورة عن جواز السفر",
+                "صورة شخصية بخلفية بيضاء"
               ],
               "servicesTitle": "الخدمات المتاحة",
               "offerings": [
                 {
-                  "name": "تأشيرة سياحية",
-                  "validity": "30 يومًا",
-                  "turnaround": "3 - 5 أيام"
+                  "name": "سياحية",
+                  "validity": "بحسب الإجراء",
+                  "turnaround": "10 - 20 يوم عمل"
                 },
                 {
-                  "name": "تأشيرة زيارة",
-                  "validity": "14 يومًا",
-                  "turnaround": "2 - 4 أيام"
+                  "name": "سنوية مع إقامة",
+                  "validity": "سنوية",
+                  "turnaround": "20 - 30 يوم عمل"
                 }
               ],
               "contactNote": "يمكنك طلب هذه الخدمة عبر التواصل معنا مباشرة على واتساب.",
+              "nationalityVariants": [
+                {
+                  "slug": "syrian",
+                  "label": "سوري",
+                  "requirements": [
+                    "صورة عن جواز السفر",
+                    "صورة شخصية بخلفية بيضاء"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "سياحية",
+                      "validity": "بحسب الإجراء",
+                      "turnaround": "10 - 20 يوم عمل"
+                    },
+                    {
+                      "name": "سنوية مع إقامة",
+                      "validity": "سنوية",
+                      "turnaround": "20 - 30 يوم عمل"
+                    }
+                  ],
+                  "contactNote": "يمكنك طلب هذه الخدمة عبر التواصل معنا مباشرة على واتساب."
+                },
+                {
+                  "slug": "iraqi",
+                  "label": "عراقي",
+                  "requirements": [
+                    "صورة عن جواز السفر",
+                    "صورة شخصية بخلفية بيضاء",
+                    "بطاقة موحدة"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "10 أيام",
+                      "validity": "10 أيام",
+                      "turnaround": "2 - 4 يوم عمل"
+                    },
+                    {
+                      "name": "30 يوم",
+                      "validity": "30 يوماً",
+                      "turnaround": "2 - 4 يوم عمل"
+                    },
+                    {
+                      "name": "60 يوم",
+                      "validity": "60 يوماً",
+                      "turnaround": "2 - 4 يوم عمل"
+                    }
+                  ],
+                  "contactNote": "بدّل الجنسية ثم تواصل معنا عبر واتساب لنرتب لك خيار عُمان الأنسب."
+                },
+                {
+                  "slug": "syrian-uae-resident",
+                  "label": "سوري حامل إقامة إماراتية",
+                  "requirements": [
+                    "صورة عن جواز السفر",
+                    "صورة شخصية بخلفية بيضاء",
+                    "صورة عن الإقامة"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "سياحية",
+                      "validity": "بحسب الإجراء",
+                      "turnaround": "بحسب الحالة"
+                    }
+                  ],
+                  "contactNote": "لخدمات عُمان المرتبطة بحامل الإقامة الإماراتية، راسلنا عبر واتساب لنوضح لك المتاح حسب حالتك."
+                }
+              ],
               "image": "/images/visa/oman-card.jpg",
               "imageAlt": "كورنيش مسقط في سلطنة عُمان",
               "landmarkImage": "https://images.pexels.com/photos/35738331/pexels-photo-35738331.jpeg?auto=compress&cs=tinysrgb&w=1600",
@@ -199,30 +297,117 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
               "slug": "uae",
               "title": "الإمارات العربية المتحدة",
               "shortLabel": "الإمارات",
-              "summary": "بنية أولية لعرض أنواع التأشيرات مع أوراق واضحة ومسار نظيف وسهل المتابعة.",
+              "summary": "خيارات الإمارات مرتبة بوضوح، مع إجراءات أسهل وأوراق معروفة من البداية.",
               "heroTag": "خيار متاح",
-              "description": "صفحة مخصصة تشرح المتطلبات الأساسية وأنواع الخدمات المتاحة مع الحفاظ على عرض بصري مرتب وواضح.",
+              "description": "خدمات الإمارات معروضة بشكل مختصر وواضح لتختار المسار المناسب بدون تعقيد.",
               "requirementsTitle": "المتطلبات الرسمية",
               "requirements": [
-                "صورة جواز السفر",
-                "صورة شخصية واضحة",
-                "بيانات مقدم الطلب",
+                "صورة عن جواز السفر",
+                "صورة شخصية بخلفية بيضاء واضحة جداً",
+                "صورة غلاف جواز السفر الخارجي",
                 "حجز أولي إذا لزم الأمر"
               ],
               "servicesTitle": "الخدمات المتاحة",
               "offerings": [
                 {
-                  "name": "تأشيرة سياحية",
-                  "validity": "30 يومًا",
-                  "turnaround": "2 - 4 أيام"
+                  "name": "فيزا الترفيه",
+                  "validity": "بحسب نوع الطلب",
+                  "turnaround": "24 ساعة - 5 أيام"
                 },
                 {
-                  "name": "تمديد إقامة",
-                  "validity": "بحسب الحالة",
-                  "turnaround": "3 - 6 أيام"
+                  "name": "الاستقدام العائلي",
+                  "validity": "بحسب الإجراء",
+                  "turnaround": "بحسب الحالة"
+                },
+                {
+                  "name": "الإقامة من داخل الدولة",
+                  "validity": "بحسب الإجراء",
+                  "turnaround": "بحسب الحالة"
+                },
+                {
+                  "name": "فيزا شهر",
+                  "validity": "30 يوماً",
+                  "turnaround": "24 ساعة - 5 أيام"
+                },
+                {
+                  "name": "فيزا شهرين",
+                  "validity": "60 يوماً",
+                  "turnaround": "24 ساعة - 5 أيام"
                 }
               ],
               "contactNote": "للحصول على التوجيه النهائي المناسب، تواصل معنا مباشرة عبر واتساب.",
+              "nationalityVariants": [
+                {
+                  "slug": "syrian",
+                  "label": "سوري",
+                  "requirements": [
+                    "صورة عن جواز السفر",
+                    "صورة شخصية بخلفية بيضاء واضحة جداً",
+                    "صورة غلاف جواز السفر الخارجي",
+                    "حجز أولي إذا لزم الأمر"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "فيزا الترفيه",
+                      "validity": "بحسب نوع الطلب",
+                      "turnaround": "24 ساعة - 5 أيام"
+                    },
+                    {
+                      "name": "الاستقدام العائلي",
+                      "validity": "بحسب الإجراء",
+                      "turnaround": "بحسب الحالة"
+                    },
+                    {
+                      "name": "الإقامة من داخل الدولة",
+                      "validity": "بحسب الإجراء",
+                      "turnaround": "بحسب الحالة"
+                    },
+                    {
+                      "name": "فيزا شهر",
+                      "validity": "30 يوماً",
+                      "turnaround": "24 ساعة - 5 أيام"
+                    },
+                    {
+                      "name": "فيزا شهرين",
+                      "validity": "60 يوماً",
+                      "turnaround": "24 ساعة - 5 أيام"
+                    }
+                  ],
+                  "contactNote": "للحصول على التوجيه النهائي المناسب، تواصل معنا مباشرة عبر واتساب."
+                },
+                {
+                  "slug": "iraqi",
+                  "label": "عراقي",
+                  "requirements": [
+                    "صورة عن جواز السفر",
+                    "الهوية الوطنية",
+                    "صورة شخصية بخلفية بيضاء"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "فيزا شهر",
+                      "validity": "30 يوماً",
+                      "turnaround": "2 - 3 يوم عمل"
+                    },
+                    {
+                      "name": "فيزا شهر VIP",
+                      "validity": "30 يوماً",
+                      "turnaround": "24 ساعة"
+                    },
+                    {
+                      "name": "فيزا شهرين (دخول لمرة واحدة)",
+                      "validity": "60 يوماً",
+                      "turnaround": "2 - 3 يوم عمل"
+                    },
+                    {
+                      "name": "فيزا شهرين (دخول متعدد)",
+                      "validity": "60 يوماً",
+                      "turnaround": "2 - 3 يوم عمل"
+                    }
+                  ],
+                  "contactNote": "اختر جنسيتك ثم راسلنا عبر واتساب لنوجّهك إلى الإجراء الأنسب داخل الإمارات."
+                }
+              ],
               "image": "/images/visa/uae-card.jpg",
               "imageAlt": "خور دبي في الإمارات العربية المتحدة",
               "landmarkImage": "https://images.pexels.com/photos/32364200/pexels-photo-32364200.jpeg?auto=compress&cs=tinysrgb&w=1600",
@@ -240,30 +425,55 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
               "slug": "saudi",
               "title": "المملكة العربية السعودية",
               "shortLabel": "السعودية",
-              "summary": "صفحة فرعية مرتبة لعرض المتطلبات وأنواع الخدمات المتاحة داخل نفس الوجهة.",
+              "summary": "خدمات السعودية بصياغة أوضح، مع متطلبات مرتبة وخيارات جاهزة للمراجعة.",
               "heroTag": "خيار متاح",
-              "description": "هذا المثال يوضح كيف يمكن عرض أكثر من خدمة داخل نفس الوجهة بشكل منظم وقابل للتوسع لاحقًا.",
+              "description": "خدمات السعودية مرتبة لتسهّل عليك مقارنة الخيارات والبدء بالإجراء الأنسب بسرعة.",
               "requirementsTitle": "المتطلبات الرسمية",
               "requirements": [
-                "جواز سفر ساري المفعول",
-                "صورة شخصية",
-                "معلومات المهنة أو العمل عند الحاجة",
-                "بيانات التواصل"
+                "صورة عن جواز السفر",
+                "صورة شخصية بخلفية بيضاء",
+                "الإقامة الخليجية بصلاحية 3 أشهر",
+                "الهوية الخليجية"
               ],
               "servicesTitle": "الخدمات المتاحة",
               "offerings": [
                 {
-                  "name": "تأشيرة زيارة",
-                  "validity": "30 يومًا",
-                  "turnaround": "4 - 7 أيام"
+                  "name": "سياحية لحاملي إقامة الخليج",
+                  "validity": "بحسب الإجراء",
+                  "turnaround": "48 ساعة"
                 },
                 {
-                  "name": "تأشيرة أعمال",
-                  "validity": "90 يومًا",
-                  "turnaround": "5 - 8 أيام"
+                  "name": "عمرة",
+                  "validity": "بحسب الإجراء",
+                  "turnaround": "15 يوم عمل"
                 }
               ],
-              "contactNote": "راسلنا عبر واتساب لبدء الطلب أو لاختيار نوع الخدمة الأنسب.",
+              "contactNote": "راسلنا عبر واتساب لبدء طلب السعودية أو لمعرفة الخيار الأنسب حسب جنسيتك وإقامتك.",
+              "nationalityVariants": [
+                {
+                  "slug": "syrian",
+                  "label": "سوري",
+                  "requirements": [
+                    "صورة عن جواز السفر",
+                    "صورة شخصية بخلفية بيضاء",
+                    "الإقامة الخليجية بصلاحية 3 أشهر",
+                    "الهوية الخليجية"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "سياحية لحاملي إقامة الخليج",
+                      "validity": "بحسب الإجراء",
+                      "turnaround": "48 ساعة"
+                    },
+                    {
+                      "name": "عمرة",
+                      "validity": "بحسب الإجراء",
+                      "turnaround": "15 يوم عمل"
+                    }
+                  ],
+                  "contactNote": "راسلنا عبر واتساب لبدء طلب السعودية أو لمعرفة الخيار الأنسب حسب جنسيتك وإقامتك."
+                }
+              ],
               "image": "/images/visa/saudi-card.png",
               "imageAlt": "مدائن صالح في العلا بالمملكة العربية السعودية",
               "landmarkImage": "/images/visa/saudi-landmark.jpg",
@@ -276,11 +486,418 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
               "landmarkPosition": "center center",
               "requirementsPosition": "center center",
               "servicesPosition": "center center"
+            },
+            {
+              "slug": "lebanon",
+              "title": "لبنان",
+              "shortLabel": "لبنان",
+              "summary": "خدمات لبنان بشكل أوضح، مع خيارات مرتبة ومتطلبات سهلة المراجعة.",
+              "heroTag": "خيار متاح",
+              "description": "خدمات لبنان معروضة باختصار أنيق ليسهُل عليك فهم الخيارات والبدء بالخطوة المناسبة.",
+              "requirementsTitle": "المتطلبات الرسمية",
+              "requirements": [
+                "صورة عن جواز السفر",
+                "أو صورة عن الهوية الشخصية"
+              ],
+              "servicesTitle": "الخدمات المتاحة",
+              "offerings": [
+                {
+                  "name": "فيزا 48 ساعة",
+                  "validity": "بحسب الإجراء",
+                  "turnaround": "48 ساعة (بوقت محدد)"
+                },
+                {
+                  "name": "فيزا شهر",
+                  "validity": "بحسب الإجراء",
+                  "turnaround": "2 إلى 7 أيام"
+                },
+                {
+                  "name": "الإقامات",
+                  "validity": "بحسب الإجراء",
+                  "turnaround": "20 يوم"
+                }
+              ],
+              "contactNote": "راسلنا عبر واتساب لبدء طلب لبنان أو لمعرفة الخدمة الأنسب بحسب حالتك.",
+              "nationalityVariants": [
+                {
+                  "slug": "syrian",
+                  "label": "سوري",
+                  "requirements": [
+                    "صورة عن جواز السفر",
+                    "أو صورة عن الهوية الشخصية"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "فيزا 48 ساعة",
+                      "validity": "بحسب الإجراء",
+                      "turnaround": "48 ساعة (بوقت محدد)"
+                    },
+                    {
+                      "name": "فيزا شهر",
+                      "validity": "بحسب الإجراء",
+                      "turnaround": "2 إلى 7 أيام"
+                    },
+                    {
+                      "name": "الإقامات",
+                      "validity": "بحسب الإجراء",
+                      "turnaround": "20 يوم"
+                    }
+                  ],
+                  "contactNote": "راسلنا عبر واتساب لبدء طلب لبنان أو لمعرفة الخدمة الأنسب بحسب حالتك."
+                }
+              ],
+              "image": "https://upload.wikimedia.org/wikipedia/commons/1/10/Central_Beirut%2C_Lebanon.jpg",
+              "imageAlt": "مشهد حقيقي لوسط بيروت في لبنان",
+              "landmarkImage": "https://upload.wikimedia.org/wikipedia/commons/1/13/Beirut_Corniche%2C_Beirut%2C_Lebanon.jpg",
+              "landmarkAlt": "كورنيش بيروت في لبنان",
+              "requirementsImage": "https://upload.wikimedia.org/wikipedia/commons/4/4b/BeirutNejemah.jpg",
+              "requirementsImageAlt": "ساحة النجمة في بيروت",
+              "servicesImage": "https://upload.wikimedia.org/wikipedia/commons/8/8c/A_sunset_on_the_Mediterranean_sea%2C_Pigeon_Rocks%2C_Beirut%2C_Lebanon.jpg",
+              "servicesImageAlt": "صخور الروشة عند الغروب في بيروت",
+              "imagePosition": "center center",
+              "landmarkPosition": "center center",
+              "requirementsPosition": "center center",
+              "servicesPosition": "center center"
+            },
+            {
+              "slug": "indonesia",
+              "title": "إندونيسيا",
+              "shortLabel": "إندونيسيا",
+              "summary": "خيارات إندونيسيا أوضح، مع متطلبات مرتبة ومدة إنجاز سهلة الفهم.",
+              "heroTag": "خيار متاح",
+              "description": "خدمات إندونيسيا مرتبة بوضوح لتراجع المسارات المتاحة وتبدأ بالإجراء المناسب بسهولة.",
+              "requirementsTitle": "المتطلبات الرسمية",
+              "requirements": [
+                "صورة عن جواز السفر",
+                "صورة شخصية بخلفية بيضاء"
+              ],
+              "servicesTitle": "الخدمات المتاحة",
+              "offerings": [
+                {
+                  "name": "فيزا سياحية",
+                  "validity": "بحسب الإجراء",
+                  "turnaround": "10 إلى 15 يوم عمل"
+                },
+                {
+                  "name": "إقامة استثمار",
+                  "validity": "بحسب الإجراء",
+                  "turnaround": "25 يوم"
+                },
+                {
+                  "name": "إقامة Remote Worker",
+                  "validity": "بحسب الإجراء",
+                  "turnaround": "25 يوم"
+                }
+              ],
+              "contactNote": "راسلنا عبر واتساب لبدء طلب إندونيسيا أو لمعرفة الخيار الأنسب حسب جنسيتك.",
+              "nationalityVariants": [
+                {
+                  "slug": "syrian",
+                  "label": "سوري",
+                  "requirements": [
+                    "صورة عن جواز السفر",
+                    "صورة شخصية بخلفية بيضاء"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "فيزا سياحية",
+                      "validity": "بحسب الإجراء",
+                      "turnaround": "10 إلى 15 يوم عمل"
+                    },
+                    {
+                      "name": "إقامة استثمار",
+                      "validity": "بحسب الإجراء",
+                      "turnaround": "25 يوم"
+                    },
+                    {
+                      "name": "إقامة Remote Worker",
+                      "validity": "بحسب الإجراء",
+                      "turnaround": "25 يوم"
+                    }
+                  ],
+                  "contactNote": "راسلنا عبر واتساب لبدء طلب إندونيسيا أو لمعرفة الخيار الأنسب حسب جنسيتك."
+                },
+                {
+                  "slug": "iraqi",
+                  "label": "عراقي",
+                  "requirements": [
+                    "صورة عن جواز السفر",
+                    "صورة شخصية بخلفية بيضاء",
+                    "كشف حساب بنكي لآخر 3 إلى 6 شهور"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "فيزا 60 يوم",
+                      "validity": "60 يوم",
+                      "turnaround": "10 إلى 15 يوم عمل"
+                    },
+                    {
+                      "name": "سريعة VIP",
+                      "validity": "بحسب الإجراء",
+                      "turnaround": "3 إلى 5 يوم عمل"
+                    }
+                  ],
+                  "contactNote": "راسلنا عبر واتساب لبدء طلب إندونيسيا أو لمعرفة الخيار الأنسب حسب جنسيتك."
+                }
+              ],
+              "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Jakarta%20Skyline%20Part%202.jpg",
+              "imageAlt": "مشهد حقيقي لأفق جاكرتا في إندونيسيا",
+              "landmarkImage": "https://commons.wikimedia.org/wiki/Special:FilePath/Borobudur-Nothwest-view.jpg",
+              "landmarkAlt": "معبد بوروبودور في إندونيسيا",
+              "requirementsImage": "https://commons.wikimedia.org/wiki/Special:FilePath/Jakarta%20Skyline%20Part%202.jpg",
+              "requirementsImageAlt": "مشهد حقيقي لأفق جاكرتا في إندونيسيا",
+              "servicesImage": "https://commons.wikimedia.org/wiki/Special:FilePath/Borobudur-Nothwest-view.jpg",
+              "servicesImageAlt": "مشهد سياحي حقيقي من إندونيسيا",
+              "imagePosition": "center center",
+              "landmarkPosition": "center center",
+              "requirementsPosition": "center center",
+              "servicesPosition": "center center"
+            },
+            {
+              "slug": "jordan",
+              "title": "الأردن",
+              "shortLabel": "الأردن",
+              "summary": "خدمات الأردن بصياغة مختصرة وواضحة، مع متطلبات جاهزة للمراجعة.",
+              "heroTag": "خيار متاح",
+              "description": "خدمات الأردن معروضة بشكل مرتب ومباشر لتراجع الخيارات وتتحرك بسرعة أكبر.",
+              "requirementsTitle": "المتطلبات الرسمية",
+              "requirements": [
+                "صورة عن جواز السفر",
+                "صورة شخصية بخلفية بيضاء"
+              ],
+              "servicesTitle": "الخدمات المتاحة",
+              "offerings": [
+                {
+                  "name": "سياحية وسفارة",
+                  "validity": "بحسب الإجراء",
+                  "turnaround": "10 إلى 15 يوم"
+                }
+              ],
+              "contactNote": "راسلنا عبر واتساب لبدء طلب الأردن أو لمعرفة الخيار الأنسب حسب جنسيتك.",
+              "nationalityVariants": [
+                {
+                  "slug": "syrian",
+                  "label": "سوري",
+                  "requirements": [
+                    "صورة عن جواز السفر",
+                    "صورة شخصية بخلفية بيضاء",
+                    "صورة عن هوية الكفيل ضمن الأردن (إن وجد)"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "سياحية وسفارة",
+                      "validity": "بحسب الإجراء",
+                      "turnaround": "10 إلى 15 يوم"
+                    }
+                  ],
+                  "contactNote": "راسلنا عبر واتساب لبدء طلب الأردن أو لمعرفة الخيار الأنسب حسب جنسيتك."
+                },
+                {
+                  "slug": "iraqi",
+                  "label": "عراقي",
+                  "requirements": [
+                    "صورة عن جواز السفر",
+                    "صورة شخصية بخلفية بيضاء"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "حرة إلكترونية",
+                      "validity": "شهر",
+                      "turnaround": "10 إلى 15 يوم عمل"
+                    },
+                    {
+                      "name": "مستعجلة VIP",
+                      "validity": "شهر",
+                      "turnaround": "24 ساعة"
+                    },
+                    {
+                      "name": "سريعة VIP",
+                      "validity": "شهر",
+                      "turnaround": "4 إلى 6 يوم عمل"
+                    },
+                    {
+                      "name": "متعددة 6 أشهر",
+                      "validity": "6 أشهر",
+                      "turnaround": "10 إلى 12 يوم عمل"
+                    }
+                  ],
+                  "contactNote": "راسلنا عبر واتساب لبدء طلب الأردن أو لمعرفة الخيار الأنسب حسب جنسيتك."
+                }
+              ],
+              "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/New_Abdali_2024.png/1280px-New_Abdali_2024.png",
+              "imageAlt": "مشهد حقيقي لمنطقة العبدلي في عمّان بالأردن",
+              "landmarkImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Treasury_petra_crop.jpeg/1280px-Treasury_petra_crop.jpeg",
+              "landmarkAlt": "الخزنة في البتراء بالأردن",
+              "requirementsImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Oval_Plaza_%28Forum_Romanum%2C_Gerasa_-_Jerash%2C_Jordan%29_-_%D8%B3%D8%A7%D8%AD%D8%A9_%D8%A7%D9%84%D9%86%D8%AF%D9%88%D8%A9%2C_%D8%AC%D8%B1%D8%B4.jpg/1280px-Oval_Plaza_%28Forum_Romanum%2C_Gerasa_-_Jerash%2C_Jordan%29_-_%D8%B3%D8%A7%D8%AD%D8%A9_%D8%A7%D9%84%D9%86%D8%AF%D9%88%D8%A9%2C_%D8%AC%D8%B1%D8%B4.jpg",
+              "requirementsImageAlt": "الساحة البيضوية في جرش بالأردن",
+              "servicesImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Treasury_petra_crop.jpeg/1280px-Treasury_petra_crop.jpeg",
+              "servicesImageAlt": "مشهد حقيقي من البتراء في الأردن",
+              "imagePosition": "center center",
+              "landmarkPosition": "center center",
+              "requirementsPosition": "center center",
+              "servicesPosition": "center center"
+            },
+            {
+              "slug": "erbil",
+              "title": "أربيل",
+              "shortLabel": "أربيل",
+              "summary": "خدمات أربيل المعروضة حالياً مع متطلبات واضحة وخيارات مرتبة.",
+              "heroTag": "خيار متاح",
+              "description": "خدمات أربيل معروضة بشكل مباشر لتفهم المسارات المتاحة وتبدأ بدون إرباك.",
+              "requirementsTitle": "المتطلبات الرسمية",
+              "requirements": [
+                "جواز السفر",
+                "الإقامة القديمة عند طلب التجديد",
+                "صورة شخصية",
+                "صورة عن إقامة الزوج أو الزوجة عند طلب لم الشمل",
+                "صورة عن عقد الزواج",
+                "صورة عن دفتر العائلة للأطفال",
+                "النسخة الأصلية من تأييد العمل",
+                "النسخة الأصلية من تأييد السكن"
+              ],
+              "servicesTitle": "الخدمات المتاحة",
+              "offerings": [
+                {
+                  "name": "حامل الإقامة الأوروبية",
+                  "validity": "بحسب الإجراء",
+                  "turnaround": "48 ساعة - 7 أيام"
+                },
+                {
+                  "name": "تجديد إقامة 6 أشهر أو سنوية",
+                  "validity": "6 أشهر أو سنوية",
+                  "turnaround": "25 يوم"
+                },
+                {
+                  "name": "فيزا لم شمل",
+                  "validity": "بحسب الإجراء",
+                  "turnaround": "شهر أو أكثر"
+                }
+              ],
+              "contactNote": "راسلنا عبر واتساب لبدء طلب أربيل أو لمعرفة الخدمة الأنسب بحسب حالتك.",
+              "nationalityVariants": [
+                {
+                  "slug": "syrian",
+                  "label": "سوري",
+                  "requirements": [
+                    "جواز السفر",
+                    "الإقامة القديمة عند طلب التجديد",
+                    "صورة شخصية",
+                    "صورة عن إقامة الزوج أو الزوجة عند طلب لم الشمل",
+                    "صورة عن عقد الزواج",
+                    "صورة عن دفتر العائلة للأطفال",
+                    "النسخة الأصلية من تأييد العمل",
+                    "النسخة الأصلية من تأييد السكن"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "حامل الإقامة الأوروبية",
+                      "validity": "بحسب الإجراء",
+                      "turnaround": "48 ساعة - 7 أيام"
+                    },
+                    {
+                      "name": "تجديد إقامة 6 أشهر أو سنوية",
+                      "validity": "6 أشهر أو سنوية",
+                      "turnaround": "25 يوم"
+                    },
+                    {
+                      "name": "فيزا لم شمل",
+                      "validity": "بحسب الإجراء",
+                      "turnaround": "شهر أو أكثر"
+                    }
+                  ],
+                  "contactNote": "راسلنا عبر واتساب لبدء طلب أربيل أو لمعرفة الخدمة الأنسب بحسب حالتك."
+                }
+              ],
+              "image": "https://images.unsplash.com/photo-1585923130831-2878d611614b?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGVyYmlsfGVufDB8fDB8fHww&ixlib=rb-4.1.0&q=60&w=3000",
+              "imageAlt": "مشهد حقيقي لمدينة أربيل ليلاً",
+              "landmarkImage": "https://images.unsplash.com/photo-1707590713835-67b4bc23fa4d?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZXJiaWx8ZW58MHx8MHx8fDA%3D&ixlib=rb-4.1.0&q=60&w=3000",
+              "landmarkAlt": "قلعة أربيل التاريخية في مشهد حقيقي من المدينة",
+              "requirementsImage": "https://images.unsplash.com/photo-1588379674354-8c9c0ee60e10?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZXJiaWx8ZW58MHx8MHx8fDA%3D&ixlib=rb-4.1.0&q=60&w=3000",
+              "requirementsImageAlt": "ساحة مركزية حقيقية في أربيل",
+              "servicesImage": "https://media.istockphoto.com/id/2205829767/photo/the-most-famous-mosque-in-the-city-of-erbil-arbil-kurdistan-region-of-iraq-jalil-khayat.webp?a=1&b=1&c=VZ8eNS7XvUjhyn9i3Rr42IFYmnzHosYw2jzwiCe0zGk%3D&k=20&s=612x612&w=0",
+              "servicesImageAlt": "جامع جليل الخياط في أربيل ضمن مشهد حقيقي من المدينة",
+              "imagePosition": "center center",
+              "landmarkPosition": "center center",
+              "requirementsPosition": "center center",
+              "servicesPosition": "center center"
+            },
+            {
+              "slug": "baghdad",
+              "title": "بغداد",
+              "shortLabel": "بغداد",
+              "summary": "خدمات بغداد بشكل أوضح، مع مسارات مرتبة ومتطلبات أساسية جاهزة.",
+              "heroTag": "خيار متاح",
+              "description": "خدمات بغداد مرتبة بشكل واضح لتراجع الخيارات بسرعة وتبدأ بالإجراء المناسب.",
+              "requirementsTitle": "المتطلبات الرسمية",
+              "requirements": [
+                "صورة عن جواز السفر",
+                "صورة شخصية بخلفية بيضاء"
+              ],
+              "servicesTitle": "الخدمات المتاحة",
+              "offerings": [
+                {
+                  "name": "فيزا شهرين",
+                  "validity": "شهران",
+                  "turnaround": "40 يوم"
+                },
+                {
+                  "name": "إقامة سنوية",
+                  "validity": "سنوية",
+                  "turnaround": "50 - 60 يوم عمل"
+                },
+                {
+                  "name": "فيزا وإقامة سنوية",
+                  "validity": "سنوية",
+                  "turnaround": "60 يوم (داخل بغداد)"
+                }
+              ],
+              "contactNote": "راسلنا عبر واتساب لبدء طلب بغداد أو لمعرفة الخدمة الأنسب بحسب حالتك.",
+              "nationalityVariants": [
+                {
+                  "slug": "syrian",
+                  "label": "سوري",
+                  "requirements": [
+                    "صورة عن جواز السفر",
+                    "صورة شخصية بخلفية بيضاء"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "فيزا شهرين",
+                      "validity": "شهران",
+                      "turnaround": "40 يوم"
+                    },
+                    {
+                      "name": "إقامة سنوية",
+                      "validity": "سنوية",
+                      "turnaround": "50 - 60 يوم عمل"
+                    },
+                    {
+                      "name": "فيزا وإقامة سنوية",
+                      "validity": "سنوية",
+                      "turnaround": "60 يوم (داخل بغداد)"
+                    }
+                  ],
+                  "contactNote": "راسلنا عبر واتساب لبدء طلب بغداد أو لمعرفة الخدمة الأنسب بحسب حالتك."
+                }
+              ],
+              "image": "https://idsb.tmgrup.com.tr/ly/uploads/images/2021/08/17/136874.jpg",
+              "imageAlt": "مشهد جوي حقيقي لبغداد ونهر دجلة",
+              "landmarkImage": "https://i.pinimg.com/736x/f6/83/09/f68309753b1cbbe726d1d1c76eae9f67.jpg",
+              "landmarkAlt": "برج بارز في بغداد ضمن مشهد حقيقي من المدينة",
+              "requirementsImage": "https://www.xinhuanet.com/english/2020-01/08/138686613_15784413485421n.jpg",
+              "requirementsImageAlt": "أفق بغداد الحقيقي وقت الغروب",
+              "servicesImage": "https://i.pinimg.com/736x/16/d7/70/16d770ba4db40c9702d1418eb3308d42.jpg",
+              "servicesImageAlt": "جامع في بغداد ضمن مشهد حضري حقيقي",
+              "imagePosition": "center center",
+              "landmarkPosition": "center center",
+              "requirementsPosition": "center center",
+              "servicesPosition": "center center"
             }
           ],
-          "previewImage": "/images/visa/uae-card.jpg",
-          "previewImageAlt": "مشهد حقيقي من الإمارات يرتبط بخدمات التأشيرات والإقامة",
-          "previewImagePosition": "center center"
+          "previewImage": "https://images.pexels.com/photos/33497885/pexels-photo-33497885.jpeg?auto=compress&cs=tinysrgb&w=1600",
+          "previewImageAlt": "جوازات سفر ووثائق سفر مرتبة على طاولة بشكل يناسب خدمات التأشيرات والإقامات",
+          "previewImagePosition": "center center",
+          "audiences": visaAudiencesAr
         },
         {
           "slug": "flight-booking",
@@ -288,17 +905,17 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
           "title": "حجوزات الطيران",
           "eyebrow": "خيارات سفر",
           "summary": "نقدّم خيارات حجز الطيران بشكل واضح يسهّل المقارنة ويسرّع تأكيد الحجز.",
-          "detail": "حوّلنا الحجز إلى مسار خدمة منظم: وجهات وأنواع حجز ثم تفاصيل تشغيلية تساعد العميل على اختيار المسار الأنسب بسرعة.",
+          "detail": "حجز أسرع، متابعة أوضح، وخيارات جاهزة للمقارنة واتخاذ القرار.",
           "highlights": [
             "مقارنة أوضح بين خيارات الحجز",
             "متابعة مباشرة حتى تأكيد الحجز",
             "رسائل مبنية على السرعة والوضوح"
           ],
           "cardCta": "عرض الخيارات",
-          "heroTitle": "حجوزات طيران أسهل للمراجعة وأسرع في التأكيد",
-          "heroSubtitle": "من الرحلات الفردية إلى حجوزات المجموعات، كل خيار معروض ضمن هيكل أوضح يساعد على القرار السريع والمتابعة السلسة.",
+          "heroTitle": "فريق طيران مختص لحجوزات أسهل",
+          "heroSubtitle": "اطلب استشارتك لحجز تذاكر الطيران إلى كافة أنحاء العالم",
           "optionsTitle": "أنواع الحجز وخيارات المسارات",
-          "optionsSubtitle": "افتح كل خيار لمعرفة ما نحتاجه للبدء، وما الذي نقدمه، وكيف تتم المتابعة من الاستفسار حتى التأكيد.",
+          "optionsSubtitle": "افتح كل خيار لتعرف ما نحتاجه للبدء، وما الذي يشمله الحجز، وكيف تتم المتابعة حتى التأكيد النهائي.",
           "items": [
             {
               "slug": "europe",
@@ -431,57 +1048,57 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
         {
           "slug": "study-abroad",
           "icon": "globe",
-          "title": "الدراسة في الخارج",
-          "eyebrow": "مسار أوضح",
-          "summary": "رتبنا خدمات الدراسة في الخارج حسب الدولة أو البرنامج لتفهم المسار المناسب لك بسهولة أكبر.",
-          "detail": "هذه الخدمة تحتاج إلى وضوح وإقناع معًا، لذلك فصلنا كل دولة أو مسار دراسي في صفحة مستقلة تساعد العميل على فهم الطريق من البداية.",
+          "title": "الكروبات السياحية",
+          "eyebrow": "رحلات منظمة",
+          "summary": "كروبات سياحية ببرامج واضحة وصور أقرب للتجربة، لتختار الرحلة المناسبة بسهولة.",
+          "detail": "نحوّل الرحلة إلى برنامج واضح، من اختيار الوجهة حتى تفاصيل الحجز والمتابعة.",
           "highlights": [
-            "فصل واضح حسب الدولة أو البرنامج",
-            "فهم أسهل قبل بدء التقديم",
-            "بنية قابلة للتوسع مستقبلًا"
+            "برامج جاهزة وواضحة",
+            "تنسيق أسهل للمجموعات والعائلات",
+            "تجربة أقرب للرحلة الفعلية"
           ],
-          "cardCta": "عرض البرامج",
-          "heroTitle": "الدراسة في الخارج بمسار أوضح من أول استفسار",
-          "heroSubtitle": "ننظم الوجهات والمسارات التعليمية بحيث يرى العميل الخيار الأنسب مبكرًا، ثم ينتقل إلى المتطلبات والخطوات التالية بثقة.",
-          "optionsTitle": "الوجهات والبرامج المتاحة",
-          "optionsSubtitle": "كل مسار يشرح المتطلبات الأولية والدعم الذي نقدمه والطريق العملي المتوقع بعد ذلك.",
+          "cardCta": "عرض الرحلات",
+          "heroTitle": "رحلات سياحية خصيصاً لك",
+          "heroSubtitle": "اختر الوجهة أو نوع الرحلة، وابدأ ببرنامج واضح يناسب وقتك وميزانيتك.",
+          "optionsTitle": "الوجهات وأنواع الرحلات",
+          "optionsSubtitle": "كل بطاقة تعرض فكرة الرحلة، وما نحتاجه للحجز، وما يشمله البرنامج.",
           "items": [
             {
               "slug": "turkiye",
-              "title": "الدراسة في تركيا",
-              "shortLabel": "تركيا",
-              "summary": "مثال أولي لصفحة برنامج أو دولة داخل خدمة الدراسة.",
-              "heroTag": "خيار دراسي",
-              "description": "يمكن لهذه الصفحة أن تعرض ملخصًا سريعًا للمسار والمتطلبات الأولية والخدمات التي نقدمها حول هذا الخيار.",
-              "requirementsTitle": "المتطلبات الأولية",
+              "title": "كروبات المدن الأوروبية",
+              "shortLabel": "أوروبا",
+              "summary": "رحلات جماعية لمدن أوروبية ببرنامج واضح وجولات أساسية.",
+              "heroTag": "رحلة شائعة",
+              "description": "خيار مناسب لمن يريد برنامجًا منظمًا بين أشهر المدن والمعالم، مع وقت مريح للاستكشاف والمتابعة السلسة.",
+              "requirementsTitle": "ما نحتاجه للحجز",
               "requirements": [
                 "صورة جواز السفر",
-                "آخر شهادة دراسية",
-                "وسيلة تواصل موثوقة",
-                "تفضيل مبدئي للتخصص"
+                "تاريخ السفر التقريبي",
+                "عدد المسافرين",
+                "تفضيل الفندق أو الغرفة"
               ],
-              "servicesTitle": "الخدمات المتاحة",
+              "servicesTitle": "ما يشمله البرنامج",
               "offerings": [
                 {
-                  "name": "استشارة أولية",
-                  "validity": "مرة واحدة",
+                  "name": "حجز ضمن كروب سياحي",
+                  "validity": "بحسب الموعد",
                   "turnaround": "خلال يوم واحد"
                 },
                 {
-                  "name": "متابعة ملف التقديم",
-                  "validity": "لكل برنامج",
-                  "turnaround": "بحسب الحالة"
+                  "name": "تنسيق فندق وتنقلات",
+                  "validity": "طوال الرحلة",
+                  "turnaround": "بحسب الخطة"
                 }
               ],
-              "contactNote": "راسلنا عبر واتساب لنبدأ بالخيار الأنسب لك.",
-              "image": "https://images.pexels.com/photos/15247433/pexels-photo-15247433.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "imageAlt": "مبنى جامعي حقيقي في إسطنبول ضمن مسار الدراسة في تركيا",
-              "landmarkImage": "https://images.pexels.com/photos/20483641/pexels-photo-20483641.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "landmarkAlt": "بوابة جامعة إسطنبول في مشهد حقيقي من تركيا",
-              "requirementsImage": "https://images.pexels.com/photos/8384827/pexels-photo-8384827.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "requirementsImageAlt": "واجهة جامعة إسطنبول التاريخية بما يناسب متطلبات الدراسة",
-              "servicesImage": "https://images.pexels.com/photos/25389979/pexels-photo-25389979.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "servicesImageAlt": "مشهد جامعي حقيقي من إسطنبول يخدم محتوى الدراسة في تركيا",
+              "contactNote": "راسلنا عبر واتساب لنرسل لك البرنامج المتاح وأقرب موعد مناسب.",
+              "image": "https://images.pexels.com/photos/36729289/pexels-photo-36729289.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "imageAlt": "مجموعة أصدقاء يخططون لجولة سياحية في المدينة باستخدام خريطة",
+              "landmarkImage": "https://images.pexels.com/photos/18999517/pexels-photo-18999517.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "landmarkAlt": "مجموعة سياح أمام مشهد حضري أوروبي خلال رحلة منظمة",
+              "requirementsImage": "https://images.pexels.com/photos/10621014/pexels-photo-10621014.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "requirementsImageAlt": "سائحات يتجولن في مدينة أوروبية خلال برنامج سياحي",
+              "servicesImage": "https://images.pexels.com/photos/30119513/pexels-photo-30119513.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "servicesImageAlt": "أصدقاء يستكشفون شوارع مدينة سياحية ضمن كروب سفر",
               "imagePosition": "center center",
               "landmarkPosition": "center center",
               "requirementsPosition": "center center",
@@ -489,40 +1106,40 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
             },
             {
               "slug": "uk",
-              "title": "الدراسة في بريطانيا",
-              "shortLabel": "بريطانيا",
-              "summary": "صفحة أولية لوجهة دراسية ثانية مع نفس البنية الواضحة والمتماسكة.",
-              "heroTag": "خيار دراسي",
-              "description": "وجود صفحة مستقلة لكل وجهة دراسية يجعل استيعاب المحتوى أسهل ويمنع تداخل المعلومات على المستخدم.",
-              "requirementsTitle": "المتطلبات الأولية",
+              "title": "رحلات البحر والصيف",
+              "shortLabel": "رحلات صيفية",
+              "summary": "برامج خفيفة لشواطئ ومدن ساحلية ضمن مجموعات منظمة.",
+              "heroTag": "موسم مفضل",
+              "description": "هذا المسار مناسب لمن يبحث عن إجازة أخف، تجمع بين البحر والجولات والوقت الحر ضمن برنامج مريح وواضح.",
+              "requirementsTitle": "ما نحتاجه للحجز",
               "requirements": [
-                "جواز سفر",
-                "آخر شهادة",
-                "مستوى اللغة إن وجد",
-                "بيانات التواصل"
+                "صورة جواز السفر",
+                "الشهر المفضل للسفر",
+                "عدد البالغين والأطفال",
+                "نوع الغرفة المطلوب"
               ],
-              "servicesTitle": "الخدمات المتاحة",
+              "servicesTitle": "ما يشمله البرنامج",
               "offerings": [
                 {
-                  "name": "تقييم أولي",
-                  "validity": "مرة واحدة",
+                  "name": "برنامج مع فندق وإفطار",
+                  "validity": "بحسب العرض",
                   "turnaround": "خلال يوم واحد"
                 },
                 {
-                  "name": "تهيئة ملف مبدئي",
-                  "validity": "لكل وجهة",
-                  "turnaround": "2 - 5 أيام"
+                  "name": "جولات يومية اختيارية",
+                  "validity": "أثناء الرحلة",
+                  "turnaround": "بحسب الوجهة"
                 }
               ],
-              "contactNote": "راسلنا عبر واتساب لتحديد أول خطوة مناسبة لك.",
-              "image": "https://images.pexels.com/photos/14753324/pexels-photo-14753324.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "imageAlt": "مبنى أكاديمي كلاسيكي يناسب محتوى الدراسة في بريطانيا",
-              "landmarkImage": "https://images.pexels.com/photos/11796159/pexels-photo-11796159.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "landmarkAlt": "مشهد حقيقي من لندن مع بيغ بن يعبّر عن الدراسة في بريطانيا",
-              "requirementsImage": "https://images.pexels.com/photos/11826754/pexels-photo-11826754.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "requirementsImageAlt": "واجهة مؤسسة تعليمية كلاسيكية في لندن تناسب المتطلبات الأولية",
-              "servicesImage": "https://images.pexels.com/photos/16230669/pexels-photo-16230669.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "servicesImageAlt": "مشهد حضري حقيقي من لندن يخدم محتوى الدراسة في بريطانيا",
+              "contactNote": "تواصل معنا عبر واتساب لنشاركك البرامج الصيفية المتاحة والأسعار الأقرب لطلبك.",
+              "image": "https://images.pexels.com/photos/21937731/pexels-photo-21937731.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "imageAlt": "سياح يمشون على الشاطئ خلال رحلة صيفية جماعية",
+              "landmarkImage": "https://images.pexels.com/photos/7938729/pexels-photo-7938729.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "landmarkAlt": "مجموعة سياح على شاطئ مشمس ضمن رحلة بحرية",
+              "requirementsImage": "https://images.pexels.com/photos/8760662/pexels-photo-8760662.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "requirementsImageAlt": "مجموعة صديقات على الشاطئ في أجواء صيفية مرحة",
+              "servicesImage": "https://images.pexels.com/photos/27500850/pexels-photo-27500850.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "servicesImageAlt": "مجموعة مسافرين يستمتعون بغروب البحر ضمن رحلة جماعية",
               "imagePosition": "center center",
               "landmarkPosition": "center center",
               "requirementsPosition": "center center",
@@ -530,75 +1147,75 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
             },
             {
               "slug": "malaysia",
-              "title": "الدراسة في ماليزيا",
-              "shortLabel": "ماليزيا",
-              "summary": "مثال إضافي يوضح كيف يمكن إضافة دول جديدة ضمن نفس النظام بسهولة.",
-              "heroTag": "خيار دراسي",
-              "description": "يمكن إضافة دول جديدة أو صفحات برامج جديدة من خلال البيانات فقط من دون تعديل نظام الواجهة.",
-              "requirementsTitle": "المتطلبات الأولية",
+              "title": "رحلات عائلية وبرية",
+              "shortLabel": "عائلية",
+              "summary": "رحلات مناسبة للعائلات أو الأصدقاء مع تنقل مريح وبرنامج مرن.",
+              "heroTag": "خيار عائلي",
+              "description": "هذا الخيار مناسب لمن يريد رحلة أخف بإيقاع مرن، مع مساحات مريحة للتنقل والتوقفات والصور والأنشطة.",
+              "requirementsTitle": "ما نحتاجه للحجز",
               "requirements": [
                 "صورة جواز السفر",
-                "شهادة دراسية",
-                "التخصص المطلوب",
-                "بيانات التواصل"
+                "مدينة الانطلاق",
+                "عدد الغرف المطلوبة",
+                "الميزانية التقريبية"
               ],
-              "servicesTitle": "الخدمات المتاحة",
+              "servicesTitle": "ما يشمله البرنامج",
               "offerings": [
                 {
-                  "name": "استشارة أولية",
-                  "validity": "مرة واحدة",
+                  "name": "تنسيق رحلة عائلية",
+                  "validity": "بحسب التاريخ",
                   "turnaround": "خلال يوم واحد"
                 },
                 {
-                  "name": "تنظيم الملف",
-                  "validity": "بحسب الحالة",
-                  "turnaround": "2 - 4 أيام"
+                  "name": "برنامج يومي مرن",
+                  "validity": "طوال الرحلة",
+                  "turnaround": "بحسب الخطة"
                 }
               ],
-              "contactNote": "تواصل معنا عبر واتساب وسنوضح لك المسار الأنسب.",
-              "image": "https://images.pexels.com/photos/33196113/pexels-photo-33196113.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "imageAlt": "أفق كوالالمبور الحقيقي بما يناسب الدراسة في ماليزيا",
-              "landmarkImage": "https://images.pexels.com/photos/32644036/pexels-photo-32644036.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "landmarkAlt": "مشهد حقيقي من كوالالمبور مع الأبراج الشهيرة في ماليزيا",
-              "requirementsImage": "https://images.pexels.com/photos/30067522/pexels-photo-30067522.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "requirementsImageAlt": "أفق كوالالمبور عند الغروب بما يناسب متطلبات الدراسة في ماليزيا",
-              "servicesImage": "https://images.pexels.com/photos/3724019/pexels-photo-3724019.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "servicesImageAlt": "مشهد حقيقي من ماليزيا يخدم محتوى خدمات الدراسة بالخارج",
+              "contactNote": "راسلنا عبر واتساب لنجهز لك خيارًا عائليًا مريحًا يناسب عدد المسافرين والميزانية.",
+              "image": "https://images.pexels.com/photos/34688454/pexels-photo-34688454.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "imageAlt": "أصدقاء يستمتعون برحلة برية قرب سيارة فان وسط الطبيعة",
+              "landmarkImage": "https://images.pexels.com/photos/14809953/pexels-photo-14809953.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "landmarkAlt": "عائلة بجانب فان خلال رحلة طبيعية منظمة",
+              "requirementsImage": "https://images.pexels.com/photos/16548855/pexels-photo-16548855.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "requirementsImageAlt": "عائلة تطل على منظر جبلي خلال رحلة خارجية",
+              "servicesImage": "https://images.pexels.com/photos/7464537/pexels-photo-7464537.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "servicesImageAlt": "أصدقاء داخل سيارة خلال رحلة برية مريحة",
               "imagePosition": "center center",
               "landmarkPosition": "center center",
               "requirementsPosition": "center center",
-              "servicesPosition": "center center"
+              "servicesPosition": "center 8%"
             }
           ],
-          "previewImage": "/images/hero/study-abroad-hero.jpg",
-          "previewImageAlt": "طلاب دوليون في حرم جامعي حديث",
+          "previewImage": "https://unsplash.com/photos/eXXCJt00Ul4/download?force=true&w=1600",
+          "previewImageAlt": "شاطئ صيفي مع مظلة شمسية يناسب الرحلات السياحية",
           "previewImagePosition": "center center"
         },
         {
           "slug": "language-exams",
           "icon": "star",
           "title": "حجوزات اختبارات اللغة",
-          "eyebrow": "بنية مباشرة",
-          "summary": "حجوزات اختبارات اللغة مع معلومات أوضح وخطوات مباشرة تساعدك على تثبيت الحجز بسرعة.",
-          "detail": "بدل عرض الاختبارات كعناصر متشابهة ومسطحة، أعطينا كل اختبار صفحة مستقلة بمتطلبات أوضح ومنطق حجز أكثر وضوحًا ودعم متابعة مباشر.",
+          "eyebrow": "حجز مباشر",
+          "summary": "نرتب لك حجز اختبار اللغة بخطوات واضحة ومتابعة سريعة من أول استفسار حتى التأكيد.",
+          "detail": "اختر الاختبار المناسب، وأرسل البيانات المطلوبة، ونحن نرتب معك الحجز بشكل واضح وسريع.",
           "highlights": [
-            "صفحات مركزة لكل اختبار",
-            "معلومات عملية قبل الحجز",
-            "بنية جاهزة لمراكز وتواريخ جديدة"
+            "معلومات واضحة قبل الحجز",
+            "متابعة سريعة حتى التأكيد",
+            "خيارات متعددة بحسب الاختبار والمركز"
           ],
           "cardCta": "عرض الخيارات",
-          "heroTitle": "حجوزات اختبارات اللغة برسائل أوضح وصور مستعادة",
-          "heroSubtitle": "كل اختبار يفتح على صفحة مركزة تساعد العميل على فهم المطلوب وما يمكن ترتيبه وكيف يبدأ بسرعة.",
+          "heroTitle": "حجوزات اختبارات اللغة بشكل أوضح وأسرع",
+          "heroSubtitle": "كل اختبار له صفحته الخاصة لتعرف المطلوب وتبدأ الحجز بثقة.",
           "optionsTitle": "الاختبارات المتاحة للحجز",
-          "optionsSubtitle": "اختر الاختبار الذي تحتاجه لمراجعة المعلومات المطلوبة ودعم الحجز والخطوة التالية التي يمكننا تنفيذها لك.",
+          "optionsSubtitle": "اختر الاختبار المناسب لك، واطلع على المطلوب والخطوة التالية قبل تأكيد الحجز.",
           "items": [
             {
               "slug": "ielts",
               "title": "حجز IELTS",
               "shortLabel": "IELTS",
-              "summary": "صفحة أولية لحجز الاختبار بواجهة أنظف ومسار أوضح.",
+              "summary": "خيار مناسب لمن يريد حجز IELTS بخطوات سريعة وواضحة.",
               "heroTag": "خيار متاح",
-              "description": "توضح هذه الصفحة ما نحتاجه من العميل وما الذي نقدمه ضمن خدمة الحجز.",
+              "description": "راجع المطلوب لحجز IELTS، وأرسل بياناتك لنبدأ معك مباشرة.",
               "requirementsTitle": "المعلومات المطلوبة",
               "requirements": [
                 "الاسم مطابقًا تمامًا للجواز",
@@ -619,7 +1236,7 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
                   "turnaround": "بحسب الحالة"
                 }
               ],
-              "contactNote": "للحجز أو للاستفسار، تواصل معنا عبر واتساب.",
+              "contactNote": "للحجز أو لمعرفة المواعيد المتاحة، راسلنا عبر واتساب.",
               "image": "https://images.pexels.com/photos/6684255/pexels-photo-6684255.jpeg?auto=compress&cs=tinysrgb&w=1600",
               "imageAlt": "مشهد حقيقي لطالب يقدّم اختبارًا كتابيًا يناسب IELTS",
               "landmarkImage": "https://images.pexels.com/photos/6549856/pexels-photo-6549856.jpeg?auto=compress&cs=tinysrgb&w=1600",
@@ -637,9 +1254,9 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
               "slug": "toefl",
               "title": "حجز TOEFL",
               "shortLabel": "TOEFL",
-              "summary": "مثال ثانٍ داخل نفس بنية الخدمة مع عرض ثابت وواضح.",
+              "summary": "حجز TOEFL بمتطلبات واضحة وخطوات سهلة من البداية.",
               "heroTag": "خيار متاح",
-              "description": "نفس التصميم يدعم أكثر من نوع اختبار بشكل مستقر وواضح للمستخدم.",
+              "description": "إذا كنت تحتاج TOEFL، ستجد هنا المعلومات الأساسية التي تسرّع بدء الحجز.",
               "requirementsTitle": "المعلومات المطلوبة",
               "requirements": [
                 "الاسم المطابق للجواز",
@@ -660,7 +1277,7 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
                   "turnaround": "خلال يوم واحد"
                 }
               ],
-              "contactNote": "راسلنا عبر واتساب لترتيب الحجز المناسب.",
+              "contactNote": "راسلنا عبر واتساب لننسق معك الحجز المناسب والمركز الأقرب.",
               "image": "https://images.pexels.com/photos/6549856/pexels-photo-6549856.jpeg?auto=compress&cs=tinysrgb&w=1600",
               "imageAlt": "تحضير أكاديمي رقمي حقيقي يناسب اختبار TOEFL",
               "landmarkImage": "https://images.pexels.com/photos/28224333/pexels-photo-28224333.jpeg?auto=compress&cs=tinysrgb&w=1600",
@@ -678,9 +1295,9 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
               "slug": "pte",
               "title": "حجز PTE",
               "shortLabel": "PTE",
-              "summary": "مثال ثالث يثبت مرونة نفس المسار مع اختبارات إضافية.",
+              "summary": "حجز PTE بخطوات مختصرة ومتابعة مباشرة حتى التأكيد.",
               "heroTag": "خيار متاح",
-              "description": "يمكن إضافة أي اختبار جديد أو مركز جديد من خلال البيانات فقط دون تغيير بنية الصفحة.",
+              "description": "هذه الصفحة تختصر لك المطلوب لحجز PTE وتوضح كيف نكمل معك الإجراء.",
               "requirementsTitle": "المعلومات المطلوبة",
               "requirements": [
                 "الاسم الكامل",
@@ -701,7 +1318,7 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
                   "turnaround": "بحسب الحالة"
                 }
               ],
-              "contactNote": "لبدء الإجراء، تواصل معنا مباشرة عبر واتساب.",
+              "contactNote": "تواصل معنا عبر واتساب لنبدأ بالحجز ونشاركك المواعيد المتاحة.",
               "image": "https://images.pexels.com/photos/28224333/pexels-photo-28224333.jpeg?auto=compress&cs=tinysrgb&w=1600",
               "imageAlt": "سماعات وكمبيوتر في مشهد حقيقي يناسب اختبار PTE",
               "landmarkImage": "https://images.pexels.com/photos/18966473/pexels-photo-18966473.jpeg?auto=compress&cs=tinysrgb&w=1600",
@@ -718,6 +1335,241 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
           ],
           "previewImage": "/images/hero/goethe-exam.jpg",
           "previewImageAlt": "مواد تحضير لاختبار لغة وشهادة أكاديمية",
+          "previewImagePosition": "center center"
+        },
+        {
+          "slug": "other-services",
+          "icon": "shield",
+          "title": "خدمات أخرى",
+          "eyebrow": "خدمات مساندة",
+          "summary": "خدمات حجز جوازات السفر بخطوات واضحة ومتابعة سريعة داخل البلد أو خارجه.",
+          "detail": "إذا كنت تحتاج ترتيب موعد لجواز السفر، نساعدك في اختيار الخدمة المناسبة وتجهيز الخطوات من البداية حتى التأكيد.",
+          "highlights": [
+            "مواعيد أوضح وخطوات مرتبة",
+            "دعم مباشر في الحجز والمتابعة",
+            "خيارات داخلية وخارجية بحسب الحالة"
+          ],
+          "cardCta": "عرض الخدمات",
+          "heroTitle": "خدماتنا تشمل جميع ما يحتاجه المسافر",
+          "heroSubtitle": "اختر نوع الخدمة المناسبة، وابدأ بخطوات واضحة توفر عليك الوقت والارتباك.",
+          "optionsTitle": "خدمات حجز جواز السفر",
+          "optionsSubtitle": "كل خيار يوضح المطلوب، وما يمكن ترتيبه، وكيف تبدأ بسرعة.",
+          "items": [
+            {
+              "slug": "passport-issuance-renewal",
+              "title": "إصدار وتجديد جواز السفر",
+              "shortLabel": "جواز السفر",
+              "summary": "خدمة واحدة تنظم لك إصدار وتجديد جواز السفر داخلياً أو خارجياً بخطوات أوضح.",
+              "heroTag": "خدمة متاحة",
+              "description": "نرتب لك خدمة إصدار وتجديد جواز السفر من نفس الصفحة، مع فلتر واضح يبدّل بين الداخلي والخارجي حسب حالتك.",
+              "requirementsTitle": "الأوراق المطلوبة",
+              "requirements": [
+                "الاسم الكامل",
+                "رقم الهوية أو البيانات الأساسية",
+                "المدينة المطلوبة",
+                "رقم تواصل فعال"
+              ],
+              "servicesTitle": "الخدمات المتاحة",
+              "offerings": [
+                {
+                  "name": "تنسيق موعد داخلي",
+                  "validity": "بحسب الموعد",
+                  "turnaround": "خلال يوم واحد"
+                },
+                {
+                  "name": "متابعة وتجهيز أولي",
+                  "validity": "حتى التأكيد",
+                  "turnaround": "بحسب الحالة"
+                }
+              ],
+              "contactNote": "راسلنا عبر واتساب لنرتب لك الخدمة الأنسب ونوضح لك الخطوات المطلوبة.",
+              "nationalityVariants": [
+                {
+                  "slug": "internal",
+                  "label": "جواز داخلي",
+                  "requirements": [
+                    "الاسم الكامل",
+                    "رقم الهوية أو البيانات الأساسية",
+                    "المدينة المطلوبة",
+                    "رقم تواصل فعال"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "تنسيق موعد داخلي",
+                      "validity": "بحسب الموعد",
+                      "turnaround": "خلال يوم واحد"
+                    },
+                    {
+                      "name": "متابعة وتجهيز أولي",
+                      "validity": "حتى التأكيد",
+                      "turnaround": "بحسب الحالة"
+                    }
+                  ],
+                  "contactNote": "راسلنا عبر واتساب لنرتب لك الخدمة الأنسب ونوضح لك الخطوات المطلوبة."
+                },
+                {
+                  "slug": "external",
+                  "label": "جواز خارجي",
+                  "requirements": [
+                    "صورة الجواز أو البيانات الأساسية",
+                    "بلد الإقامة الحالية",
+                    "المدينة أو البعثة المطلوبة",
+                    "وسيلة تواصل سريعة"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "تنسيق موعد خارجي",
+                      "validity": "بحسب الجهة",
+                      "turnaround": "خلال يوم واحد"
+                    },
+                    {
+                      "name": "متابعة حتى تثبيت الموعد",
+                      "validity": "حتى التأكيد",
+                      "turnaround": "بحسب الحالة"
+                    }
+                  ],
+                  "contactNote": "تواصل معنا عبر واتساب لنرتب لك حجز الجواز الخارجي ونوضح لك ما يلزم قبل البدء."
+                }
+              ],
+              "image": "https://images.pexels.com/photos/33497885/pexels-photo-33497885.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "imageAlt": "جوازات سفر ووثائق سفر مرتبة على طاولة لخدمة إصدار وتجديد جواز السفر",
+              "landmarkImage": "https://images.pexels.com/photos/32642491/pexels-photo-32642491.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "landmarkAlt": "جواز سفر مع مستندات وبطاقات سفر بشكل يناسب خدمات إصدار وتجديد جواز السفر",
+              "requirementsImage": "https://images.pexels.com/photos/7235894/pexels-photo-7235894.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "requirementsImageAlt": "جواز سفر فوق دفتر ملاحظات ضمن تجهيز معاملة جواز السفر",
+              "servicesImage": "https://images.pexels.com/photos/13080790/pexels-photo-13080790.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "servicesImageAlt": "جواز سفر على طاولة خشبية مع هاتف ضمن خدمة إصدار وتجديد جواز السفر",
+              "imagePosition": "center center",
+              "landmarkPosition": "center center",
+              "requirementsPosition": "center center",
+              "servicesPosition": "center center"
+            },
+            {
+              "slug": "hotel-booking",
+              "title": "الحجز الفندقي",
+              "shortLabel": "حجز فندقي",
+              "summary": "حجز فنادق مناسب لميزانيتك وموقعك المفضل مع خيارات أوضح ومتابعة أسرع قبل التأكيد.",
+              "heroTag": "خدمة متاحة",
+              "description": "استمتع بالإقامة في أهم الفنادق العالمية التي تناسب ميزانيتك",
+              "requirementsTitle": "ما نحتاجه للبدء",
+              "requirements": [
+                "الوجهة أو المدينة المطلوبة",
+                "تاريخ الدخول والخروج",
+                "عدد النزلاء والغرف",
+                "نوع الغرفة أو مستوى الفندق المطلوب"
+              ],
+              "servicesTitle": "الخدمات المتاحة",
+              "offerings": [
+                {
+                  "name": "حجز فندقي فردي أو عائلي",
+                  "validity": "بحسب مدة الإقامة",
+                  "turnaround": "خلال يوم واحد"
+                },
+                {
+                  "name": "مقارنة خيارات الفنادق والأسعار",
+                  "validity": "بحسب الطلب",
+                  "turnaround": "بحسب الحالة"
+                }
+              ],
+              "contactNote": "راسلنا عبر واتساب لنرشح لك الفندق الأنسب حسب الميزانية والموقع ونوضح لك تفاصيل الحجز قبل التأكيد.",
+              "image": "https://images.pexels.com/photos/30722813/pexels-photo-30722813.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "imageAlt": "غرفة فندقية مرتبة بإطلالة مريحة ضمن خدمة الحجز الفندقي",
+              "landmarkImage": "https://images.pexels.com/photos/14036250/pexels-photo-14036250.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "landmarkAlt": "موظفة استقبال في فندق توضح أجواء خدمة الحجز الفندقي",
+              "requirementsImage": "https://images.pexels.com/photos/7512139/pexels-photo-7512139.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "requirementsImageAlt": "استقبال فندقي مع عميلة لتوضيح متطلبات الحجز الفندقي",
+              "servicesImage": "https://images.pexels.com/photos/5137964/pexels-photo-5137964.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "servicesImageAlt": "عميلة تستكمل إجراءات تسجيل الوصول في فندق ضمن خدمات الحجز الفندقي",
+              "imagePosition": "center center",
+              "landmarkPosition": "center center",
+              "requirementsPosition": "center center",
+              "servicesPosition": "center center"
+            },
+            {
+              "slug": "land-transport",
+              "title": "النقل البري",
+              "shortLabel": "نقل بري",
+              "summary": "تنسيق نقل بري مريح وواضح بين المطار والفندق أو بين المدن مع متابعة أسرع قبل التثبيت.",
+              "heroTag": "خدمة متاحة",
+              "description": "هذا الخيار مناسب لمن يحتاج وسيلة نقل برية مرتبة وواضحة ضمن الرحلة، سواء للاستقبال من المطار أو للتنقل بين المدن أو لترتيب مشاوير خاصة براحة أكبر.",
+              "requirementsTitle": "ما نحتاجه للبدء",
+              "requirements": [
+                "مكان الانطلاق والوصول",
+                "تاريخ ووقت النقل",
+                "عدد المسافرين والحقائب",
+                "نوع المركبة المطلوبة أو مستوى الخدمة"
+              ],
+              "servicesTitle": "الخدمات المتاحة",
+              "offerings": [
+                {
+                  "name": "استقبال وتوصيل من وإلى المطار",
+                  "validity": "بحسب الحجز",
+                  "turnaround": "خلال يوم واحد"
+                },
+                {
+                  "name": "تنسيق تنقلات خاصة أو بين المدن",
+                  "validity": "بحسب الطلب",
+                  "turnaround": "بحسب الحالة"
+                }
+              ],
+              "contactNote": "راسلنا عبر واتساب لنرتب لك خيار النقل البري الأنسب ونوضح لك تفاصيل السيارة أو الرحلة قبل التأكيد.",
+              "image": "https://images.pexels.com/photos/7263971/pexels-photo-7263971.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "imageAlt": "حافلة نقل بري تسير على طريق جبلي ضمن خدمة النقل البري",
+              "landmarkImage": "https://images.pexels.com/photos/27081934/pexels-photo-27081934.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "landmarkAlt": "حافلات مصطفة في محطة نقل تمثل خدمات النقل البري المنظمة",
+              "requirementsImage": "https://images.pexels.com/photos/28145274/pexels-photo-28145274.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "requirementsImageAlt": "مركبة نقل قرب المطار لتوضيح متطلبات خدمة النقل البري",
+              "servicesImage": "https://images.pexels.com/photos/11565580/pexels-photo-11565580.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "servicesImageAlt": "سيارات أجرة مصطفة لدعم خدمات النقل البري والتنقلات",
+              "imagePosition": "center center",
+              "landmarkPosition": "center center",
+              "requirementsPosition": "center center",
+              "servicesPosition": "center center"
+            },
+            {
+              "slug": "health-insurance",
+              "title": "التأمين الصحي",
+              "shortLabel": "تأمين صحي",
+              "summary": "تأمين صحي مناسب للسفر أو لمتطلبات التأشيرة مع خطوات أوضح واختيار أدق للتغطية.",
+              "heroTag": "خدمة متاحة",
+              "description": "هذا الخيار مناسب لمن يحتاج تأميناً صحياً للسفر أو لمتطلبات السفارة أو للاطمئنان الطبي أثناء الرحلة، مع توضيح نوع التغطية والمطلوب قبل الإصدار.",
+              "requirementsTitle": "ما نحتاجه للبدء",
+              "requirements": [
+                "الاسم الكامل كما في الجواز",
+                "صورة الجواز أو البيانات الأساسية",
+                "وجهة السفر والتاريخ التقريبي",
+                "عدد المسافرين أو تفاصيل مقدم الطلب"
+              ],
+              "servicesTitle": "الخدمات المتاحة",
+              "offerings": [
+                {
+                  "name": "تأمين طبي للسفر",
+                  "validity": "بحسب مدة الرحلة",
+                  "turnaround": "خلال يوم واحد"
+                },
+                {
+                  "name": "اختيار التغطية المناسبة ومراجعة التفاصيل",
+                  "validity": "بحسب الطلب",
+                  "turnaround": "بحسب الحالة"
+                }
+              ],
+              "contactNote": "راسلنا عبر واتساب لنحدد لك نوع التأمين الصحي الأنسب ونوضح لك التغطية والمطلوب قبل الإصدار.",
+              "image": "https://images.pexels.com/photos/8413288/pexels-photo-8413288.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "imageAlt": "طبيب ومريضة يراجعان أوراقاً طبية في عيادة ضمن خدمة التأمين الصحي",
+              "landmarkImage": "https://images.pexels.com/photos/8383904/pexels-photo-8383904.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "landmarkAlt": "هاتف يعرض جوازاً صحياً مع مستلزمات طبية مرتبطة بالسفر والتأمين الصحي",
+              "requirementsImage": "https://images.pexels.com/photos/8413176/pexels-photo-8413176.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "requirementsImageAlt": "توقيع نموذج طبي داخل عيادة لتوضيح متطلبات التأمين الصحي",
+              "servicesImage": "https://images.pexels.com/photos/7088483/pexels-photo-7088483.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "servicesImageAlt": "طبيب يراجع أوراقاً طبية لتوضيح خدمات إصدار التأمين الصحي",
+              "imagePosition": "center center",
+              "landmarkPosition": "center center",
+              "requirementsPosition": "center center",
+              "servicesPosition": "center center"
+            },
+          ],
+          "previewImage": "https://images.pexels.com/photos/32060712/pexels-photo-32060712.jpeg?auto=compress&cs=tinysrgb&w=1600",
+          "previewImageAlt": "جوازات سفر ومستندات سفر مرتبة بشكل يناسب خدمات حجز الجوازات",
           "previewImagePosition": "center center"
         }
       ]
@@ -777,7 +1629,7 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
       "ctaTitle": "Start with the right service immediately",
       "ctaSubtitle": "Message us on WhatsApp and we will guide you straight to the service, destination, or booking path that fits your request best.",
       "ctaBtn": "Contact on WhatsApp",
-      "whatsapp": "971501234567",
+      "whatsapp": "963960641428",
       "services": [
         {
           "slug": "visa-residency",
@@ -801,30 +1653,95 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
               "slug": "oman",
               "title": "Oman",
               "shortLabel": "Oman",
-              "summary": "A first example of a destination page with requirements and service options.",
+              "summary": "Clear Oman options with simpler steps and organized requirements.",
               "heroTag": "Available option",
-              "description": "This is a starter layout showing how a destination page can hold a short overview, required documents, and available services.",
+              "description": "Oman services are presented in a cleaner way so you can review options quickly and start with more confidence.",
               "requirementsTitle": "Official requirements",
               "requirements": [
-                "Valid passport",
-                "Recent personal photo",
-                "ID or residency copy when needed",
-                "Travel details or initial booking information"
+                "Passport copy",
+                "White-background personal photo"
               ],
               "servicesTitle": "Available services",
               "offerings": [
                 {
-                  "name": "Tourist visa",
-                  "validity": "30 days",
-                  "turnaround": "3 - 5 days"
+                  "name": "Tourist",
+                  "validity": "Depends on the procedure",
+                  "turnaround": "10 - 20 working days"
                 },
                 {
-                  "name": "Visit visa",
-                  "validity": "14 days",
-                  "turnaround": "2 - 4 days"
+                  "name": "Annual with residency",
+                  "validity": "Annual",
+                  "turnaround": "20 - 30 working days"
                 }
               ],
               "contactNote": "You can request this service by contacting us directly on WhatsApp.",
+              "nationalityVariants": [
+                {
+                  "slug": "syrian",
+                  "label": "Syrian",
+                  "requirements": [
+                    "Passport copy",
+                    "White-background personal photo"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "Tourist",
+                      "validity": "Depends on the procedure",
+                      "turnaround": "10 - 20 working days"
+                    },
+                    {
+                      "name": "Annual with residency",
+                      "validity": "Annual",
+                      "turnaround": "20 - 30 working days"
+                    }
+                  ],
+                  "contactNote": "You can request this service by contacting us directly on WhatsApp."
+                },
+                {
+                  "slug": "iraqi",
+                  "label": "Iraqi",
+                  "requirements": [
+                    "Passport copy",
+                    "White-background personal photo",
+                    "Unified card"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "10 days",
+                      "validity": "10 days",
+                      "turnaround": "2 - 4 working days"
+                    },
+                    {
+                      "name": "30 days",
+                      "validity": "30 days",
+                      "turnaround": "2 - 4 working days"
+                    },
+                    {
+                      "name": "60 days",
+                      "validity": "60 days",
+                      "turnaround": "2 - 4 working days"
+                    }
+                  ],
+                  "contactNote": "Switch nationality, then contact us on WhatsApp so we can arrange the right Oman option for your case."
+                },
+                {
+                  "slug": "syrian-uae-resident",
+                  "label": "Syrian with UAE residency",
+                  "requirements": [
+                    "Passport copy",
+                    "White-background personal photo",
+                    "Residency copy"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "Tourist",
+                      "validity": "Depends on the procedure",
+                      "turnaround": "Case-based"
+                    }
+                  ],
+                  "contactNote": "For Oman services related to Syrian clients holding UAE residency, contact us on WhatsApp so we can clarify what is currently available for your case."
+                }
+              ],
               "image": "/images/visa/oman-card.jpg",
               "imageAlt": "Muscat Corniche in Oman",
               "landmarkImage": "https://images.pexels.com/photos/35738331/pexels-photo-35738331.jpeg?auto=compress&cs=tinysrgb&w=1600",
@@ -842,30 +1759,117 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
               "slug": "uae",
               "title": "United Arab Emirates",
               "shortLabel": "UAE",
-              "summary": "An initial structure for visa types with clear documents and a clean path.",
+              "summary": "Clear UAE options with simpler steps and the main documents upfront.",
               "heroTag": "Available option",
-              "description": "A dedicated page explaining core requirements and available service types, while keeping the content visually clean.",
+              "description": "UAE services are presented in a short, clear format to help you choose the right path without extra complexity.",
               "requirementsTitle": "Official requirements",
               "requirements": [
                 "Passport copy",
-                "Clear personal photo",
-                "Applicant details",
+                "Clear white-background personal photo",
+                "Outer passport cover copy",
                 "Initial booking if required"
               ],
               "servicesTitle": "Available services",
               "offerings": [
                 {
-                  "name": "Tourist visa",
-                  "validity": "30 days",
-                  "turnaround": "2 - 4 days"
+                  "name": "Entertainment visa",
+                  "validity": "Depends on the request type",
+                  "turnaround": "24 hours - 5 days"
                 },
                 {
-                  "name": "Residency extension",
-                  "validity": "Case-based",
-                  "turnaround": "3 - 6 days"
+                  "name": "Family sponsorship",
+                  "validity": "Depends on the procedure",
+                  "turnaround": "Case-based"
+                },
+                {
+                  "name": "Residency from inside the country",
+                  "validity": "Depends on the procedure",
+                  "turnaround": "Case-based"
+                },
+                {
+                  "name": "One-month visa",
+                  "validity": "30 days",
+                  "turnaround": "24 hours - 5 days"
+                },
+                {
+                  "name": "Two-month visa",
+                  "validity": "60 days",
+                  "turnaround": "24 hours - 5 days"
                 }
               ],
               "contactNote": "For final guidance, contact us directly on WhatsApp.",
+              "nationalityVariants": [
+                {
+                  "slug": "syrian",
+                  "label": "Syrian",
+                  "requirements": [
+                    "Passport copy",
+                    "Clear white-background personal photo",
+                    "Outer passport cover copy",
+                    "Initial booking if required"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "Entertainment visa",
+                      "validity": "Depends on the request type",
+                      "turnaround": "24 hours - 5 days"
+                    },
+                    {
+                      "name": "Family sponsorship",
+                      "validity": "Depends on the procedure",
+                      "turnaround": "Case-based"
+                    },
+                    {
+                      "name": "Residency from inside the country",
+                      "validity": "Depends on the procedure",
+                      "turnaround": "Case-based"
+                    },
+                    {
+                      "name": "One-month visa",
+                      "validity": "30 days",
+                      "turnaround": "24 hours - 5 days"
+                    },
+                    {
+                      "name": "Two-month visa",
+                      "validity": "60 days",
+                      "turnaround": "24 hours - 5 days"
+                    }
+                  ],
+                  "contactNote": "For final guidance, contact us directly on WhatsApp."
+                },
+                {
+                  "slug": "iraqi",
+                  "label": "Iraqi",
+                  "requirements": [
+                    "Passport copy",
+                    "National ID",
+                    "White-background personal photo"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "One-month visa",
+                      "validity": "30 days",
+                      "turnaround": "2 - 3 working days"
+                    },
+                    {
+                      "name": "One-month visa VIP",
+                      "validity": "30 days",
+                      "turnaround": "24 hours"
+                    },
+                    {
+                      "name": "Two-month visa (single entry)",
+                      "validity": "60 days",
+                      "turnaround": "2 - 3 working days"
+                    },
+                    {
+                      "name": "Two-month visa (multiple entry)",
+                      "validity": "60 days",
+                      "turnaround": "2 - 3 working days"
+                    }
+                  ],
+                  "contactNote": "Choose your nationality, then contact us on WhatsApp so we can guide you to the right UAE process."
+                }
+              ],
               "image": "/images/visa/uae-card.jpg",
               "imageAlt": "Dubai Creek in the United Arab Emirates",
               "landmarkImage": "https://images.pexels.com/photos/32364200/pexels-photo-32364200.jpeg?auto=compress&cs=tinysrgb&w=1600",
@@ -883,30 +1887,55 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
               "slug": "saudi",
               "title": "Saudi Arabia",
               "shortLabel": "Saudi",
-              "summary": "A structured sub-page for requirements and available service types.",
+              "summary": "Saudi options with clear requirements and a smoother starting point.",
               "heroTag": "Available option",
-              "description": "This example shows how multiple offerings inside one destination can stay organized and expandable.",
+              "description": "Saudi services are organized to make comparison easier and help you move to the right option faster.",
               "requirementsTitle": "Official requirements",
               "requirements": [
-                "Valid passport",
-                "Personal photo",
-                "Job information when needed",
-                "Contact details"
+                "Passport copy",
+                "White-background personal photo",
+                "Gulf residency valid for 3 months",
+                "Gulf ID"
               ],
               "servicesTitle": "Available services",
               "offerings": [
                 {
-                  "name": "Visit visa",
-                  "validity": "30 days",
-                  "turnaround": "4 - 7 days"
+                  "name": "Tourist for Gulf residency holders",
+                  "validity": "Depends on the procedure",
+                  "turnaround": "48 hours"
                 },
                 {
-                  "name": "Business visa",
-                  "validity": "90 days",
-                  "turnaround": "5 - 8 days"
+                  "name": "Umrah",
+                  "validity": "Depends on the procedure",
+                  "turnaround": "15 working days"
                 }
               ],
-              "contactNote": "Message us on WhatsApp to start or to choose the right service type.",
+              "contactNote": "Message us on WhatsApp to start your Saudi request or to choose the right option based on your nationality and residency status.",
+              "nationalityVariants": [
+                {
+                  "slug": "syrian",
+                  "label": "Syrian",
+                  "requirements": [
+                    "Passport copy",
+                    "White-background personal photo",
+                    "Gulf residency valid for 3 months",
+                    "Gulf ID"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "Tourist for Gulf residency holders",
+                      "validity": "Depends on the procedure",
+                      "turnaround": "48 hours"
+                    },
+                    {
+                      "name": "Umrah",
+                      "validity": "Depends on the procedure",
+                      "turnaround": "15 working days"
+                    }
+                  ],
+                  "contactNote": "Message us on WhatsApp to start your Saudi request or to choose the right option based on your nationality and residency status."
+                }
+              ],
               "image": "/images/visa/saudi-card.png",
               "imageAlt": "Hegra in AlUla, Saudi Arabia",
               "landmarkImage": "/images/visa/saudi-landmark.jpg",
@@ -919,11 +1948,418 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
               "landmarkPosition": "center center",
               "requirementsPosition": "center center",
               "servicesPosition": "center center"
+            },
+            {
+              "slug": "lebanon",
+              "title": "Lebanon",
+              "shortLabel": "Lebanon",
+              "summary": "Lebanon options presented more clearly, with simple requirements and faster review.",
+              "heroTag": "Available option",
+              "description": "Lebanon services are presented in a shorter, cleaner way so the right option is easier to review and start.",
+              "requirementsTitle": "Official requirements",
+              "requirements": [
+                "Passport copy",
+                "Or personal ID copy"
+              ],
+              "servicesTitle": "Available services",
+              "offerings": [
+                {
+                  "name": "48-hour visa",
+                  "validity": "Depends on the procedure",
+                  "turnaround": "48 hours (scheduled slot)"
+                },
+                {
+                  "name": "One-month visa",
+                  "validity": "Depends on the procedure",
+                  "turnaround": "2 - 7 days"
+                },
+                {
+                  "name": "Residency",
+                  "validity": "Depends on the procedure",
+                  "turnaround": "20 days"
+                }
+              ],
+              "contactNote": "Message us on WhatsApp to start your Lebanon request or to choose the right service for your case.",
+              "nationalityVariants": [
+                {
+                  "slug": "syrian",
+                  "label": "Syrian",
+                  "requirements": [
+                    "Passport copy",
+                    "Or personal ID copy"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "48-hour visa",
+                      "validity": "Depends on the procedure",
+                      "turnaround": "48 hours (scheduled slot)"
+                    },
+                    {
+                      "name": "One-month visa",
+                      "validity": "Depends on the procedure",
+                      "turnaround": "2 - 7 days"
+                    },
+                    {
+                      "name": "Residency",
+                      "validity": "Depends on the procedure",
+                      "turnaround": "20 days"
+                    }
+                  ],
+                  "contactNote": "Message us on WhatsApp to start your Lebanon request or to choose the right service for your case."
+                }
+              ],
+              "image": "https://upload.wikimedia.org/wikipedia/commons/1/10/Central_Beirut%2C_Lebanon.jpg",
+              "imageAlt": "Real view of central Beirut in Lebanon",
+              "landmarkImage": "https://upload.wikimedia.org/wikipedia/commons/1/13/Beirut_Corniche%2C_Beirut%2C_Lebanon.jpg",
+              "landmarkAlt": "Beirut Corniche in Lebanon",
+              "requirementsImage": "https://upload.wikimedia.org/wikipedia/commons/4/4b/BeirutNejemah.jpg",
+              "requirementsImageAlt": "Nejmeh Square in Beirut",
+              "servicesImage": "https://upload.wikimedia.org/wikipedia/commons/8/8c/A_sunset_on_the_Mediterranean_sea%2C_Pigeon_Rocks%2C_Beirut%2C_Lebanon.jpg",
+              "servicesImageAlt": "Pigeon Rocks at sunset in Beirut",
+              "imagePosition": "center center",
+              "landmarkPosition": "center center",
+              "requirementsPosition": "center center",
+              "servicesPosition": "center center"
+            },
+            {
+              "slug": "indonesia",
+              "title": "Indonesia",
+              "shortLabel": "Indonesia",
+              "summary": "Indonesia options with clear paths, simple requirements, and easy review.",
+              "heroTag": "Available option",
+              "description": "Indonesia services are organized clearly so you can compare the paths quickly and move forward with less friction.",
+              "requirementsTitle": "Official requirements",
+              "requirements": [
+                "Passport copy",
+                "White-background personal photo"
+              ],
+              "servicesTitle": "Available services",
+              "offerings": [
+                {
+                  "name": "Tourist visa",
+                  "validity": "Depends on the procedure",
+                  "turnaround": "10 to 15 working days"
+                },
+                {
+                  "name": "Investment residency",
+                  "validity": "Depends on the procedure",
+                  "turnaround": "25 days"
+                },
+                {
+                  "name": "Remote Worker residency",
+                  "validity": "Depends on the procedure",
+                  "turnaround": "25 days"
+                }
+              ],
+              "contactNote": "Message us on WhatsApp to start your Indonesia request or to choose the right option based on your nationality.",
+              "nationalityVariants": [
+                {
+                  "slug": "syrian",
+                  "label": "Syrian",
+                  "requirements": [
+                    "Passport copy",
+                    "White-background personal photo"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "Tourist visa",
+                      "validity": "Depends on the procedure",
+                      "turnaround": "10 to 15 working days"
+                    },
+                    {
+                      "name": "Investment residency",
+                      "validity": "Depends on the procedure",
+                      "turnaround": "25 days"
+                    },
+                    {
+                      "name": "Remote Worker residency",
+                      "validity": "Depends on the procedure",
+                      "turnaround": "25 days"
+                    }
+                  ],
+                  "contactNote": "Message us on WhatsApp to start your Indonesia request or to choose the right option based on your nationality."
+                },
+                {
+                  "slug": "iraqi",
+                  "label": "Iraqi",
+                  "requirements": [
+                    "Passport copy",
+                    "White-background personal photo",
+                    "Bank statement for the last 3 to 6 months"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "60-day visa",
+                      "validity": "60 days",
+                      "turnaround": "10 to 15 working days"
+                    },
+                    {
+                      "name": "Fast VIP",
+                      "validity": "Depends on the procedure",
+                      "turnaround": "3 to 5 working days"
+                    }
+                  ],
+                  "contactNote": "Message us on WhatsApp to start your Indonesia request or to choose the right option based on your nationality."
+                }
+              ],
+              "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Jakarta%20Skyline%20Part%202.jpg",
+              "imageAlt": "Real Jakarta skyline in Indonesia",
+              "landmarkImage": "https://commons.wikimedia.org/wiki/Special:FilePath/Borobudur-Nothwest-view.jpg",
+              "landmarkAlt": "Borobudur Temple in Indonesia",
+              "requirementsImage": "https://commons.wikimedia.org/wiki/Special:FilePath/Jakarta%20Skyline%20Part%202.jpg",
+              "requirementsImageAlt": "Real Jakarta skyline in Indonesia",
+              "servicesImage": "https://commons.wikimedia.org/wiki/Special:FilePath/Borobudur-Nothwest-view.jpg",
+              "servicesImageAlt": "Real travel landmark scene from Indonesia",
+              "imagePosition": "center center",
+              "landmarkPosition": "center center",
+              "requirementsPosition": "center center",
+              "servicesPosition": "center center"
+            },
+            {
+              "slug": "jordan",
+              "title": "Jordan",
+              "shortLabel": "Jordan",
+              "summary": "Jordan options with clearer steps, simple requirements, and faster review.",
+              "heroTag": "Available option",
+              "description": "Jordan services are arranged in a clean, direct way to help you review options and move faster.",
+              "requirementsTitle": "Official requirements",
+              "requirements": [
+                "Passport copy",
+                "White-background personal photo"
+              ],
+              "servicesTitle": "Available services",
+              "offerings": [
+                {
+                  "name": "Tourist and embassy",
+                  "validity": "Depends on the procedure",
+                  "turnaround": "10 to 15 days"
+                }
+              ],
+              "contactNote": "Message us on WhatsApp to start your Jordan request or to choose the right option based on your nationality.",
+              "nationalityVariants": [
+                {
+                  "slug": "syrian",
+                  "label": "Syrian",
+                  "requirements": [
+                    "Passport copy",
+                    "White-background personal photo",
+                    "Sponsor ID inside Jordan when available"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "Tourist and embassy",
+                      "validity": "Depends on the procedure",
+                      "turnaround": "10 to 15 days"
+                    }
+                  ],
+                  "contactNote": "Message us on WhatsApp to start your Jordan request or to choose the right option based on your nationality."
+                },
+                {
+                  "slug": "iraqi",
+                  "label": "Iraqi",
+                  "requirements": [
+                    "Passport copy",
+                    "White-background personal photo"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "Electronic free visa",
+                      "validity": "One month",
+                      "turnaround": "10 to 15 working days"
+                    },
+                    {
+                      "name": "Urgent VIP",
+                      "validity": "One month",
+                      "turnaround": "24 hours"
+                    },
+                    {
+                      "name": "Fast VIP",
+                      "validity": "One month",
+                      "turnaround": "4 to 6 working days"
+                    },
+                    {
+                      "name": "Multiple 6 months",
+                      "validity": "6 months",
+                      "turnaround": "10 to 12 working days"
+                    }
+                  ],
+                  "contactNote": "Message us on WhatsApp to start your Jordan request or to choose the right option based on your nationality."
+                }
+              ],
+              "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/New_Abdali_2024.png/1280px-New_Abdali_2024.png",
+              "imageAlt": "Real view of New Abdali in Amman, Jordan",
+              "landmarkImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Treasury_petra_crop.jpeg/1280px-Treasury_petra_crop.jpeg",
+              "landmarkAlt": "The Treasury at Petra in Jordan",
+              "requirementsImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Oval_Plaza_%28Forum_Romanum%2C_Gerasa_-_Jerash%2C_Jordan%29_-_%D8%B3%D8%A7%D8%AD%D8%A9_%D8%A7%D9%84%D9%86%D8%AF%D9%88%D8%A9%2C_%D8%AC%D8%B1%D8%B4.jpg/1280px-Oval_Plaza_%28Forum_Romanum%2C_Gerasa_-_Jerash%2C_Jordan%29_-_%D8%B3%D8%A7%D8%AD%D8%A9_%D8%A7%D9%84%D9%86%D8%AF%D9%88%D8%A9%2C_%D8%AC%D8%B1%D8%B4.jpg",
+              "requirementsImageAlt": "The Oval Plaza in Jerash, Jordan",
+              "servicesImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Treasury_petra_crop.jpeg/1280px-Treasury_petra_crop.jpeg",
+              "servicesImageAlt": "Real Petra landmark scene in Jordan",
+              "imagePosition": "center center",
+              "landmarkPosition": "center center",
+              "requirementsPosition": "center center",
+              "servicesPosition": "center center"
+            },
+            {
+              "slug": "erbil",
+              "title": "Erbil",
+              "shortLabel": "Erbil",
+              "summary": "Erbil options presented clearly, with organized requirements and simple next steps.",
+              "heroTag": "Available option",
+              "description": "Erbil services are presented in a direct, practical way so the next step feels easier and clearer.",
+              "requirementsTitle": "Official requirements",
+              "requirements": [
+                "Passport",
+                "Previous residency when renewing",
+                "Personal photo",
+                "Spouse residency copy for family reunification",
+                "Marriage contract copy",
+                "Family book copy for children",
+                "Original employment confirmation",
+                "Original housing confirmation"
+              ],
+              "servicesTitle": "Available services",
+              "offerings": [
+                {
+                  "name": "For European residency holders",
+                  "validity": "Depends on the procedure",
+                  "turnaround": "48 hours - 7 days"
+                },
+                {
+                  "name": "Residency renewal for 6 months or annual",
+                  "validity": "6 months or annual",
+                  "turnaround": "25 days"
+                },
+                {
+                  "name": "Family reunification visa",
+                  "validity": "Depends on the procedure",
+                  "turnaround": "One month or more"
+                }
+              ],
+              "contactNote": "Message us on WhatsApp to start your Erbil request or to choose the right option for your case.",
+              "nationalityVariants": [
+                {
+                  "slug": "syrian",
+                  "label": "Syrian",
+                  "requirements": [
+                    "Passport",
+                    "Previous residency when renewing",
+                    "Personal photo",
+                    "Spouse residency copy for family reunification",
+                    "Marriage contract copy",
+                    "Family book copy for children",
+                    "Original employment confirmation",
+                    "Original housing confirmation"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "For European residency holders",
+                      "validity": "Depends on the procedure",
+                      "turnaround": "48 hours - 7 days"
+                    },
+                    {
+                      "name": "Residency renewal for 6 months or annual",
+                      "validity": "6 months or annual",
+                      "turnaround": "25 days"
+                    },
+                    {
+                      "name": "Family reunification visa",
+                      "validity": "Depends on the procedure",
+                      "turnaround": "One month or more"
+                    }
+                  ],
+                  "contactNote": "Message us on WhatsApp to start your Erbil request or to choose the right option for your case."
+                }
+              ],
+              "image": "https://images.unsplash.com/photo-1585923130831-2878d611614b?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGVyYmlsfGVufDB8fDB8fHww&ixlib=rb-4.1.0&q=60&w=3000",
+              "imageAlt": "Real night view of Erbil",
+              "landmarkImage": "https://images.unsplash.com/photo-1707590713835-67b4bc23fa4d?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZXJiaWx8ZW58MHx8MHx8fDA%3D&ixlib=rb-4.1.0&q=60&w=3000",
+              "landmarkAlt": "The Erbil Citadel in a real city view",
+              "requirementsImage": "https://images.unsplash.com/photo-1588379674354-8c9c0ee60e10?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZXJiaWx8ZW58MHx8MHx8fDA%3D&ixlib=rb-4.1.0&q=60&w=3000",
+              "requirementsImageAlt": "A real central square in Erbil",
+              "servicesImage": "https://media.istockphoto.com/id/2205829767/photo/the-most-famous-mosque-in-the-city-of-erbil-arbil-kurdistan-region-of-iraq-jalil-khayat.webp?a=1&b=1&c=VZ8eNS7XvUjhyn9i3Rr42IFYmnzHosYw2jzwiCe0zGk%3D&k=20&s=612x612&w=0",
+              "servicesImageAlt": "Jalil Khayat Mosque in Erbil",
+              "imagePosition": "center center",
+              "landmarkPosition": "center center",
+              "requirementsPosition": "center center",
+              "servicesPosition": "center center"
+            },
+            {
+              "slug": "baghdad",
+              "title": "Baghdad",
+              "shortLabel": "Baghdad",
+              "summary": "Baghdad options presented clearly, with organized requirements and simple next steps.",
+              "heroTag": "Available option",
+              "description": "Baghdad services are organized clearly so you can review the paths quickly and start with less back-and-forth.",
+              "requirementsTitle": "Official requirements",
+              "requirements": [
+                "Passport copy",
+                "White-background personal photo"
+              ],
+              "servicesTitle": "Available services",
+              "offerings": [
+                {
+                  "name": "Two-month visa",
+                  "validity": "Two months",
+                  "turnaround": "40 days"
+                },
+                {
+                  "name": "Annual residency",
+                  "validity": "Annual",
+                  "turnaround": "50 - 60 working days"
+                },
+                {
+                  "name": "Annual visa and residency",
+                  "validity": "Annual",
+                  "turnaround": "60 days (inside Baghdad)"
+                }
+              ],
+              "contactNote": "Message us on WhatsApp to start your Baghdad request or to choose the right option for your case.",
+              "nationalityVariants": [
+                {
+                  "slug": "syrian",
+                  "label": "Syrian",
+                  "requirements": [
+                    "Passport copy",
+                    "White-background personal photo"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "Two-month visa",
+                      "validity": "Two months",
+                      "turnaround": "40 days"
+                    },
+                    {
+                      "name": "Annual residency",
+                      "validity": "Annual",
+                      "turnaround": "50 - 60 working days"
+                    },
+                    {
+                      "name": "Annual visa and residency",
+                      "validity": "Annual",
+                      "turnaround": "60 days (inside Baghdad)"
+                    }
+                  ],
+                  "contactNote": "Message us on WhatsApp to start your Baghdad request or to choose the right option for your case."
+                }
+              ],
+              "image": "https://idsb.tmgrup.com.tr/ly/uploads/images/2021/08/17/136874.jpg",
+              "imageAlt": "Real aerial view of Baghdad and the Tigris River",
+              "landmarkImage": "https://i.pinimg.com/736x/f6/83/09/f68309753b1cbbe726d1d1c76eae9f67.jpg",
+              "landmarkAlt": "A prominent tower in a real Baghdad city scene",
+              "requirementsImage": "https://www.xinhuanet.com/english/2020-01/08/138686613_15784413485421n.jpg",
+              "requirementsImageAlt": "Real Baghdad skyline at sunset",
+              "servicesImage": "https://i.pinimg.com/736x/16/d7/70/16d770ba4db40c9702d1418eb3308d42.jpg",
+              "servicesImageAlt": "A mosque in Baghdad within a real urban scene",
+              "imagePosition": "center center",
+              "landmarkPosition": "center center",
+              "requirementsPosition": "center center",
+              "servicesPosition": "center center"
             }
           ],
-          "previewImage": "/images/visa/uae-card.jpg",
-          "previewImageAlt": "Real UAE scene related to visa and residency services",
-          "previewImagePosition": "center center"
+          "previewImage": "https://images.pexels.com/photos/33497885/pexels-photo-33497885.jpeg?auto=compress&cs=tinysrgb&w=1600",
+          "previewImageAlt": "Passports and travel documents arranged on a table for visa and residency services",
+          "previewImagePosition": "center center",
+          "audiences": visaAudiencesEn
         },
         {
           "slug": "flight-booking",
@@ -1074,57 +2510,57 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
         {
           "slug": "study-abroad",
           "icon": "globe",
-          "title": "Study Abroad",
-          "eyebrow": "Clearer path",
-          "summary": "Study-abroad routes organized by destination or program, giving the service a cleaner structure and more scalable presentation.",
-          "detail": "This service needs both clarity and persuasion, so each country or route is separated into its own page to help the client understand the path from the start.",
+          "title": "Group Tours",
+          "eyebrow": "Organized trips",
+          "summary": "Group tours with clearer programs and more travel-led imagery, making it easier to choose the right trip.",
+          "detail": "We turn the trip into a clear program, from destination choice to booking details and follow-up.",
           "highlights": [
-            "Clear separation by country or program",
-            "Easier client understanding before applying",
-            "Scalable structure for future expansion"
+            "Ready-made and easy-to-read programs",
+            "Smoother planning for groups and families",
+            "A stronger sense of the real trip experience"
           ],
-          "cardCta": "View programs",
-          "heroTitle": "Study abroad, with a clearer path from first inquiry",
-          "heroSubtitle": "We structure destinations and education routes to help clients see the right fit earlier, then move into requirements and next steps with confidence.",
-          "optionsTitle": "Available destinations and programs",
-          "optionsSubtitle": "Each route explains the initial requirements, the support we provide, and the practical path the client can expect next.",
+          "cardCta": "View trips",
+          "heroTitle": "Group tours arranged for easier, more enjoyable travel",
+          "heroSubtitle": "Choose the destination or trip style, then start with a clear program that fits your time and budget.",
+          "optionsTitle": "Destinations and trip styles",
+          "optionsSubtitle": "Each card explains the trip idea, what we need to book it, and what the program includes.",
           "items": [
             {
               "slug": "turkiye",
-              "title": "Study in Turkey",
-              "shortLabel": "Turkey",
-              "summary": "A first example of a program or country page inside the study service.",
-              "heroTag": "Study option",
-              "description": "This page can show a short route summary, initial requirements, and the services we provide around that path.",
-              "requirementsTitle": "Initial requirements",
+              "title": "European City Tours",
+              "shortLabel": "Europe",
+              "summary": "Group trips to European cities with a clear itinerary and essential guided stops.",
+              "heroTag": "Popular trip",
+              "description": "A good fit for travelers who want a structured route through well-known cities and landmarks, with enough time to explore comfortably.",
+              "requirementsTitle": "What we need to book",
               "requirements": [
                 "Passport copy",
-                "Latest academic certificate",
-                "Reliable contact method",
-                "Initial specialization preference"
+                "Approximate travel date",
+                "Number of travelers",
+                "Preferred hotel or room setup"
               ],
-              "servicesTitle": "Available services",
+              "servicesTitle": "What the program includes",
               "offerings": [
                 {
-                  "name": "Initial consultation",
-                  "validity": "One-time",
+                  "name": "Seat in a group tour",
+                  "validity": "By departure date",
                   "turnaround": "Within one day"
                 },
                 {
-                  "name": "Application file follow-up",
-                  "validity": "Per program",
-                  "turnaround": "Case-based"
+                  "name": "Hotel and transfer coordination",
+                  "validity": "Throughout the trip",
+                  "turnaround": "Plan-based"
                 }
               ],
-              "contactNote": "Message us on WhatsApp to begin with the best-fit option.",
-              "image": "https://images.pexels.com/photos/15247433/pexels-photo-15247433.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "imageAlt": "Real university building in Istanbul for study in Turkey",
-              "landmarkImage": "https://images.pexels.com/photos/20483641/pexels-photo-20483641.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "landmarkAlt": "Istanbul University gate in a real Turkey study route scene",
-              "requirementsImage": "https://images.pexels.com/photos/8384827/pexels-photo-8384827.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "requirementsImageAlt": "Historic Istanbul University facade matching study requirements",
-              "servicesImage": "https://images.pexels.com/photos/25389979/pexels-photo-25389979.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "servicesImageAlt": "Real campus scene from Istanbul supporting study in Turkey content",
+              "contactNote": "Message us on WhatsApp and we will send the available itinerary and nearest matching departure.",
+              "image": "https://images.pexels.com/photos/36729289/pexels-photo-36729289.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "imageAlt": "Friends planning a city tour together with a map outdoors",
+              "landmarkImage": "https://images.pexels.com/photos/18999517/pexels-photo-18999517.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "landmarkAlt": "A joyful group of tourists in a European city setting",
+              "requirementsImage": "https://images.pexels.com/photos/10621014/pexels-photo-10621014.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "requirementsImageAlt": "Travelers walking through a European street during a guided trip",
+              "servicesImage": "https://images.pexels.com/photos/30119513/pexels-photo-30119513.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "servicesImageAlt": "Friends exploring a famous city district as part of a travel group",
               "imagePosition": "center center",
               "landmarkPosition": "center center",
               "requirementsPosition": "center center",
@@ -1132,40 +2568,40 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
             },
             {
               "slug": "uk",
-              "title": "Study in Britain",
-              "shortLabel": "Britain",
-              "summary": "A starter page for another education destination with a consistent structure.",
-              "heroTag": "Study option",
-              "description": "A dedicated page for a study destination makes it easier to hold its own content without confusing the user.",
-              "requirementsTitle": "Initial requirements",
+              "title": "Beach and Summer Trips",
+              "shortLabel": "Summer",
+              "summary": "Lighter group programs for beach destinations and coastal city escapes.",
+              "heroTag": "Season favorite",
+              "description": "Built for travelers who want a softer holiday rhythm, this route combines beach time, day outings, and comfortable free time.",
+              "requirementsTitle": "What we need to book",
               "requirements": [
-                "Passport",
-                "Latest certificate",
-                "Language level if available",
-                "Contact details"
+                "Passport copy",
+                "Preferred travel month",
+                "Number of adults and children",
+                "Preferred room type"
               ],
-              "servicesTitle": "Available services",
+              "servicesTitle": "What the program includes",
               "offerings": [
                 {
-                  "name": "Initial evaluation",
-                  "validity": "One-time",
+                  "name": "Hotel with breakfast package",
+                  "validity": "By offer",
                   "turnaround": "Within one day"
                 },
                 {
-                  "name": "Starter file setup",
-                  "validity": "Per destination",
-                  "turnaround": "2 - 5 days"
+                  "name": "Optional daily excursions",
+                  "validity": "During the trip",
+                  "turnaround": "Destination-based"
                 }
               ],
-              "contactNote": "Message us on WhatsApp to identify the right first step.",
-              "image": "https://images.pexels.com/photos/14753324/pexels-photo-14753324.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "imageAlt": "Classic academic building suited to study in Britain",
-              "landmarkImage": "https://images.pexels.com/photos/11796159/pexels-photo-11796159.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "landmarkAlt": "Real London scene with Big Ben representing study in Britain",
-              "requirementsImage": "https://images.pexels.com/photos/11826754/pexels-photo-11826754.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "requirementsImageAlt": "Classic educational facade in London matching initial requirements",
-              "servicesImage": "https://images.pexels.com/photos/16230669/pexels-photo-16230669.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "servicesImageAlt": "Real London city scene supporting study in Britain content",
+              "contactNote": "Message us on WhatsApp and we will share the available summer programs and the closest matching rates.",
+              "image": "https://images.pexels.com/photos/21937731/pexels-photo-21937731.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "imageAlt": "Travelers walking along a sunny beach during a summer group trip",
+              "landmarkImage": "https://images.pexels.com/photos/7938729/pexels-photo-7938729.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "landmarkAlt": "Tourists enjoying a bright beach walk on a coastal holiday",
+              "requirementsImage": "https://images.pexels.com/photos/8760662/pexels-photo-8760662.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "requirementsImageAlt": "A cheerful beach group enjoying a summer travel day",
+              "servicesImage": "https://images.pexels.com/photos/27500850/pexels-photo-27500850.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "servicesImageAlt": "A travel group watching sunset on the beach during a planned trip",
               "imagePosition": "center center",
               "landmarkPosition": "center center",
               "requirementsPosition": "center center",
@@ -1173,48 +2609,48 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
             },
             {
               "slug": "malaysia",
-              "title": "Study in Malaysia",
-              "shortLabel": "Malaysia",
-              "summary": "Another example showing how new countries can slot into the same system.",
-              "heroTag": "Study option",
-              "description": "New countries or program pages can be added through data only, without changing the layout system.",
-              "requirementsTitle": "Initial requirements",
+              "title": "Family and Road Trips",
+              "shortLabel": "Family",
+              "summary": "Trips suited to families or friends, with comfortable movement and a more flexible program.",
+              "heroTag": "Family option",
+              "description": "This route suits travelers who want a lighter pace, with comfortable stops, photo moments, and activities that fit the group.",
+              "requirementsTitle": "What we need to book",
               "requirements": [
                 "Passport copy",
-                "Academic certificate",
-                "Field of interest",
-                "Contact details"
+                "Departure city",
+                "Number of rooms needed",
+                "Approximate budget"
               ],
-              "servicesTitle": "Available services",
+              "servicesTitle": "What the program includes",
               "offerings": [
                 {
-                  "name": "Initial consultation",
-                  "validity": "One-time",
+                  "name": "Family trip coordination",
+                  "validity": "By travel date",
                   "turnaround": "Within one day"
                 },
                 {
-                  "name": "File structuring",
-                  "validity": "Case-based",
-                  "turnaround": "2 - 4 days"
+                  "name": "Flexible day-by-day plan",
+                  "validity": "Throughout the trip",
+                  "turnaround": "Plan-based"
                 }
               ],
-              "contactNote": "Contact us on WhatsApp and we will clarify the right route for you.",
-              "image": "https://images.pexels.com/photos/33196113/pexels-photo-33196113.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "imageAlt": "Real Kuala Lumpur skyline suited to study in Malaysia",
-              "landmarkImage": "https://images.pexels.com/photos/32644036/pexels-photo-32644036.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "landmarkAlt": "Real Kuala Lumpur skyline with iconic towers in Malaysia",
-              "requirementsImage": "https://images.pexels.com/photos/30067522/pexels-photo-30067522.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "requirementsImageAlt": "Kuala Lumpur skyline at sunset matching study requirements in Malaysia",
-              "servicesImage": "https://images.pexels.com/photos/3724019/pexels-photo-3724019.jpeg?auto=compress&cs=tinysrgb&w=1600",
-              "servicesImageAlt": "Real Malaysia city scene supporting study abroad service content",
+              "contactNote": "Message us on WhatsApp and we will shape a comfortable family option that fits the group size and budget.",
+              "image": "https://images.pexels.com/photos/34688454/pexels-photo-34688454.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "imageAlt": "Friends enjoying a scenic road trip beside a van in nature",
+              "landmarkImage": "https://images.pexels.com/photos/14809953/pexels-photo-14809953.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "landmarkAlt": "Family by a van during an outdoor travel stop",
+              "requirementsImage": "https://images.pexels.com/photos/16548855/pexels-photo-16548855.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "requirementsImageAlt": "Family looking over a mountain view during a holiday",
+              "servicesImage": "https://images.pexels.com/photos/7464537/pexels-photo-7464537.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "servicesImageAlt": "Friends enjoying a relaxed road trip inside a vehicle",
               "imagePosition": "center center",
               "landmarkPosition": "center center",
               "requirementsPosition": "center center",
-              "servicesPosition": "center center"
+              "servicesPosition": "center 8%"
             }
           ],
-          "previewImage": "/images/hero/study-abroad-hero.jpg",
-          "previewImageAlt": "International students on a modern university campus",
+          "previewImage": "https://images.pexels.com/photos/36729289/pexels-photo-36729289.jpeg?auto=compress&cs=tinysrgb&w=1600",
+          "previewImageAlt": "Travel group planning a city tour outdoors",
           "previewImagePosition": "center center"
         },
         {
@@ -1362,6 +2798,241 @@ export const servicesContent: Record<Locale, ServicesDictionary> = {
           "previewImage": "/images/hero/goethe-exam.jpg",
           "previewImageAlt": "Language exam preparation materials and academic certificate",
           "previewImagePosition": "center center"
+        },
+        {
+          "slug": "other-services",
+          "icon": "shield",
+          "title": "Other Services",
+          "eyebrow": "Support services",
+          "summary": "Passport booking services with clearer steps and faster follow-up, whether inside the country or abroad.",
+          "detail": "If you need help arranging a passport appointment, we guide you to the right service and help organize the process from the start.",
+          "highlights": [
+            "Clearer appointment flow",
+            "Direct booking and follow-up support",
+            "Internal and external options based on your case"
+          ],
+          "cardCta": "View services",
+          "heroTitle": "Additional services that make passport booking easier",
+          "heroSubtitle": "Choose the right option for your case and begin with a clearer path that saves time.",
+          "optionsTitle": "Passport booking services",
+          "optionsSubtitle": "Each option explains what is needed, what can be arranged, and how to start quickly.",
+          "items": [
+            {
+              "slug": "passport-issuance-renewal",
+              "title": "Passport Issuance and Renewal",
+              "shortLabel": "Passport",
+              "summary": "One service page that helps arrange passport issuance and renewal inside or outside the country.",
+              "heroTag": "Available service",
+              "description": "A single page for passport issuance and renewal, with a clear type switch between internal and external service details.",
+              "requirementsTitle": "Required documents",
+              "requirements": [
+                "Full name",
+                "ID number or basic personal details",
+                "Target city",
+                "Active contact number"
+              ],
+              "servicesTitle": "Available services",
+              "offerings": [
+                {
+                  "name": "Internal appointment arrangement",
+                  "validity": "By appointment",
+                  "turnaround": "Within one day"
+                },
+                {
+                  "name": "Starter follow-up and setup",
+                  "validity": "Until confirmation",
+                  "turnaround": "Case-based"
+                }
+              ],
+              "contactNote": "Message us on WhatsApp and we will guide you to the right service and explain the next steps.",
+              "nationalityVariants": [
+                {
+                  "slug": "internal",
+                  "label": "Internal passport",
+                  "requirements": [
+                    "Full name",
+                    "ID number or basic personal details",
+                    "Target city",
+                    "Active contact number"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "Internal appointment arrangement",
+                      "validity": "By appointment",
+                      "turnaround": "Within one day"
+                    },
+                    {
+                      "name": "Starter follow-up and setup",
+                      "validity": "Until confirmation",
+                      "turnaround": "Case-based"
+                    }
+                  ],
+                  "contactNote": "Message us on WhatsApp and we will guide you to the right service and explain the next steps."
+                },
+                {
+                  "slug": "external",
+                  "label": "External passport",
+                  "requirements": [
+                    "Passport copy or basic details",
+                    "Current country of residence",
+                    "Target city or mission",
+                    "Fast contact method"
+                  ],
+                  "offerings": [
+                    {
+                      "name": "External appointment arrangement",
+                      "validity": "By authority",
+                      "turnaround": "Within one day"
+                    },
+                    {
+                      "name": "Follow-up until confirmation",
+                      "validity": "Until confirmed",
+                      "turnaround": "Case-based"
+                    }
+                  ],
+                  "contactNote": "Contact us on WhatsApp and we will help arrange the external passport booking and explain what is needed before you begin."
+                }
+              ],
+              "image": "https://images.pexels.com/photos/33497885/pexels-photo-33497885.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "imageAlt": "Passports and travel documents arranged on a table for passport issuance and renewal service",
+              "landmarkImage": "https://images.pexels.com/photos/32642491/pexels-photo-32642491.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "landmarkAlt": "Passport with travel documents and cards for passport issuance and renewal service",
+              "requirementsImage": "https://images.pexels.com/photos/7235894/pexels-photo-7235894.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "requirementsImageAlt": "Passport on top of a planner for passport issuance and renewal preparation",
+              "servicesImage": "https://images.pexels.com/photos/13080790/pexels-photo-13080790.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "servicesImageAlt": "Passport on a wooden table with a phone for passport issuance and renewal support",
+              "imagePosition": "center center",
+              "landmarkPosition": "center center",
+              "requirementsPosition": "center center",
+              "servicesPosition": "center center"
+            },
+            {
+              "slug": "hotel-booking",
+              "title": "Hotel Booking",
+              "shortLabel": "Hotels",
+              "summary": "Hotel booking tailored to your budget and preferred location, with clearer options and faster follow-up before confirmation.",
+              "heroTag": "Available service",
+              "description": "A suitable option for clients who want a clear and comfortable hotel stay, with better comparison across location, price, and room type before the booking is confirmed.",
+              "requirementsTitle": "What we need to begin",
+              "requirements": [
+                "Destination or target city",
+                "Check-in and check-out dates",
+                "Number of guests and rooms",
+                "Preferred room type or hotel level"
+              ],
+              "servicesTitle": "Available services",
+              "offerings": [
+                {
+                  "name": "Individual or family hotel booking",
+                  "validity": "By stay duration",
+                  "turnaround": "Within one day"
+                },
+                {
+                  "name": "Hotel and rate comparison",
+                  "validity": "By request",
+                  "turnaround": "Case-based"
+                }
+              ],
+              "contactNote": "Message us on WhatsApp and we will suggest the most suitable hotel based on your budget and location, then clarify the booking details before confirmation.",
+              "image": "https://images.pexels.com/photos/30722813/pexels-photo-30722813.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "imageAlt": "Well-prepared hotel room with a relaxing view for hotel booking service",
+              "landmarkImage": "https://images.pexels.com/photos/14036250/pexels-photo-14036250.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "landmarkAlt": "Hotel receptionist welcoming guests to represent hotel booking service",
+              "requirementsImage": "https://images.pexels.com/photos/7512139/pexels-photo-7512139.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "requirementsImageAlt": "Hotel front desk scene illustrating hotel booking requirements",
+              "servicesImage": "https://images.pexels.com/photos/5137964/pexels-photo-5137964.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "servicesImageAlt": "Guest completing check-in at a hotel for hotel booking support",
+              "imagePosition": "center center",
+              "landmarkPosition": "center center",
+              "requirementsPosition": "center center",
+              "servicesPosition": "center center"
+            },
+            {
+              "slug": "land-transport",
+              "title": "Land Transport",
+              "shortLabel": "Transport",
+              "summary": "Comfortable and clearly arranged land transport between the airport, hotel, or cities with faster follow-up before confirmation.",
+              "heroTag": "Available service",
+              "description": "A suitable option for clients who need organized ground transportation during the trip, whether for airport pickup, intercity movement, or private rides with clearer coordination and better comfort.",
+              "requirementsTitle": "What we need to begin",
+              "requirements": [
+                "Pickup and drop-off locations",
+                "Transport date and time",
+                "Number of travelers and luggage",
+                "Preferred vehicle type or service level"
+              ],
+              "servicesTitle": "Available services",
+              "offerings": [
+                {
+                  "name": "Airport pickup and drop-off",
+                  "validity": "By booking",
+                  "turnaround": "Within one day"
+                },
+                {
+                  "name": "Private or intercity transfer coordination",
+                  "validity": "By request",
+                  "turnaround": "Case-based"
+                }
+              ],
+              "contactNote": "Message us on WhatsApp and we will arrange the most suitable land transport option, then clarify the vehicle or trip details before confirmation.",
+              "image": "https://images.pexels.com/photos/7263971/pexels-photo-7263971.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "imageAlt": "Ground transport shuttle driving along a mountain road for land transport service",
+              "landmarkImage": "https://images.pexels.com/photos/27081934/pexels-photo-27081934.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "landmarkAlt": "Organized buses lined up at a station to represent land transport services",
+              "requirementsImage": "https://images.pexels.com/photos/28145274/pexels-photo-28145274.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "requirementsImageAlt": "Transfer vehicle near an airport to illustrate land transport requirements",
+              "servicesImage": "https://images.pexels.com/photos/11565580/pexels-photo-11565580.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "servicesImageAlt": "Taxi vehicles lined up to support land transport and transfer services",
+              "imagePosition": "center center",
+              "landmarkPosition": "center center",
+              "requirementsPosition": "center center",
+              "servicesPosition": "center center"
+            },
+            {
+              "slug": "health-insurance",
+              "title": "Health Insurance",
+              "shortLabel": "Insurance",
+              "summary": "Secure health insurance for travel or visa requirements with clearer steps and more suitable coverage guidance.",
+              "heroTag": "Available service",
+              "description": "A suitable option for clients who need health insurance for travel, embassy requirements, or medical reassurance during the trip, with clearer guidance on the right coverage and what is needed before issue.",
+              "requirementsTitle": "What we need to begin",
+              "requirements": [
+                "Full name exactly as in passport",
+                "Passport copy or basic ID details",
+                "Travel destination and approximate dates",
+                "Number of travelers or applicant details"
+              ],
+              "servicesTitle": "Available services",
+              "offerings": [
+                {
+                  "name": "Travel medical insurance",
+                  "validity": "By trip duration",
+                  "turnaround": "Within one day"
+                },
+                {
+                  "name": "Coverage guidance and plan selection",
+                  "validity": "By request",
+                  "turnaround": "Case-based"
+                }
+              ],
+              "contactNote": "Message us on WhatsApp and we will help choose the right health insurance, explain the coverage, and clarify what is needed before issue.",
+              "image": "https://images.pexels.com/photos/8413288/pexels-photo-8413288.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "imageAlt": "Doctor and patient reviewing medical documents in a clinic for health insurance service",
+              "landmarkImage": "https://images.pexels.com/photos/8383904/pexels-photo-8383904.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "landmarkAlt": "Digital health passport with medical items related to travel health insurance",
+              "requirementsImage": "https://images.pexels.com/photos/8413176/pexels-photo-8413176.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "requirementsImageAlt": "Patient signing a medical consent form to illustrate health insurance requirements",
+              "servicesImage": "https://images.pexels.com/photos/7088483/pexels-photo-7088483.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "servicesImageAlt": "Doctor reviewing medical paperwork related to health insurance coverage",
+              "imagePosition": "center center",
+              "landmarkPosition": "center center",
+              "requirementsPosition": "center center",
+              "servicesPosition": "center center"
+            },
+          ],
+          "previewImage": "https://images.pexels.com/photos/32060712/pexels-photo-32060712.jpeg?auto=compress&cs=tinysrgb&w=1600",
+          "previewImageAlt": "Passports and travel documents arranged for passport booking services",
+          "previewImagePosition": "center center"
         }
       ]
     },
@@ -1425,4 +3096,36 @@ export function getAdjacentItems(locale: Locale, serviceSlug: string, itemSlug: 
     previous: index > 0 ? service.items[index - 1] : null,
     next: index >= 0 && index < service.items.length - 1 ? service.items[index + 1] : null,
   };
+}
+
+export function getServiceWhatsAppNumber(serviceSlug: string) {
+  return serviceSlug === "flight-booking" ? FLIGHT_BOOKING_WHATSAPP : GENERAL_SERVICES_WHATSAPP;
+}
+
+export function getServicesListingWhatsAppHref(locale: Locale) {
+  const text =
+    locale === "ar"
+      ? "مرحباً، أريد الاستفسار عن خدماتكم المتاحة."
+      : "Hello, I would like to ask about your available services.";
+
+  return `https://wa.me/${GENERAL_SERVICES_WHATSAPP}?text=${encodeURIComponent(text)}`;
+}
+
+export function getServiceWhatsAppHref(
+  locale: Locale,
+  serviceSlug: string,
+  serviceTitle: string,
+  itemTitle?: string,
+) {
+  const number = getServiceWhatsAppNumber(serviceSlug);
+  const text =
+    locale === "ar"
+      ? itemTitle
+        ? `مرحباً، أريد الاستفسار عن خدمة ${serviceTitle} - ${itemTitle}.`
+        : `مرحباً، أريد الاستفسار عن خدمة ${serviceTitle}.`
+      : itemTitle
+        ? `Hello, I would like to ask about the ${serviceTitle} service - ${itemTitle}.`
+        : `Hello, I would like to ask about the ${serviceTitle} service.`;
+
+  return `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
 }
