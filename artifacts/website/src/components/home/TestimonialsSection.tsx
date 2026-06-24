@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import SectionHeading from "./SectionHeading";
 import { useReveal } from "./useReveal";
 import { withBasePath } from "@/lib/base-path";
+import { decodeArabicMojibake } from "@/lib/data/services";
 
 interface Testimonial {
   name: string;
@@ -23,27 +24,37 @@ function isArabicText(text: string): boolean {
   return /[\u0600-\u06FF]/.test(text);
 }
 
+function normalizeDisplayText(text: string): string {
+  return decodeArabicMojibake(text);
+}
+
 function pickVisual(context: string, index: number): string {
   const normalized = context.toLowerCase();
-  if (normalized.includes("dubai") || normalized.includes("ط¯ط¨ظٹ")) return withBasePath("/images/branches-dubai.jpg");
-  if (normalized.includes("erbil") || normalized.includes("ط£ط±ط¨ظٹظ„")) return withBasePath("/images/branches-erbil.jpg");
-  if (normalized.includes("homs") || normalized.includes("ط­ظ…طµ")) return withBasePath("/images/branches-homs.jpg");
-  return [withBasePath("/images/branches-dubai.jpg"), withBasePath("/images/branches-erbil.jpg"), withBasePath("/images/branches-homs.jpg")][index % 3];
+  if (normalized.includes("dubai") || normalized.includes("دبي")) return withBasePath("/images/branches-dubai.jpg");
+  if (normalized.includes("erbil") || normalized.includes("أربيل")) return withBasePath("/images/branches-erbil.jpg");
+  if (normalized.includes("homs") || normalized.includes("حمص")) return withBasePath("/images/branches-homs.jpg");
+  return [
+    withBasePath("/images/branches-dubai.jpg"),
+    withBasePath("/images/branches-erbil.jpg"),
+    withBasePath("/images/branches-homs.jpg"),
+  ][index % 3];
 }
 
 function pickAvatar(name: string, index: number, gender?: "male" | "female"): string {
   if (gender === "male") return withBasePath("/images/testimonial-avatar-mohamed.jpg");
   if (gender === "female") return withBasePath("/images/testimonial-avatar-nour.jpg");
+
   const normalized = name.toLowerCase();
-  if (normalized.includes("mohamed") || normalized.includes("mohammad") || normalized.includes("ظ…ط­ظ…ط¯")) {
+  if (normalized.includes("mohamed") || normalized.includes("mohammad") || normalized.includes("محمد")) {
     return withBasePath("/images/testimonial-avatar-mohamed.jpg");
   }
-  if (normalized.includes("nour") || normalized.includes("ظ†ظˆط±")) {
+  if (normalized.includes("nour") || normalized.includes("نور")) {
     return withBasePath("/images/testimonial-avatar-nour.jpg");
   }
-  if (normalized.includes("reem") || normalized.includes("ط±ظٹظ…")) {
+  if (normalized.includes("reem") || normalized.includes("ريم")) {
     return withBasePath("/images/testimonial-avatar-reem.jpg");
   }
+
   return [
     withBasePath("/images/testimonial-avatar-mohamed.jpg"),
     withBasePath("/images/testimonial-avatar-nour.jpg"),
@@ -68,16 +79,28 @@ export default function TestimonialsSection({
   const { ref, visible } = useReveal(0.1);
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
-  const isArabic = isArabicText(title);
+  const safeLabel = normalizeDisplayText(label);
+  const safeTitle = normalizeDisplayText(title);
+  const safeSubtitle = normalizeDisplayText(subtitle);
+  const isArabic = isArabicText(safeTitle);
   const total = testimonials.length;
 
   const items = useMemo(
     () =>
-      testimonials.map((t, i) => ({
-        ...t,
-        image: pickVisual(t.context, i),
-        avatar: pickAvatar(t.name, i, t.gender),
-      })),
+      testimonials.map((t, i) => {
+        const name = normalizeDisplayText(t.name);
+        const text = normalizeDisplayText(t.text);
+        const context = normalizeDisplayText(t.context);
+
+        return {
+          ...t,
+          name,
+          text,
+          context,
+          image: pickVisual(context, i),
+          avatar: pickAvatar(name, i, t.gender),
+        };
+      }),
     [testimonials],
   );
 
@@ -100,7 +123,7 @@ export default function TestimonialsSection({
       <div className="pointer-events-none absolute right-[8%] bottom-8 h-72 w-72 rounded-full bg-brand-bg/10 blur-3xl" />
 
       <div className="container-custom">
-        <SectionHeading label={label} title={title} subtitle={subtitle} />
+        <SectionHeading label={safeLabel} title={safeTitle} subtitle={safeSubtitle} />
 
         <div
           className="mx-auto mt-6 grid max-w-[1180px] grid-cols-1 items-stretch gap-6 lg:grid-cols-[1.1fr_0.9fr]"
@@ -115,14 +138,14 @@ export default function TestimonialsSection({
           onMouseLeave={() => setPaused(false)}
         >
           <div className="relative rounded-[28px] border border-slate-200/80 bg-white p-6 shadow-[0_24px_52px_-32px_rgba(15,23,42,0.35)] sm:p-8">
-            <h3 className="text-center text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">{title}</h3>
+            <h3 className="text-center text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">{safeTitle}</h3>
 
             <div className="mt-7 flex items-center justify-center gap-5">
               <button
                 type="button"
                 onClick={prev}
                 className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-500 transition-all duration-200 hover:border-brand-cta/60 hover:bg-brand-bg hover:text-brand-cta"
-                aria-label={isArabic ? "ط§ظ„ط³ط§ط¨ظ‚" : "Previous"}
+                aria-label={isArabic ? "السابق" : "Previous"}
               >
                 <ArrowIcon dir={isArabic ? "right" : "left"} />
               </button>
@@ -148,7 +171,7 @@ export default function TestimonialsSection({
                 type="button"
                 onClick={next}
                 className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-500 transition-all duration-200 hover:border-brand-cta/60 hover:bg-brand-bg hover:text-brand-cta"
-                aria-label={isArabic ? "ط§ظ„طھط§ظ„ظٹ" : "Next"}
+                aria-label={isArabic ? "التالي" : "Next"}
               >
                 <ArrowIcon dir={isArabic ? "left" : "right"} />
               </button>
@@ -181,7 +204,7 @@ export default function TestimonialsSection({
                   key={i}
                   type="button"
                   onClick={() => setActive(i)}
-                  aria-label={isArabic ? `ط§ط°ظ‡ط¨ ظ„ظ„ط±ط£ظٹ ${i + 1}` : `Go to testimonial ${i + 1}`}
+                  aria-label={isArabic ? `انتقل إلى الرأي ${i + 1}` : `Go to testimonial ${i + 1}`}
                   className={`h-2.5 rounded-full transition-all duration-300 ${
                     i === active ? "w-7 bg-brand-cta" : "w-2.5 bg-slate-300 hover:bg-slate-400"
                   }`}
@@ -208,7 +231,7 @@ export default function TestimonialsSection({
             <div className="relative z-10 flex h-full min-h-[430px] items-end p-6">
               <div className="rounded-xl border border-white/20 bg-black/25 px-4 py-3 backdrop-blur-sm">
                 <p className="text-xs font-semibold uppercase tracking-[0.15em] text-brand-cta">
-                  {isArabic ? "طھط¬ط±ط¨ط© ط¹ظ…ظٹظ„" : "Client Story"}
+                  {isArabic ? "تجربة عميل" : "Client Story"}
                 </p>
                 <p className="mt-1 text-lg font-bold text-white">{items[active]?.name}</p>
               </div>

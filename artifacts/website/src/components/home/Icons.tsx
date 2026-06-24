@@ -60,6 +60,37 @@ export function GlobeIcon({ className }: IconProps) {
   );
 }
 
+export function UserCheckIcon({ className }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M16 21v-1a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v1" />
+      <circle cx="9.5" cy="8" r="4" />
+      <path d="m16 11 2 2 4-4" />
+    </svg>
+  );
+}
+
+export function Building2Icon({ className }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 22V7.5A1.5 1.5 0 0 1 7.5 6H14v16" />
+      <path d="M14 10h4.5A1.5 1.5 0 0 1 20 11.5V22" />
+      <path d="M4 22h18" />
+      <path d="M9 9h2M9 12h2M9 15h2M16 13h2M16 16h2" />
+    </svg>
+  );
+}
+
+export function AwardIcon({ className }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="8" r="5" />
+      <path d="m8.5 14.5-1.5 6 5-2 5 2-1.5-6" />
+      <path d="m10.5 8 1 1 2-2" />
+    </svg>
+  );
+}
+
 export function HeadsetIcon({ className }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

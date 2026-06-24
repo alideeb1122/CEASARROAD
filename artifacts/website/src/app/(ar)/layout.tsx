@@ -17,6 +17,12 @@ export const metadata: Metadata = {
   },
   description:
     "طريق القيصر للسياحة والسفر - رفيقك الموثوق في رحلات لا تنسى حول العالم",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
+  manifest: "/site.webmanifest",
 };
 
 export default function ArabicLayout({
@@ -39,8 +45,6 @@ export default function ArabicLayout({
           siteName={ar.siteName}
           nav={ar.nav}
           footer={ar.footer}
-          branches={ar.pages.branches.branches}
-          branchSocials={ar.pages.contact.socials}
         />
       </body>
     </html>

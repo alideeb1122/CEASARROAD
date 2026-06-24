@@ -1,0 +1,20 @@
+{
+  "name": "Caesar Road Travel & Tourism",
+  "short_name": "Caesar Road",
+  "description": "Caesar Road Travel & Tourism",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0d1530",
+  "theme_color": "#0d1530",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

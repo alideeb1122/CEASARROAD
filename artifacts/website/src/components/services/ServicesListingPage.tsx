@@ -5,6 +5,7 @@ import RevealWrapper from "@/components/shared/RevealWrapper";
 import FinalCtaSection from "@/components/shared/FinalCtaSection";
 import { ChevronRightIcon, WhatsAppIcon, getServiceIcon } from "@/components/home/Icons";
 import { withBasePath } from "@/lib/base-path";
+import { getServicesListingWhatsAppHref } from "@/lib/data/services";
 import type { Locale, ServiceRecord } from "@/lib/data/services";
 
 interface ServicesListingPageProps {
@@ -35,6 +36,7 @@ export default function ServicesListingPage({ locale, content, common }: Service
   const servicesBaseHref = locale === "ar" ? "/services" : "/en/services";
   const homeHref = locale === "ar" ? "/" : "/en";
   const heroBackground = withBasePath("/images/hero/services-travel-docs.jpg");
+  const servicesWhatsAppHref = getServicesListingWhatsAppHref(locale);
 
   return (
     <>
@@ -58,21 +60,21 @@ export default function ServicesListingPage({ locale, content, common }: Service
               <span className="text-white/90">{content.label}</span>
             </div>
 
-            <div className="grid gap-8 lg:grid-cols-[1.12fr_0.88fr] lg:items-center">
+            <div className="mx-auto max-w-4xl text-center">
               <div>
                 <p className="mb-4 text-sm font-semibold uppercase tracking-[0.34em] text-gold/72">
                   {content.label}
                 </p>
-                <h1 className="max-w-2xl text-4xl font-extrabold leading-[1.02] tracking-tight sm:text-5xl lg:text-[4rem]">
+                <h1 className="mx-auto w-full max-w-[52rem] text-center text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl md:whitespace-nowrap lg:text-[2.9rem] lg:leading-[1.04] xl:text-[3.15rem]">
                   {content.title}
                 </h1>
-                <p className="mt-5 max-w-2xl text-base leading-8 text-white/92 lg:text-[1.05rem]">
+                <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-white/92 lg:text-[1.05rem]">
                   {content.subtitle}
                 </p>
 
-                <div className="mt-8 flex flex-wrap gap-3">
+                <div className="mt-8 flex flex-wrap justify-center gap-3">
                   <a
-                    href={`https://wa.me/${content.whatsapp}`}
+                    href={servicesWhatsAppHref}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-3 rounded-2xl bg-[#25D366] px-6 py-3 text-sm font-semibold text-white shadow-[0_18px_38px_-20px_rgba(37,211,102,0.75)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1fba58]"
@@ -89,41 +91,7 @@ export default function ServicesListingPage({ locale, content, common }: Service
                   </a>
                 </div>
               </div>
-
-              <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-                {content.stats.map((stat, index) => (
-                  <RevealWrapper key={stat.label} delay={index * 80}>
-                    <div className="relative overflow-hidden rounded-[24px] border border-white/18 bg-[#08101e]/[0.82] p-5 shadow-[0_24px_60px_-32px_rgba(7,12,24,0.86)] backdrop-blur-2xl">
-                      <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-gold/10 to-transparent" />
-                      <div className="relative flex items-center justify-between gap-4">
-                        <div className="min-w-0">
-                          <div className="mb-3 h-px w-14 bg-gradient-to-r from-gold/80 to-transparent" />
-                          <div className="text-sm font-medium leading-6 text-white/92 lg:text-[0.95rem]">
-                            {stat.label}
-                          </div>
-                        </div>
-                        <div className="shrink-0 text-right">
-                          <div className="text-3xl font-extrabold leading-none text-gold lg:text-[2.2rem]">
-                            {stat.value}
-                          </div>
-                          <div className="mt-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-white/45">
-                            {content.label}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </RevealWrapper>
-                ))}
-              </div>
             </div>
-          </div>
-        </RevealWrapper>
-      </section>
-
-      <section data-header-theme="light" className="bg-white section-padding-sm border-b border-black/5">
-        <RevealWrapper className="container-custom">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="text-base leading-8 text-text-muted">{content.intro}</p>
           </div>
         </RevealWrapper>
       </section>
@@ -132,7 +100,7 @@ export default function ServicesListingPage({ locale, content, common }: Service
         <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-gold/[0.06] to-transparent" />
         <div className="container-custom relative">
           <RevealWrapper className="mb-10">
-            <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+            <div>
               <div>
                 <p className="mb-3 text-sm font-semibold uppercase tracking-[0.32em] text-gold">
                   {content.label}
@@ -141,7 +109,6 @@ export default function ServicesListingPage({ locale, content, common }: Service
                   {content.spotlightTitle}
                 </h2>
               </div>
-              <p className="max-w-xl text-sm leading-7 text-text-muted lg:text-base">{content.spotlightText}</p>
             </div>
           </RevealWrapper>
 
@@ -154,7 +121,7 @@ export default function ServicesListingPage({ locale, content, common }: Service
                 >
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(214,183,112,0.16),transparent_56%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                   <div className="absolute -right-10 top-6 h-28 w-28 rounded-full bg-gold/10 blur-3xl transition-transform duration-500 group-hover:scale-125" />
-                  <div className="relative">
+                  <div className="relative flex h-full flex-col">
                     {service.previewImage ? (
                       <div className="mb-5 overflow-hidden rounded-[24px] border border-slate-200/70 bg-[#f8f7f3]">
                         <img
@@ -166,7 +133,7 @@ export default function ServicesListingPage({ locale, content, common }: Service
                         />
                       </div>
                     ) : null}
-                    <div className="mb-7 flex items-start justify-between gap-4">
+                    <div className="mb-7 flex items-center justify-between gap-4">
                       <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-gold/15 bg-gradient-to-b from-gold/15 to-gold/5 text-gold transition-all duration-500 group-hover:scale-105 group-hover:rotate-[3deg]">
                         {getServiceIcon(service.icon, "h-7 w-7")}
                       </div>
@@ -181,7 +148,7 @@ export default function ServicesListingPage({ locale, content, common }: Service
                     <h3 className="text-xl font-bold text-text-primary">{service.title}</h3>
                     <p className="mt-3 text-sm leading-6 text-text-muted">{service.summary}</p>
 
-                    <div className="mt-7 flex items-center gap-2 text-sm font-semibold text-navy">
+                    <div className="mt-auto pt-7 flex items-center gap-2 text-sm font-semibold text-navy">
                       <span>{service.cardCta}</span>
                       <ChevronRightIcon className={`h-4 w-4 transition-transform duration-300 ${isRtl ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"}`} />
                     </div>
@@ -198,6 +165,7 @@ export default function ServicesListingPage({ locale, content, common }: Service
         subtitle={content.ctaSubtitle}
         ctaBtn={content.ctaBtn}
         whatsapp={content.whatsapp}
+        whatsappHref={servicesWhatsAppHref}
       />
     </>
   );

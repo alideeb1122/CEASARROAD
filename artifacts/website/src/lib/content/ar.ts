@@ -15,10 +15,10 @@ export const ar = {
   pages: {
     home: {
       heroLabel: "طريق القيصر للسياحة والسفر",
-      heroTitle: "سفرٌ أرقى يبدأ من هنا",
-      heroTitleAccent: "طريق القيصر يرتّب رحلتك بذوق يليق بك",
-      heroSubtitle: "",
-      heroWhatsappCta: "تواصل عبر واتساب",
+      heroTitle: "طريقك نحو الأفضل",
+      heroTitleAccent: "",
+      heroSubtitle: "رحلات سياحية، حجوزات طيران، تأشيرات، وبرامج سفر متكاملة إلى أشهر الوجهات العالمية",
+      heroWhatsappCta: "أحجز إستشارتك المجانية",
       heroServicesCta: "اكتشف خدماتنا",
       heroMediaLabel: "",
 
@@ -226,7 +226,7 @@ export const ar = {
         },
       ],
 
-      airlinesLabel: "شركاء النقل الجوي",
+      airlinesLabel: "شركاء النجاح",
       airlinesTrust: "نحجز لك عبر أكبر شركات الطيران في المنطقة والعالم",
 
       finalCtaLabel: "هل أنت مستعد؟",
@@ -364,7 +364,7 @@ export const ar = {
           country: "الإمارات العربية المتحدة",
           address: "البرشاء 1 – بناية البداية – مكتب 302",
           mapUrl: "https://maps.app.goo.gl/NzAPJUiPULQs8YUz8",
-          whatsapp: "971XXXXXXXXX",
+          whatsapp: "971529015091",
           hours: "10:00 ص – 6:00 م",
           offDay: "الأحد",
           description:
@@ -375,7 +375,7 @@ export const ar = {
           country: "العراق — إقليم كردستان",
           address: "بختياري – شارع 20 – مقابل قصاب أربيل",
           mapUrl: "https://maps.app.goo.gl/v9wdBeigiUvSf4gbA",
-          whatsapp: "964XXXXXXXXX",
+          whatsapp: "9647509548130",
           hours: "10:00 ص – 8:00 م",
           offDay: "الجمعة",
           description:
@@ -386,7 +386,7 @@ export const ar = {
           country: "سوريا",
           address: "الكورنيش الغربي – بجانب حديقة الدبلان – مقابل بروستد خيري الله",
           mapUrl: "https://maps.app.goo.gl/oyDdPQpz9wQf2BMG7",
-          whatsapp: "963XXXXXXXXX",
+          whatsapp: "963960641418",
           hours: "8:00 ص – 4:00 م",
           offDay: "الجمعة",
           description:

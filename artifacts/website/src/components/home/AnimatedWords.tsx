@@ -18,7 +18,9 @@ export default function AnimatedWords({
   const words = text.split(" ");
 
   return (
-    <span className={className}>
+    <span
+      className={`inline-flex flex-wrap items-baseline justify-center gap-x-[0.22em] gap-y-[0.08em] whitespace-normal ${className ?? ""}`}
+    >
       {words.map((word, index) => (
         <span
           key={`${word}-${index}`}
@@ -32,7 +34,6 @@ export default function AnimatedWords({
           }}
         >
           {word}
-          {index < words.length - 1 ? "\u00A0" : ""}
         </span>
       ))}
     </span>

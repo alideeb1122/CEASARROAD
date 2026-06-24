@@ -16,7 +16,13 @@ export const metadata: Metadata = {
     template: "%s | Caesar Road",
   },
   description:
-    "Caesar Road Travel & Tourism — Your trusted companion for unforgettable journeys around the world",
+    "Caesar Road Travel & Tourism - Your trusted companion for unforgettable journeys around the world",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
+  manifest: "/site.webmanifest",
 };
 
 export default function EnglishLayout({
@@ -39,8 +45,6 @@ export default function EnglishLayout({
           siteName={en.siteName}
           nav={en.nav}
           footer={en.footer}
-          branches={en.pages.branches.branches}
-          branchSocials={en.pages.contact.socials}
         />
       </body>
     </html>

@@ -20,6 +20,12 @@ export default function HomepageIntro({
   kicker,
   title,
 }: HomepageIntroProps) {
+  void kicker;
+  void title;
+
+  // Temporarily bypass the intro overlay without removing the component.
+  return <>{children}</>;
+
   const [phase, setPhase] = useState<IntroPhase>("enter");
 
   const reduceMotion = useMemo(() => {

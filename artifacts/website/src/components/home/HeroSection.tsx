@@ -5,6 +5,7 @@ import Link from "next/link";
 import { WhatsAppIcon } from "./Icons";
 import AnimatedWords from "./AnimatedWords";
 import { withBasePath } from "@/lib/base-path";
+import StatsSection, { type Stat } from "./StatsSection";
 
 interface HeroContent {
   heroLabel: string;
@@ -21,6 +22,9 @@ interface HeroSectionProps {
   locale: "ar" | "en";
   servicesHref: string;
   whatsappNumber?: string;
+  statsLabel: string;
+  statsTitle: string;
+  stats: Stat[];
 }
 
 const reveal = (visible: boolean, delay = 0): React.CSSProperties => ({
@@ -35,12 +39,19 @@ export default function HeroSection({
   locale,
   servicesHref,
   whatsappNumber = "971501234567",
+  statsLabel,
+  statsTitle,
+  stats,
 }: HeroSectionProps) {
   const isArabic = locale === "ar";
+  const videoRotationMs = 4200;
+  const videoSwapDelayMs = 180;
   const heroVideos = [
-    withBasePath("/videos/hero/hero-travel.mp4"),
+    withBasePath("/videos/hero/hero-travel-5.mp4"),
     withBasePath("/videos/hero/hero-travel-2.mp4"),
-    withBasePath("/videos/hero/hero-travel-3.mp4"),
+    withBasePath("/videos/hero/hero-travel-6.mp4"),
+    withBasePath("/videos/hero/hero-travel-4.mp4"),
+    withBasePath("/videos/hero/hero-travel-7.mp4"),
   ];
 
   const [mounted, setMounted] = useState(false);
@@ -71,12 +82,11 @@ export default function HeroSection({
 
       window.setTimeout(() => {
         setActiveSlot((prev) => (prev === "a" ? "b" : "a"));
-      }, 260);
-    }, 11200);
+      }, videoSwapDelayMs);
+    }, videoRotationMs);
 
     return () => window.clearInterval(intervalId);
-  }, [activeSlot, heroVideos.length, slotAIndex, slotBIndex]);
-
+  }, [activeSlot, heroVideos.length, slotAIndex, slotBIndex, videoRotationMs, videoSwapDelayMs]);
   return (
     <section
       data-header-theme="dark"
@@ -91,29 +101,29 @@ export default function HeroSection({
     >
       <div className="absolute inset-0 pointer-events-none">
         <video
+          key={`hero-video-a-${slotAIndex}`}
           className={`hero-video absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${activeSlot === "a" ? "opacity-100" : "opacity-0"}`}
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
+          src={heroVideos[slotAIndex]}
           poster={withBasePath("/images/hero/hero-poster.jpg")}
-        >
-          <source src={heroVideos[slotAIndex]} type="video/mp4" />
-        </video>
+        />
         <video
+          key={`hero-video-b-${slotBIndex}`}
           className={`hero-video absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${activeSlot === "b" ? "opacity-100" : "opacity-0"}`}
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
+          src={heroVideos[slotBIndex]}
           poster={withBasePath("/images/hero/hero-poster.jpg")}
-        >
-          <source src={heroVideos[slotBIndex]} type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-[linear-gradient(160deg,rgba(13,18,38,0.58)_0%,rgba(20,30,66,0.52)_36%,rgba(13,20,46,0.64)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.12)_0%,transparent_48%),radial-gradient(ellipse_at_88%_20%,rgba(194,169,107,0.18)_0%,transparent_54%)]" />
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(160deg,rgba(10,16,34,0.7)_0%,rgba(17,27,58,0.62)_36%,rgba(10,17,38,0.74)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.1)_0%,transparent_44%),radial-gradient(ellipse_at_88%_20%,rgba(194,169,107,0.15)_0%,transparent_50%),radial-gradient(ellipse_at_center,rgba(10,16,31,0.2)_0%,transparent_58%)]" />
       </div>
 
       <div className="absolute inset-0 pointer-events-none">
@@ -176,67 +186,105 @@ export default function HeroSection({
 
       </div>
 
-      <div className="container-custom relative z-10 py-12 sm:py-14 lg:py-16">
-        <div
-          className="relative mx-auto flex min-h-[58vh] max-w-4xl flex-col items-center justify-center pt-1 text-center sm:min-h-[62vh] sm:pt-2 lg:min-h-[66vh] lg:-translate-y-3"
-          style={reveal(mounted, 0)}
-        >
-          <div className="relative z-10 flex w-full flex-col items-center">
-          <h1 className={`text-center font-extrabold leading-[1.04] tracking-[-0.04em] text-white ${isArabic ? "text-4xl sm:text-[3.8rem] lg:text-[4.45rem]" : "text-[3.35rem] sm:text-[4rem] lg:text-[4.5rem]"}`}>
-            <span className="text-brand-cta">
-              <AnimatedWords text={content.heroTitle} visible={mounted} baseDelay={120} />
-            </span>
-          </h1>
-          {content.heroTitleAccent ? (
-            <p
-              className={`max-w-3xl font-semibold leading-[1.35] text-white ${isArabic ? "mt-6 text-[1.95rem] sm:mt-7 sm:text-[2.15rem] lg:text-[2.25rem]" : "mt-7 text-[1.75rem] sm:mt-8 sm:text-[2rem] lg:text-[2.15rem]"}`}
-              style={reveal(mounted, 200)}
-            >
-              <AnimatedWords text={content.heroTitleAccent} visible={mounted} baseDelay={200} />
-            </p>
-          ) : null}
+      <div className="container-custom relative z-10 pt-19 pb-0 sm:pt-21 sm:pb-0 lg:pt-24 lg:pb-0">
+        <div className="relative mx-auto w-full max-w-7xl">
+          <div
+            className="relative flex min-h-[42vh] w-full items-center justify-center pb-20 pt-4 sm:min-h-[52vh] sm:pb-32 sm:pt-0 lg:min-h-[58vh] lg:pb-36"
+            style={reveal(mounted, 0)}
+          >
+            <div className="relative z-10 w-full max-w-[64rem]">
+              <div className="flex flex-col items-center text-center">
+                <h1
+                  className={`font-extrabold tracking-[-0.04em] text-brand-cta ${
+                    isArabic
+                      ? "text-[2.2rem] leading-[1.06] sm:text-[2.9rem] sm:leading-[1.06] lg:text-[4.15rem] lg:leading-[1.05]"
+                      : "text-[1.95rem] leading-[1.06] sm:text-[2.55rem] sm:leading-[1.08] lg:text-[3.35rem] lg:leading-[1.08]"
+                  }`}
+                  style={reveal(mounted, 120)}
+                >
+                  <AnimatedWords
+                    text={content.heroTitle}
+                    visible={mounted}
+                    baseDelay={120}
+                  />
+                </h1>
 
-          {content.heroSubtitle ? (
-            <p
-              className="mt-9 max-w-[48rem] text-base leading-8 text-brand-muted sm:mt-10 sm:text-lg sm:leading-9 lg:mt-12 lg:text-[1.18rem]"
-              style={reveal(mounted, 280)}
-            >
-              <AnimatedWords text={content.heroSubtitle} visible={mounted} baseDelay={300} step={38} />
-            </p>
-          ) : null}
+                {content.heroTitleAccent ? (
+                  <p
+                    className={`mt-2.5 max-w-[26rem] font-semibold text-white ${
+                      isArabic
+                        ? "text-[0.96rem] leading-[1.12] sm:text-[1.1rem] sm:leading-[1.12] lg:text-[1.24rem] lg:leading-[1.14]"
+                        : "text-[0.96rem] leading-[1.12] sm:text-[1.08rem] sm:leading-[1.12] lg:text-[1.2rem] lg:leading-[1.14]"
+                    }`}
+                    style={reveal(mounted, 200)}
+                  >
+                    <AnimatedWords
+                      text={content.heroTitleAccent}
+                      visible={mounted}
+                      baseDelay={200}
+                    />
+                  </p>
+                ) : null}
 
-          <div className="mt-10 flex flex-col gap-4 sm:mt-10 sm:flex-row sm:items-center sm:justify-center sm:gap-5">
-            <a
-              href={`https://wa.me/${whatsappNumber}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-w-[17rem] items-center justify-center gap-2.5 rounded-xl bg-brand-cta px-8 py-4 text-sm font-bold text-brand-bg shadow-lg shadow-brand-cta/20 transition-all duration-200 hover:-translate-y-1 hover:bg-brand-cta-hover hover:shadow-brand-cta/40 active:translate-y-0 sm:text-base"
-            >
-              <WhatsAppIcon className="w-5 h-5" />
-              {content.heroWhatsappCta}
-            </a>
-            <Link
-              href={servicesHref}
-              className="inline-flex min-w-[14rem] items-center justify-center rounded-xl border-2 border-white/20 px-8 py-4 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-1 hover:border-white/50 hover:bg-white/10 active:translate-y-0 sm:text-base"
-            >
-              {content.heroServicesCta}
-            </Link>
-          </div>
+                {content.heroSubtitle ? (
+                  <p
+                    className={`mt-3 mx-auto max-w-[21rem] text-[0.98rem] leading-6 text-white sm:max-w-[34rem] sm:text-[1.05rem] sm:leading-7 lg:w-max lg:max-w-none lg:whitespace-nowrap ${
+                      isArabic ? "" : ""
+                    }`}
+                    style={reveal(mounted, 260)}
+                  >
+                    <AnimatedWords
+                      text={content.heroSubtitle}
+                      visible={mounted}
+                      baseDelay={280}
+                      step={38}
+                    />
+                  </p>
+                ) : null}
 
-          {content.heroMediaLabel ? (
-            <p
-              className="mt-6 text-sm font-medium text-white/72 sm:mt-7 sm:text-base"
-              style={reveal(mounted, 180)}
-            >
-              {content.heroMediaLabel}
-            </p>
-          ) : null}
+                <div
+                  className="mt-6 grid w-full max-w-[34rem] grid-cols-1 gap-3 sm:mt-7 sm:grid-cols-2"
+                  style={reveal(mounted, 320)}
+                >
+                  <a
+                    href={`https://wa.me/${whatsappNumber}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-[3rem] w-full items-center justify-center gap-2.5 rounded-[1rem] bg-brand-cta px-7 py-3 text-sm font-bold text-brand-bg shadow-lg shadow-brand-cta/20 transition-all duration-200 hover:-translate-y-1 hover:bg-brand-cta-hover hover:shadow-brand-cta/40 active:translate-y-0"
+                  >
+                    <WhatsAppIcon className="h-5 w-5" />
+                    {content.heroWhatsappCta}
+                  </a>
+                  <Link
+                    href={servicesHref}
+                    className="inline-flex min-h-[3rem] w-full items-center justify-center rounded-[1rem] border border-white/24 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-1 hover:border-white/40 hover:bg-white/10 active:translate-y-0"
+                  >
+                    {content.heroServicesCta}
+                  </Link>
+                </div>
+
+                {content.heroMediaLabel ? (
+                  <p
+                    className="mt-3 text-sm font-medium text-white/72 sm:text-[0.95rem]"
+                    style={reveal(mounted, 360)}
+                  >
+                    {content.heroMediaLabel}
+                  </p>
+                ) : null}
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom wave divider */}
-      <div className="absolute bottom-0 left-0 right-0 h-8 bg-white" style={{ clipPath: "ellipse(55% 100% at 50% 100%)" }} />
+      <div className="relative z-20 -mt-6 w-full px-2 sm:-mt-7 sm:px-3 lg:-mt-8 lg:px-4">
+        <StatsSection
+          label={statsLabel}
+          title={statsTitle}
+          stats={stats}
+          variant="attached"
+        />
+      </div>
 
       <style>{`
         @keyframes heroCloudFloat {
